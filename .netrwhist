@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/Users/bernd/.vim_runtime/temp_dirs'
+let g:netrw_dirhist_2='/Users/bernd/.vim_runtime'
+let g:netrw_dirhist_3='/Users/bernd/Development/github.com/4teamwork/bgbern.ng/.git'
+let g:netrw_dirhist_4='/Users/bernd/.vim_runtime'
+let g:netrw_dirhist_5='/Users/bernd/Development/github.com/4teamwork/bgbern.ng/bgbern/ng/themes/kcb/resources/scss'
+let g:netrw_dirhist_6='/Users/bernd/.vim_runtime'
