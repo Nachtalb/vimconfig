@@ -23,6 +23,7 @@ endif
 set clipboard=unnamed               " Use system clipboard
 
 set viminfo^=%                      " Remember open buffers
+set viminfo+=n.viminfo              " Save viminfo dir specific
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -54,7 +55,7 @@ set backspace=eol,start,indent      " Make backspace work as it should
 set encoding=utf-8                  " Set correct encoding
 
 set list                            " Show spcial characters like trailing whitespaces / tabs and eol
-set listchars=tab:‣\ ,eol:↵,trail:·,extends:»,precedes:«
+set listchars=tab:‣\ ,eol:↵,trail:·,extends:»,precedes:«,space:·
 
 set nofoldenable                    " Disable code folding
 
@@ -68,8 +69,6 @@ set nowrap                          " Do not wrap lines
 syntax on                           " Enable syntax higlighting
 
 " Set default syntax for various file types
-autocmd BufNewFile,BufRead *.zcml set syntax=xml
-autocmd BufNewFile,BufRead *.fish set syntax=sh
 
 set t_Co=256                        " Set number of available colours
 colorscheme PaperColor
@@ -208,8 +207,19 @@ vnoremap <F8> =
 nnoremap <F6> :.s/\//\./g \| nohl<CR>
 inoremap <F6> <C-o>:.s/\//\./g \| nohl<CR>
 
+" Sort selected area
+vnoremap <F5> :sort<CR>
+
+" Show buffer list
+nnoremap <C-c> :Buffers<CR>
+inoremap <C-c> <C-o>:Buffers<CR>
+
 " Toggle Pastemode
 set pastetoggle=<F2>
+
+" Copy path to clipboard
+nnoremap cp :let @* = expand('%')<CR>
+nnoremap cpp :let @* = expand('%:p')<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Turn persistent undo on

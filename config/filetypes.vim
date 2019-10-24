@@ -18,20 +18,21 @@ au FileType python map <buffer> <leader>C ?class \| :nohl<CR>w
 au FileType python map <buffer> <leader>D ?def \| :nohl<CR>w
 
 au FileType python iab pdb __import__('pdb').set_trace()
-au FileType html iab pdb <?python locals().update(econtext); import pdb; pdb.set_trace() ?>
+" au FileType html iab pdb <?python locals().update(econtext); import pdb; pdb.set_trace() ?>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-autocmd FileType html,xml,zcml,pt,javascript,css,scss,sass,less,scss.css setlocal shiftwidth=2 tabstop=2 softtabstop=2
-autocmd FileType html,xml,zcml,pt,javascript,css,scss,sass,less,scss.css setlocal iskeyword+=-
+autocmd FileType html,xml,javascript,css,scss,sass,less,scss.css setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType html,xml,javascript,css,scss,sass,less,scss.css setlocal iskeyword+=-
 
-au BufNewFile,BufRead *.pt setlocal iskeyword+=- shiftwidth=2 tabstop=2 softtabstop=2
-au BufNewFile,BufRead *.jinja set syntax=htmljinja
-au BufNewFile,BufRead *.mako set ft=mako
-au BufRead,BufNewFile *.scss set filetype=scss.css
+autocmd BufNewFile,BufRead *.pt,*.zcml setlocal iskeyword+=- shiftwidth=2 tabstop=2 softtabstop=2
+autocmd BufNewFile,BufRead *.fish set syntax=sh
+autocmd BufNewFile,BufRead *.zcml set syntax=xml
+autocmd BufNewFile,BufRead *.jinja set syntax=htmljinja
+autocmd BufNewFile,BufRead *.mako set filetype=mako
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
