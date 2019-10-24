@@ -6,7 +6,6 @@
 " This is required for Vundle to work
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'makerj/vim-pdf'
-
 Plugin 'scrooloose/nerdtree'
 Plugin 'mileszs/ack.vim'
 Plugin 'tpope/vim-fugitive'
@@ -21,10 +20,16 @@ Plugin 'w0rp/ale'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 Plugin 'hail2u/vim-css3-syntax'
-Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'skywind3000/asyncrun.vim'
-
-execute pathogen#infect()
+Plugin 'jez/vim-superman'
+Plugin 'gundo.vim'
+Plugin 'indentpython.vim'
+Plugin 'vim-airline'
+Plugin 'vim-airline-themes'
+Plugin 'vim-fish'
+Plugin 'vim-gitgutter'
+Plugin 'vim-lastplace'
+Plugin 'xmledit'
 Plugin 'ycm-core/YouCompleteMe'
 
 " ==== YCM ====
@@ -51,10 +56,10 @@ let g:deoplete#sources#jedi#extra_path=system("buildout-paths 2>/dev/null < bin/
 let g:deoplete#sources#jedi#enable_typeinfo=0
 let g:deoplete#sources#jedi#show_docstring=1
 
-" ==== Ack / Ag ====
-" Grep for word under cursor
-nnoremap K :Ack! -tf "\b<C-R><C-W>\b"<CR>:cw<CR>
+" ==== Emmet ====
+let g:user_emmet_leader_key=','
 
+" ==== Ack / Ag ====
 " Other settings
 " let g:ackpreview = 1
 
@@ -63,7 +68,7 @@ if executable('ag')
     " Use ag over grep
     set grepprg=ag\ --nogroup\ --nocolor\ -U\ --follow
 
-    let g:ackprg='ag --vimgrep --smart-case -U --follow --ignore-dir testreports --ignore SOURCES.txt --ignore-dir var --ignore-dir .idea --ignore-dir var'
+    let g:ackprg='ag --vimgrep --smart-case -U --follow --ignore-dir testreports --ignore SOURCES.txt --ignore-dir var --ignore-dir .idea --ignore-dir var --ignore-dir log'
     if isdirectory('parts/omelette/')
         let plone_dir = trim(system('ls -1 -f | grep egg-info | cut -d. -f1'))
         let plone_dir = trim(system("dirname $(ls -1 -f | grep egg-info | sed 's/\\./\\//g')"))
@@ -101,7 +106,8 @@ let g:ale_fixers = {
     \ 'python': ['autopep8', 'isort', 'yapf'],
     \ 'javascript': ['prettier', 'eslint'],
 \ }
-let g:ale_linters = {'python': ['flake8'], 'scss': ['scsslint'], 'css': ['scsslint'], 'scss.css': ['scsslint'],}
+" let g:ale_linters = {'python': ['flake8'], 'scss': ['scsslint'], 'css': ['scsslint'], 'scss.css': ['scsslint'],}
+let g:ale_linters = {'python': ['pylama'], 'scss': ['scsslint'], 'css': ['scsslint']}
 
 " Use Ale Fixer for these filetypes
 au BufNewFile,BufRead *.py,*.js nmap <F8> <Plug>(ale_fix)
@@ -158,19 +164,18 @@ autocmd BufWritePost *.wiki silent VimwikiAll2HTML
 let g:asyncrun_open = 20    " Auto open quickfix window with the given size
 
 nnoremap <Leader>ar :AsyncRun! -raw=1
-nnoremap <Leader>te :AsyncRun -raw=1 bin/test
+nnoremap <Leader>ta :AsyncRun -raw=1 bin/test
 nnoremap <Leader>tt :AsyncRun -raw=1 bin/test -t <cword><CR>
-nnoremap <Leader>ab :AsyncRun -raw=1 bin/buildout<CR>
-nnoremap <Leader>abi :AsyncRun -raw=1 bin/buildout install instance<CR>
-nnoremap <Leader>abt :AsyncRun -raw=1 bin/buildout install test<CR>
-nnoremap <Leader>ai :AsyncRun -raw=1 bin/i18n-build<CR>
-nnoremap <Leader>af :AsyncRun -raw=1 bin/instance fg<CR>
+nnoremap <Leader>apbo :AsyncRun -raw=1 bin/buildout<CR>
+nnoremap <Leader>apbi :AsyncRun -raw=1 bin/buildout install instance<CR>
+nnoremap <Leader>apbt :AsyncRun -raw=1 bin/buildout install test<CR>
+nnoremap <Leader>aib :AsyncRun -raw=1 bin/i18n-build<CR>
+nnoremap <Leader>afg :AsyncRun -raw=1 bin/instance fg<CR>
 
 " Add some of the shortcuts above as normal commands when pdb is exptected
 nnoremap <Leader>cte :!bin/test
 nnoremap <Leader>ctt :!bin/test -t <cword><CR>
 nnoremap <Leader>caf :!bin/instance fg<CR>
-
 
 " ==== End Plugin Section ====
 " This is required for Vundle to work
