@@ -13,7 +13,6 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'neoclide/mycomment.vim'
-" Plugin 'davidhalter/jedi-vim'
 Plugin 'vimwiki/vimwiki'
 Plugin 'ap/vim-buftabline'
 Plugin 'mattn/emmet-vim'
@@ -26,6 +25,31 @@ Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'skywind3000/asyncrun.vim'
 
 execute pathogen#infect()
+Plugin 'ycm-core/YouCompleteMe'
+
+" ==== YCM ====
+let python_paths = trim(system("buildout-paths 2>/dev/null < bin/test || buildout-paths 2>/dev/null < bin/instance || buildout-paths 2>/dev/null < bin/instance0"))
+let g:ycm_python_sys_path = split(python_paths, ':')
+let g:ycm_extra_conf_vim_data = [
+  \  'g:ycm_python_sys_path'
+  \]
+let g:ycm_global_ycm_extra_conf = '~/.vim/global_extra_conf.py'
+
+nnoremap gd :tab YcmCompleter GoToDefinitionElseDeclaration<CR>
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_min_num_of_chars_for_completion = 0
+" let g:ycm_goto_buffer_command = 'split-or-existing-window'
+
+" ==== Deoplete ====
+let g:deoplete#enable_at_startup = 1
+
+
+" ==== jedi ====
+" Add either bin/test, bin/instance, bin/instance0 or nothing to sys.path
+let g:deoplete#sources#jedi#extra_path=system("buildout-paths 2>/dev/null < bin/test || buildout-paths 2>/dev/null < bin/instance || buildout-paths 2>/dev/null < bin/instance0")
+let g:deoplete#sources#jedi#enable_typeinfo=0
+let g:deoplete#sources#jedi#show_docstring=1
 
 " ==== Ack / Ag ====
 " Grep for word under cursor

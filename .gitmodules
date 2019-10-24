@@ -107,3 +107,6 @@
 [submodule "bundle/asyncrun.vim"]
     path = bundle/asyncrun.vim
     url = https://github.com/skywind3000/asyncrun.vim.git
+[submodule "bundle/YouCompleteMe"]
+	path = bundle/YouCompleteMe
+	url = https://github.com/ycm-core/YouCompleteMe.git
