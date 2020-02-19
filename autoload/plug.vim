@@ -1,0 +1,1 @@
+/Users/bernd/.vim/plugged/vim-plug/plug.vim

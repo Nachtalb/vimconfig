@@ -25,14 +25,16 @@ au FileType python iab pdb __import__('pdb').set_trace()
 " => Misc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-autocmd FileType html,xml,javascript,css,scss,sass,less,scss.css setlocal shiftwidth=2 tabstop=2 softtabstop=2
-autocmd FileType html,xml,javascript,css,scss,sass,less,scss.css setlocal iskeyword+=-
+autocmd FileType html,xml,javascript,css,scss,sass,less,scss.css,yaml,yml,rst,md setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType html,xml,javascript,css,scss,sass,less,scss.css,yaml,yml setlocal iskeyword+=-
 
 autocmd BufNewFile,BufRead *.pt,*.zcml setlocal iskeyword+=- shiftwidth=2 tabstop=2 softtabstop=2
 autocmd BufNewFile,BufRead *.fish set syntax=sh
 autocmd BufNewFile,BufRead *.zcml set syntax=xml
 autocmd BufNewFile,BufRead *.jinja set syntax=htmljinja
 autocmd BufNewFile,BufRead *.mako set filetype=mako
+
+autocmd FileType json syntax match Comment +\/\/.\+$+
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

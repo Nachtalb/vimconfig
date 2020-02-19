@@ -1,12 +1,13 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible                    " be iMproved, required
 filetype off                        " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" set rtp+=~/.vim/bundle/Vundle.vim
+" call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
 let mapleader = ","                 " Set leader to ,
 
@@ -24,6 +25,8 @@ set clipboard=unnamed               " Use system clipboard
 
 set viminfo^=%                      " Remember open buffers
 set viminfo+=n.viminfo              " Save viminfo dir specific
+
+set hidden
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -55,11 +58,30 @@ set backspace=eol,start,indent      " Make backspace work as it should
 set encoding=utf-8                  " Set correct encoding
 
 set list                            " Show spcial characters like trailing whitespaces / tabs and eol
-set listchars=tab:‣\ ,eol:↵,trail:·,extends:»,precedes:«,space:·
 
 set nofoldenable                    " Disable code folding
 
 set nowrap                          " Do not wrap lines
+
+set spell                           " Enable spellcheck
+set spelllang=en                    " Set spellcheck language to english
+
+
+function! GitBranch()
+    if filereadable('.git/HEAD')
+        return trim(substitute(readfile('.git/HEAD', '', 1)[0], 'ref: refs\/heads\/', '', 'g'))
+    endif
+    return ''
+endfunction
+
+set laststatus=2
+set statusline=%=%{coc#status()}%{get(b:,'coc_current_function','')}
+" set statusline=%{GitBranch()}\ %f%m%r%<\ %{&fileencoding?&fileencoding:&encoding}\ [%{&ff}]\ %y\ %=%{coc#status()}%{get(b:,'coc_current_function','')}\ %l/%L:%v
+
+set cmdheight=2
+set updatetime=300
+set shortmess+=c
+set signcolumn=yes
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -67,34 +89,6 @@ set nowrap                          " Do not wrap lines
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 syntax on                           " Enable syntax higlighting
-
-" Set default syntax for various file types
-
-set t_Co=256                        " Set number of available colours
-colorscheme PaperColor
-let g:airline_theme='papercolor'    " Use airline theme matching colorscheme
-
-set cursorline                      " Highlight current line
-hi CursorLine cterm=NONE  ctermbg=Black
-hi CursorLineNR cterm=NONE ctermbg=red ctermfg=Yellow
-
-" Define how search results are higghlighted
-hi Search cterm=NONE ctermbg=Grey
-hi IncSearch cterm=NONE ctermfg=DarkGrey ctermbg=LightRed
-
-" Set color of matching parentheses
-hi MatchParen ctermfg=255 ctermbg=red
-
-" Set color of error messages
-hi ErrorMsg ctermfg=255
-
-set fileformats=unix,dos,mac        " Use correct eol format
-
-set scrolloff=10                    " Improve handling and navigation of vim
-
-set colorcolumn=80,90,120           " Add vertical guidelines
-hi ColorColumn cterm=NONE ctermbg=Black
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
@@ -164,6 +158,18 @@ endfun
 " Toggle paste mode on and off
 map <leader>cm :call ToggleCopyMode()<cr>
 
+fun! ToggleStatusline()
+    if &laststatus == 2
+        set laststatus=0
+        set showcmd
+    else
+        set laststatus=2
+        set noshowcmd
+    endif
+endfun
+
+map <leader>l :call ToggleStatusline()<cr>
+
 " Remap VIM 0 to first non-blank character
 map 0 ^
 
@@ -200,12 +206,15 @@ vnoremap <C-d> y`>p
 nnoremap <C-a> ggVG
 
 " Fix indentation
-nnoremap <F8> gg=G''
-vnoremap <F8> =
+" nnoremap <F8> gg=G''
+" vnoremap <F8> =
 
 " Path to reference
 nnoremap <F6> :.s/\//\./g \| nohl<CR>
 inoremap <F6> <C-o>:.s/\//\./g \| nohl<CR>
+
+nnoremap <F7> :.s/\./\//g \| nohl<CR>
+inoremap <F7> <C-o>:.s/\./\//g \| nohl<CR>
 
 " Sort selected area
 vnoremap <F5> :sort<CR>
@@ -220,6 +229,7 @@ set pastetoggle=<F2>
 " Copy path to clipboard
 nnoremap cp :let @* = expand('%')<CR>
 nnoremap cpp :let @* = expand('%:p')<CR>
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Turn persistent undo on
