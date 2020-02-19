@@ -3,58 +3,136 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " ==== Install Plugins ====
-" This is required for Vundle to work
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'makerj/vim-pdf'
-Plugin 'scrooloose/nerdtree'
-Plugin 'mileszs/ack.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'neoclide/mycomment.vim'
-Plugin 'vimwiki/vimwiki'
-Plugin 'ap/vim-buftabline'
-Plugin 'mattn/emmet-vim'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'w0rp/ale'
-Plugin 'junegunn/fzf'
-Plugin 'junegunn/fzf.vim'
-Plugin 'hail2u/vim-css3-syntax'
-Plugin 'skywind3000/asyncrun.vim'
-Plugin 'jez/vim-superman'
-Plugin 'sjl/gundo.vim'
-Plugin 'indentpython.vim'
-Plugin 'vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'dag/vim-fish'
-Plugin 'vim-gitgutter'
-Plugin 'vim-lastplace'
-Plugin 'xmledit'
-Plugin 'ycm-core/YouCompleteMe'
+Plug 'junegunn/vim-plug'
 
-" ==== YCM ====
-let python_paths = trim(system("buildout-paths 2>/dev/null < bin/test || buildout-paths 2>/dev/null < bin/instance || buildout-paths 2>/dev/null < bin/instance0"))
-let g:ycm_python_sys_path = split(python_paths, ':')
-let g:ycm_extra_conf_vim_data = [
-  \  'g:ycm_python_sys_path'
-  \]
-let g:ycm_global_ycm_extra_conf = '~/.vim/global_extra_conf.py'
-
-nnoremap gd :tab YcmCompleter GoToDefinitionElseDeclaration<CR>
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_min_num_of_chars_for_completion = 0
-" let g:ycm_goto_buffer_command = 'split-or-existing-window'
-
-" ==== Deoplete ====
-let g:deoplete#enable_at_startup = 1
+Plug 'scrooloose/nerdtree'
+Plug 'mileszs/ack.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'ap/vim-buftabline'
+Plug 'mattn/emmet-vim'
+Plug 'tpope/vim-unimpaired'
+" Plug 'w0rp/ale'
+Plug 'junegunn/fzf', { 'do': './install --all' } | Plug 'junegunn/fzf.vim'
+Plug 'hail2u/vim-css3-syntax'
+Plug 'skywind3000/asyncrun.vim'
+Plug 'jez/vim-superman'
+Plug 'sjl/gundo.vim'
+Plug 'vim-scripts/indentpython.vim'
+Plug 'dag/vim-fish'
+Plug 'airblade/vim-gitgutter'
+Plug 'vim-scripts/vim-lastplace'
+Plug 'vim-scripts/xmledit'
+Plug 'flazz/vim-colorschemes'
+Plug 'xolox/vim-misc' | Plug 'xolox/vim-colorscheme-switcher'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'jez/vim-superman'
 
 
-" ==== jedi ====
-" Add either bin/test, bin/instance, bin/instance0 or nothing to sys.path
-let g:deoplete#sources#jedi#extra_path=system("buildout-paths 2>/dev/null < bin/test || buildout-paths 2>/dev/null < bin/instance || buildout-paths 2>/dev/null < bin/instance0")
-let g:deoplete#sources#jedi#enable_typeinfo=0
-let g:deoplete#sources#jedi#show_docstring=1
+" ==== COC ====
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Remap for format selected region
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Create mappings for function text object, requires document symbols feature of languageserver.
+xmap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
+
+" Use <TAB> for select selections ranges, needs server support, like: coc-tsserver, coc-python
+nmap <silent> <TAB> <Plug>(coc-range-select)
+xmap <silent> <TAB> <Plug>(coc-range-select)
+
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" Use `:Fold` to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" use `:OR` for organize import of current buffer
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Using CocList
+" Show all diagnostics
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 " ==== Emmet ====
 let g:user_emmet_leader_key=','
@@ -68,15 +146,15 @@ if executable('ag')
     " Use ag over grep
     set grepprg=ag\ --nogroup\ --nocolor\ -U\ --follow
 
-    let g:ackprg='ag --vimgrep --smart-case -U --follow --ignore-dir testreports --ignore SOURCES.txt --ignore-dir var --ignore-dir .idea --ignore-dir var --ignore-dir log'
+    let g:ackprg='ag --vimgrep --smart-case -U --follow --ignore-dir subinstallations --ignore-dir testreports --ignore SOURCES.txt --ignore-dir var --ignore-dir .idea --ignore-dir var --ignore-dir log'
     if isdirectory('parts/omelette/')
         let plone_dir = trim(system('ls -1 -f | grep egg-info | cut -d. -f1'))
         let plone_dir = trim(system("dirname $(ls -1 -f | grep egg-info | sed 's/\\./\\//g')"))
         let g:ackprg=g:ackprg . ' --ignore-dir parts/omelette/' . plone_dir
     endif
 
-    nnoremap <Leader>a :Ack! <C-r><C-w>
-    nnoremap <Leader>A :Ack! --ignore-dir tests <C-r><C-w>
+    nnoremap <Leader>a :Ack! '<C-r><C-w>'
+    nnoremap <Leader>A :Ack! --ignore-dir tests '<C-r><C-w>'
 endif
 
 " ==== NERDTree ==== "
@@ -100,20 +178,21 @@ let NERDTreeMinimalUI = 1
 let NERDTreeAutoDeleteBuffer = 1
 
 " ==== Ale ====
-let g:ale_fix_on_save = 0
-let g:ale_linter_aliases = {'vue': ['vue', 'javascript'],}
-let g:ale_fixers = {
-    \ 'python': ['autopep8', 'isort', 'yapf'],
-    \ 'javascript': ['prettier', 'eslint'],
-\ }
-" let g:ale_linters = {'python': ['flake8'], 'scss': ['scsslint'], 'css': ['scsslint'], 'scss.css': ['scsslint'],}
-let g:ale_linters = {'python': ['pylama'], 'scss': ['scsslint'], 'css': ['scsslint']}
-
-" Use Ale Fixer for these filetypes
-au BufNewFile,BufRead *.py,*.js nmap <F8> <Plug>(ale_fix)
+" let g:ale_fix_on_save = 0
+" let g:ale_linter_aliases = {'vue': ['vue', 'javascript'],}
+" let g:ale_fixers = {
+"     \ 'python': ['autopep8', 'isort', 'yapf'],
+"     \ 'javascript': ['prettier', 'eslint'],
+" \ }
+" " let g:ale_linters = {'python': ['flake8'], 'scss': ['scsslint'], 'css': ['scsslint'], 'scss.css': ['scsslint'],}
+" let g:ale_linters = {'python': ['pylama'], 'scss': ['scsslint'], 'css': ['scsslint']}
+"
+" " Use Ale Fixer for these filetypes
+" au BufNewFile,BufRead *.py,*.js nmap <F8> <Plug>(ale_fix)
 
 " ==== Fugitive ====
 nnoremap <Leader>gs :Gstatus<cr>
+nnoremap <Leader>go :Git open<cr><cr>
 nnoremap <Leader>gpl :Git pull -r<cr>
 nnoremap <Leader>gpf :Gpush -f
 nnoremap <Leader>gpp :Gpush
@@ -142,24 +221,6 @@ noremap <C-q> :bdelete<CR>
 " Use CTRL-P to launch FZF
 execute 'map <C-P> :FZF --inline-info --history=' . expand('~') . '/.fzf_history<CR>'
 
-" ==== VimWiki ====
-let g:vimwiki_global_ext = 0
-let g:vimwiki_list = [{
-                      \ 'path': '~/wiki',
-                      \ 'path_html': '~/wiki/html',
-                      \ 'auto_export': 1,
-                      \ 'auto_toc': 1,
-                    \ },
-                    \ {
-                      \ 'path': '~/pub_wiki',
-                      \ 'path_html': '~/pub_wiki/html',
-                      \ 'auto_export': 1,
-                      \ 'auto_toc': 1,
-                    \ }]
-" Auto convert wiki files to HTML
-autocmd BufWritePost *.wiki silent VimwikiAll2HTML
-
-
 " AsyncRun
 let g:asyncrun_open = 20    " Auto open quickfix window with the given size
 
@@ -178,6 +239,7 @@ nnoremap <Leader>ctt :!bin/test -t <cword><CR>
 nnoremap <Leader>caf :!bin/instance fg<CR>
 
 " ==== End Plugin Section ====
-" This is required for Vundle to work
-call vundle#end()
+" This is required for Vim-Plug to work
+" call vundle#end()
+call plug#end()
 filetype plugin indent on

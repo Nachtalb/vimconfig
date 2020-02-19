@@ -1,112 +1,70 @@
-[submodule "bundle/Vundle.vim"]
-    path = bundle/Vundle.vim
-    url = https://github.com/VundleVim/Vundle.vim.git
-    branch = master
-[submodule "bundle/ack.vim"]
-    path = bundle/ack.vim
-    url = https://github.com/mileszs/ack.vim.git
-    branch = master
-[submodule "bundle/ale"]
-    path = bundle/ale
-    url = https://github.com/w0rp/ale.git
-    branch = master
-[submodule "bundle/emmet-vim"]
-    path = bundle/emmet-vim
-    url = https://github.com/mattn/emmet-vim.git
-    branch = master
-[submodule "bundle/fzf"]
-    path = bundle/fzf
-    url = https://github.com/junegunn/fzf.git
-    branch = master
-[submodule "bundle/fzf.vim"]
-    path = bundle/fzf.vim
-    url = https://github.com/junegunn/fzf.vim.git
-    branch = master
-[submodule "bundle/gundo.vim"]
-    path = bundle/gundo.vim
-    url = git@github.com:sjl/gundo.vim.git
-    branch = master
-[submodule "bundle/indentpython.vim"]
-    path = bundle/indentpython.vim
-    url = https://github.com/vim-scripts/indentpython.vim.git
-    branch = master
-[submodule "bundle/mycomment.vim"]
-    path = bundle/mycomment.vim
-    url = https://github.com/neoclide/mycomment.vim.git
-    branch = master
-[submodule "bundle/nerdtree"]
-    path = bundle/nerdtree
-    url = https://github.com/scrooloose/nerdtree.git
-    branch = master
-[submodule "bundle/nerdtree-git-plugin"]
-    path = bundle/nerdtree-git-plugin
-    url = https://github.com/Xuyuanp/nerdtree-git-plugin.git
-    branch = master
-[submodule "bundle/vimwiki"]
-    path = bundle/vimwiki
-    url = https://github.com/vimwiki/vimwiki.git
-    branch = master
-[submodule "bundle/vim-airline"]
-    path = bundle/vim-airline
-    url = https://github.com/vim-airline/vim-airline.git
-    branch = master
-[submodule "bundle/vim-airline-themes"]
-    path = bundle/vim-airline-themes
-    url = https://github.com/vim-airline/vim-airline-themes.git
-    branch = master
-[submodule "bundle/vim-buftabline"]
-    path = bundle/vim-buftabline
-    url = https://github.com/ap/vim-buftabline.git
-    branch = master
-[submodule "bundle/vim-fish"]
-    path = bundle/vim-fish
-    url = git@github.com:dag/vim-fish.git
-    branch = master
-[submodule "bundle/vim-fugitive"]
-    path = bundle/vim-fugitive
-    url = https://github.com/tpope/vim-fugitive.git
-    branch = master
-[submodule "bundle/vim-gitgutter"]
-    path = bundle/vim-gitgutter
-    url = git://github.com/airblade/vim-gitgutter.git
-    branch = master
-[submodule "bundle/vim-lastplace"]
-    path = bundle/vim-lastplace
-    url = git://github.com/farmergreg/vim-lastplace.git
-    branch = master
-[submodule "bundle/vim-multiple-cursors"]
-    path = bundle/vim-multiple-cursors
-    url = https://github.com/terryma/vim-multiple-cursors.git
-    branch = master
-[submodule "bundle/vim-pdf"]
-    path = bundle/vim-pdf
-    url = https://github.com/makerj/vim-pdf.git
-    branch = master
-[submodule "bundle/vim-rhubarb"]
-    path = bundle/vim-rhubarb
-    url = https://github.com/tpope/vim-rhubarb.git
-    branch = master
-[submodule "bundle/vim-superman"]
-    path = bundle/vim-superman
-    url = https://github.com/jez/vim-superman
-    branch = master
-[submodule "bundle/vim-unimpaired"]
-    path = bundle/vim-unimpaired
-    url = https://github.com/tpope/vim-unimpaired.git
-    branch = master
-[submodule "bundle/xmledit"]
-    path = bundle/xmledit
-    url = https://github.com/sukima/xmledit.git
-    branch = master
-[submodule "bundle/scss-syntax.vim"]
-    path = bundle/scss-syntax.vim
-    url = https://github.com/cakebaker/scss-syntax.vim.git
-[submodule "bundle/vim-css3-syntax"]
-    path = bundle/vim-css3-syntax
-    url = https://github.com/hail2u/vim-css3-syntax.git
-[submodule "bundle/asyncrun.vim"]
-    path = bundle/asyncrun.vim
-    url = https://github.com/skywind3000/asyncrun.vim.git
-[submodule "bundle/YouCompleteMe"]
-	path = bundle/YouCompleteMe
-	url = https://github.com/ycm-core/YouCompleteMe.git
+
+[submodule "plugged/ack.vim"]
+	path = plugged/ack.vim
+	url = https://github.com/mileszs/ack.vim.githttps://github.com/mileszs/ack.vim.git
+[submodule "plugged/asyncrun.vim"]
+	path = plugged/asyncrun.vim
+	url = https://github.com/skywind3000/asyncrun.vim.githttps://github.com/skywind3000/asyncrun.vim.git
+[submodule "plugged/coc.nvim"]
+	path = plugged/coc.nvim
+	url = https://github.com/neoclide/coc.nvim.githttps://github.com/neoclide/coc.nvim.git
+[submodule "plugged/emmet-vim"]
+	path = plugged/emmet-vim
+	url = https://github.com/mattn/emmet-vim.githttps://github.com/mattn/emmet-vim.git
+[submodule "plugged/fzf"]
+	path = plugged/fzf
+	url = https://github.com/junegunn/fzf.githttps://github.com/junegunn/fzf.git
+[submodule "plugged/fzf.vim"]
+	path = plugged/fzf.vim
+	url = https://github.com/junegunn/fzf.vim.githttps://github.com/junegunn/fzf.vim.git
+[submodule "plugged/gundo.vim"]
+	path = plugged/gundo.vim
+	url = https://github.com/sjl/gundo.vim.githttps://github.com/sjl/gundo.vim.git
+[submodule "plugged/indentpython.vim"]
+	path = plugged/indentpython.vim
+	url = https://github.com/vim-scripts/indentpython.vim.githttps://github.com/vim-scripts/indentpython.vim.git
+[submodule "plugged/nerdtree"]
+	path = plugged/nerdtree
+	url = https://github.com/scrooloose/nerdtree.githttps://github.com/scrooloose/nerdtree.git
+[submodule "plugged/nerdtree-git-plugin"]
+	path = plugged/nerdtree-git-plugin
+	url = https://github.com/Xuyuanp/nerdtree-git-plugin.githttps://github.com/Xuyuanp/nerdtree-git-plugin.git
+[submodule "plugged/vim-buftabline"]
+	path = plugged/vim-buftabline
+	url = https://github.com/ap/vim-buftabline.githttps://github.com/ap/vim-buftabline.git
+[submodule "plugged/vim-colorschemes"]
+	path = plugged/vim-colorschemes
+	url = https://github.com/flazz/vim-colorschemes.githttps://github.com/flazz/vim-colorschemes.git
+[submodule "plugged/vim-colorscheme-switcher"]
+	path = plugged/vim-colorscheme-switcher
+	url = https://github.com/xolox/vim-colorscheme-switcher.githttps://github.com/xolox/vim-colorscheme-switcher.git
+[submodule "plugged/vim-css3-syntax"]
+	path = plugged/vim-css3-syntax
+	url = https://github.com/hail2u/vim-css3-syntax.githttps://github.com/hail2u/vim-css3-syntax.git
+[submodule "plugged/vim-fish"]
+	path = plugged/vim-fish
+	url = https://github.com/dag/vim-fish.githttps://github.com/dag/vim-fish.git
+[submodule "plugged/vim-fugitive"]
+	path = plugged/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive.githttps://github.com/tpope/vim-fugitive.git
+[submodule "plugged/vim-gitgutter"]
+	path = plugged/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter.githttps://github.com/airblade/vim-gitgutter.git
+[submodule "plugged/vim-lastplace"]
+	path = plugged/vim-lastplace
+	url = https://github.com/vim-scripts/vim-lastplace.githttps://github.com/vim-scripts/vim-lastplace.git
+[submodule "plugged/vim-misc"]
+	path = plugged/vim-misc
+	url = https://github.com/xolox/vim-misc.githttps://github.com/xolox/vim-misc.git
+[submodule "plugged/vim-plug"]
+	path = plugged/vim-plug
+	url = https://github.com/junegunn/vim-plug.githttps://github.com/junegunn/vim-plug.git
+[submodule "plugged/vim-superman"]
+	path = plugged/vim-superman
+	url = https://github.com/jez/vim-superman.githttps://github.com/jez/vim-superman.git
+[submodule "plugged/vim-unimpaired"]
+	path = plugged/vim-unimpaired
+	url = https://github.com/tpope/vim-unimpaired.githttps://github.com/tpope/vim-unimpaired.git
+[submodule "plugged/xmledit"]
+	path = plugged/xmledit
+	url = https://github.com/vim-scripts/xmledit.githttps://github.com/vim-scripts/xmledit.git
