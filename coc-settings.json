@@ -1,0 +1,30 @@
+{
+    "python.jediEnabled": false,
+    "python.setLinter": "flake8",
+    "python.linting.flake8Enabled": true,
+    "python.linting.flake8Path": "~/.config/omf/bin/flake8",
+    "python.formatting.provider": "yapf",
+    "python.formatting.yapfPath": "~/.config/omf/bin/yapf",
+    "python.autoComplete.extraPaths": [
+        "./parts/omelette"
+    ],
+    "python.linting.ignorePattern": [
+        ".vscode/*.py",
+        "**/site-packages/**/*.py",
+        "bin/*",
+        "var/**/*",
+    ],
+    "files.exclude": {
+        "**/*.h*": true,
+        "**/*.py[co]": true,
+        "**/*.so": true,
+        "**/__pycache__": true,
+        "**/node_modules": true,
+        "**/bower_components": true,
+        "**/chameleon-cache": true,
+    },
+    "files.associations": {
+        "*.zcml": "xml"
+    },
+    "files.maxMemoryForLargeFilesMB": 12288
+}
