@@ -220,8 +220,8 @@ inoremap <F7> <C-o>:.s/\./\//g \| nohl<CR>
 vnoremap <F5> :sort<CR>
 
 " Show buffer list
-nnoremap <C-c> :Buffers<CR>
-inoremap <C-c> <C-o>:Buffers<CR>
+nnoremap <C-x> :Buffers<CR>
+inoremap <C-x> <C-o>:Buffers<CR>
 
 " Toggle Pastemode
 set pastetoggle=<F2>

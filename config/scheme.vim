@@ -6,7 +6,8 @@
 
 set t_Co=256                        " Set number of available colours
 " colorscheme antares
-colorscheme harlequin
+" colorscheme harlequin
+" colorscheme hybrid
 
 set cursorline                      " Highlight current line
 hi CursorLine cterm=NONE  ctermbg=Black

@@ -27,9 +27,29 @@ Plug 'flazz/vim-colorschemes'
 Plug 'xolox/vim-misc' | Plug 'xolox/vim-colorscheme-switcher'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jez/vim-superman'
+Plug 'godlygeek/tabular'
+Plug 'machakann/vim-highlightedyank'
+Plug 'tmhedberg/matchit'
+Plug 'frazrepo/vim-rainbow'
+Plug 'preservim/nerdcommenter'
+Plug 'jiangmiao/auto-pairs'
+Plug 'vim-scripts/indentpython.vim'
 
+" ==== Rainbow ====
+" Enable rainbow brackets globally
+let g:rainbow_active = 1
 
-" ==== COC ====
+" ==== Commenter =====
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+"
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+"==== COC ====
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
@@ -146,7 +166,7 @@ if executable('ag')
     " Use ag over grep
     set grepprg=ag\ --nogroup\ --nocolor\ -U\ --follow
 
-    let g:ackprg='ag --vimgrep --smart-case -U --follow --ignore-dir subinstallations --ignore-dir testreports --ignore SOURCES.txt --ignore-dir var --ignore-dir .idea --ignore-dir var --ignore-dir log'
+    let g:ackprg='ag --silent --vimgrep --smart-case -U --follow --ignore-dir subinstallations --ignore-dir testreports --ignore SOURCES.txt --ignore-dir var --ignore-dir .idea --ignore-dir var --ignore-dir log --ignore-dir src --ignore-dir node_modules --ignore-dir parts/solr-download --ignore-dir parts/solr-instance --ignore "*.min.js" --ignore "*compiled.js" --ignore "*.map"'
     if isdirectory('parts/omelette/')
         let plone_dir = trim(system('ls -1 -f | grep egg-info | cut -d. -f1'))
         let plone_dir = trim(system("dirname $(ls -1 -f | grep egg-info | sed 's/\\./\\//g')"))
@@ -219,7 +239,8 @@ noremap <C-q> :bdelete<CR>
 
 " ==== FZF ====
 " Use CTRL-P to launch FZF
-execute 'map <C-P> :FZF --inline-info --history=' . expand('~') . '/.fzf_history<CR>'
+execute 'map <C-p> :FZF --inline-info --history=' . expand('~') . '/.fzf_history<CR>'
+nnoremap <M-g> :GFiles<CR>
 
 " AsyncRun
 let g:asyncrun_open = 20    " Auto open quickfix window with the given size
