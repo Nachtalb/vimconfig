@@ -75,7 +75,7 @@ function! GitBranch()
 endfunction
 
 set laststatus=2
-set statusline=%=%{coc#status()}%{get(b:,'coc_current_function','')}
+set statusline^=%{get(g:,'coc_git_status','')}%{get(b:,'coc_git_status','')}%{get(b:,'coc_git_blame','')}=%=%{coc#status()}%{get(b:,'coc_current_function','')}\ %l:%c
 " set statusline=%{GitBranch()}\ %f%m%r%<\ %{&fileencoding?&fileencoding:&encoding}\ [%{&ff}]\ %y\ %=%{coc#status()}%{get(b:,'coc_current_function','')}\ %l/%L:%v
 
 set cmdheight=2
@@ -137,27 +137,6 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Editing mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-fun! ToggleCopyMode()
-    " Disable all extra characters etc. to get a clean text
-    if &cc == ''
-        GitGutterEnable
-        ALEDisable
-        set colorcolumn=80,90,120
-        set number
-        set list
-    else
-        GitGutterDisable
-        ALEEnable
-        set colorcolumn=
-        set nolist
-        set nonumber
-    endif
-endfun
-
-" Toggle paste mode on and off
-map <leader>cm :call ToggleCopyMode()<cr>
-
 fun! ToggleStatusline()
     if &laststatus == 2
         set laststatus=0
@@ -208,13 +187,6 @@ nnoremap <C-a> ggVG
 " Fix indentation
 " nnoremap <F8> gg=G''
 " vnoremap <F8> =
-
-" Path to reference
-nnoremap <F6> :.s/\//\./g \| nohl<CR>
-inoremap <F6> <C-o>:.s/\//\./g \| nohl<CR>
-
-nnoremap <F7> :.s/\./\//g \| nohl<CR>
-inoremap <F7> <C-o>:.s/\./\//g \| nohl<CR>
 
 " Sort selected area
 vnoremap <F5> :sort<CR>

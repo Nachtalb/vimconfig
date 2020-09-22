@@ -12,15 +12,12 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ap/vim-buftabline'
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-unimpaired'
-" Plug 'w0rp/ale'
 Plug 'junegunn/fzf', { 'do': './install --all' } | Plug 'junegunn/fzf.vim'
-Plug 'hail2u/vim-css3-syntax'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'jez/vim-superman'
 Plug 'sjl/gundo.vim'
 Plug 'vim-scripts/indentpython.vim'
 Plug 'dag/vim-fish'
-Plug 'airblade/vim-gitgutter'
 Plug 'vim-scripts/vim-lastplace'
 Plug 'vim-scripts/xmledit'
 Plug 'flazz/vim-colorschemes'
@@ -30,14 +27,14 @@ Plug 'jez/vim-superman'
 Plug 'godlygeek/tabular'
 Plug 'machakann/vim-highlightedyank'
 Plug 'tmhedberg/matchit'
-Plug 'frazrepo/vim-rainbow'
 Plug 'preservim/nerdcommenter'
 Plug 'jiangmiao/auto-pairs'
 Plug 'vim-scripts/indentpython.vim'
 
-" ==== Rainbow ====
-" Enable rainbow brackets globally
-let g:rainbow_active = 1
+" ==== LASTPLACE ====
+" Intelligently reopen files
+let g:lastplace_ignore = "gitcommit,gitrebase,svn,hgcommit"
+let g:lastplace_ignore_buftype = "quickfix,nofile,help"
 
 " ==== Commenter =====
 " Add spaces after comment delimiters by default
@@ -50,6 +47,26 @@ let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
 
 "==== COC ====
+"
+"COC PLUGINS
+"
+" CocInstall coc-json coc-python coc-cmake coc-css coc-cssmodules
+" coc-git coc-html coc-highlight coc-markdownlint coc-sh coc-sql coc-svg
+" coc-translator coc-xml coc-yaml
+"
+" coc-highlight:
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" coc-git
+" navigate chunks of current buffer
+nmap [g <Plug>(coc-git-prevchunk)
+nmap ]g <Plug>(coc-git-nextchunk)
+" show chunk diff at current position
+nmap gs <Plug>(coc-git-chunkinfo)
+nmap go :CocCommand git.browserOpen<cr>
+
+nmap <Leader>gp :CocCommand git.push<cr>
+nmap <Leader>gu :CocCommand git.chunkUndo<cr>
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
@@ -69,9 +86,9 @@ inoremap <silent><expr> <c-space> coc#refresh()
 " Coc only does snippet and additional edit on confirm.
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-" Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+" Use `[d` and `]d` to navigate diagnostics
+nmap <silent> [d <Plug>(coc-diagnostic-prev)
+nmap <silent> ]d <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
@@ -197,25 +214,12 @@ let NERDTreeShowHidden = 1
 let NERDTreeMinimalUI = 1
 let NERDTreeAutoDeleteBuffer = 1
 
-" ==== Ale ====
-" let g:ale_fix_on_save = 0
-" let g:ale_linter_aliases = {'vue': ['vue', 'javascript'],}
-" let g:ale_fixers = {
-"     \ 'python': ['autopep8', 'isort', 'yapf'],
-"     \ 'javascript': ['prettier', 'eslint'],
-" \ }
-" " let g:ale_linters = {'python': ['flake8'], 'scss': ['scsslint'], 'css': ['scsslint'], 'scss.css': ['scsslint'],}
-" let g:ale_linters = {'python': ['pylama'], 'scss': ['scsslint'], 'css': ['scsslint']}
-"
-" " Use Ale Fixer for these filetypes
-" au BufNewFile,BufRead *.py,*.js nmap <F8> <Plug>(ale_fix)
-
 " ==== Fugitive ====
 nnoremap <Leader>gs :Gstatus<cr>
-nnoremap <Leader>go :Git open<cr><cr>
+" nnoremap <Leader>go :Git open<cr><cr>
 nnoremap <Leader>gpl :Git pull -r<cr>
 nnoremap <Leader>gpf :Gpush -f
-nnoremap <Leader>gpp :Gpush
+" nnoremap <Leader>gpp :Gpush
 nnoremap <Leader>gd :Gdiff<cr>
 nnoremap <Leader>gcc :Gcommit<cr>
 nnoremap <Leader>gca :Git commit --amend --no-edit
@@ -226,10 +230,10 @@ nnoremap <Leader>gl1 :!GIT_PAGER=less git log --graph --abbrev-commit --decorate
 
 "
 " ==== GitGutter ====
-nnoremap <F3> :GitGutterPrevHunk<CR>
-inoremap <F3> <C-o>:GitGutterPrevHunk<CR>
-nnoremap <F4> :GitGutterNextHunk<CR>
-inoremap <F4> <C-o>:GitGutterNextHunk<CR>
+" nnoremap <F3> :GitGutterPrevHunk<CR>
+" inoremap <F3> <C-o>:GitGutterPrevHunk<CR>
+" nnoremap <F4> :GitGutterNextHunk<CR>
+" inoremap <F4> <C-o>:GitGutterNextHunk<CR>
 
 " ==== buf tabline ====
 set hidden
@@ -239,8 +243,29 @@ noremap <C-q> :bdelete<CR>
 
 " ==== FZF ====
 " Use CTRL-P to launch FZF
-execute 'map <C-p> :FZF --inline-info --history=' . expand('~') . '/.fzf_history<CR>'
-nnoremap <M-g> :GFiles<CR>
+
+command! -bang Omelette call fzf#vim#files('parts/omelette', fzf#vim#with_preview(), <bang>0)
+
+" To use with big projects
+" It has an initial wait because it starts the command with "sh -c" but after
+" that ripgrep is much faster at gathering files
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --no-ignore --files -L', 1,
+  \   fzf#vim#with_preview(), <bang>0)
+
+nnoremap <C-p> :Files<CR>
+nnoremap <C-g> :GFiles<CR>
+nnoremap <C-h> :History<CR>
+nnoremap <C-u> :Rg<CR>
+nnoremap <C-m> :Omelette<CR>
+
+inoremap <C-p> <C-o>:Files<CR>
+inoremap <C-g> <C-o>:GFiles<CR>
+inoremap <C-h> <C-o>:History<CR>
+inoremap <C-u> <C-o>:Rg<CR>
+inoremap <C-m> <C-o>:Omelette<CR>
+let g:fzf_buffers_jump = 1
 
 " AsyncRun
 let g:asyncrun_open = 20    " Auto open quickfix window with the given size

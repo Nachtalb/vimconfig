@@ -4,10 +4,11 @@
 
 " Set default syntax for various file types
 
-set t_Co=256                        " Set number of available colours
 " colorscheme antares
 " colorscheme harlequin
 " colorscheme hybrid
+" colorscheme zenburn
+colorscheme Atelier_DuneDark
 
 set cursorline                      " Highlight current line
 hi CursorLine cterm=NONE  ctermbg=Black
