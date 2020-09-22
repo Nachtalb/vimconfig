@@ -1,70 +1,85 @@
 
 [submodule "plugged/ack.vim"]
 	path = plugged/ack.vim
-	url = https://github.com/mileszs/ack.vim.githttps://github.com/mileszs/ack.vim.git
+	url = https://github.com/mileszs/ack.vim.git
 [submodule "plugged/asyncrun.vim"]
 	path = plugged/asyncrun.vim
-	url = https://github.com/skywind3000/asyncrun.vim.githttps://github.com/skywind3000/asyncrun.vim.git
+	url = https://github.com/skywind3000/asyncrun.vim.git
 [submodule "plugged/coc.nvim"]
 	path = plugged/coc.nvim
-	url = https://github.com/neoclide/coc.nvim.githttps://github.com/neoclide/coc.nvim.git
+	url = https://github.com/neoclide/coc.nvim.git
 [submodule "plugged/emmet-vim"]
 	path = plugged/emmet-vim
-	url = https://github.com/mattn/emmet-vim.githttps://github.com/mattn/emmet-vim.git
+	url = https://github.com/mattn/emmet-vim.git
 [submodule "plugged/fzf"]
 	path = plugged/fzf
-	url = https://github.com/junegunn/fzf.githttps://github.com/junegunn/fzf.git
+	url = https://github.com/junegunn/fzf.git
 [submodule "plugged/fzf.vim"]
 	path = plugged/fzf.vim
-	url = https://github.com/junegunn/fzf.vim.githttps://github.com/junegunn/fzf.vim.git
+	url = https://github.com/junegunn/fzf.vim.git
 [submodule "plugged/gundo.vim"]
 	path = plugged/gundo.vim
-	url = https://github.com/sjl/gundo.vim.githttps://github.com/sjl/gundo.vim.git
+	url = https://github.com/sjl/gundo.vim.git
 [submodule "plugged/indentpython.vim"]
 	path = plugged/indentpython.vim
-	url = https://github.com/vim-scripts/indentpython.vim.githttps://github.com/vim-scripts/indentpython.vim.git
+	url = https://github.com/vim-scripts/indentpython.vim.git
 [submodule "plugged/nerdtree"]
 	path = plugged/nerdtree
-	url = https://github.com/scrooloose/nerdtree.githttps://github.com/scrooloose/nerdtree.git
+	url = https://github.com/scrooloose/nerdtree.git
 [submodule "plugged/nerdtree-git-plugin"]
 	path = plugged/nerdtree-git-plugin
-	url = https://github.com/Xuyuanp/nerdtree-git-plugin.githttps://github.com/Xuyuanp/nerdtree-git-plugin.git
+	url = https://github.com/Xuyuanp/nerdtree-git-plugin.git
 [submodule "plugged/vim-buftabline"]
 	path = plugged/vim-buftabline
-	url = https://github.com/ap/vim-buftabline.githttps://github.com/ap/vim-buftabline.git
+	url = https://github.com/ap/vim-buftabline.git
 [submodule "plugged/vim-colorschemes"]
 	path = plugged/vim-colorschemes
-	url = https://github.com/flazz/vim-colorschemes.githttps://github.com/flazz/vim-colorschemes.git
+	url = https://github.com/flazz/vim-colorschemes.git
 [submodule "plugged/vim-colorscheme-switcher"]
 	path = plugged/vim-colorscheme-switcher
-	url = https://github.com/xolox/vim-colorscheme-switcher.githttps://github.com/xolox/vim-colorscheme-switcher.git
+	url = https://github.com/xolox/vim-colorscheme-switcher.git
 [submodule "plugged/vim-css3-syntax"]
 	path = plugged/vim-css3-syntax
-	url = https://github.com/hail2u/vim-css3-syntax.githttps://github.com/hail2u/vim-css3-syntax.git
+	url = https://github.com/hail2u/vim-css3-syntax.git
 [submodule "plugged/vim-fish"]
 	path = plugged/vim-fish
-	url = https://github.com/dag/vim-fish.githttps://github.com/dag/vim-fish.git
+	url = https://github.com/dag/vim-fish.git
 [submodule "plugged/vim-fugitive"]
 	path = plugged/vim-fugitive
-	url = https://github.com/tpope/vim-fugitive.githttps://github.com/tpope/vim-fugitive.git
+	url = https://github.com/tpope/vim-fugitive.git
 [submodule "plugged/vim-gitgutter"]
 	path = plugged/vim-gitgutter
-	url = https://github.com/airblade/vim-gitgutter.githttps://github.com/airblade/vim-gitgutter.git
+	url = https://github.com/airblade/vim-gitgutter.git
 [submodule "plugged/vim-lastplace"]
 	path = plugged/vim-lastplace
-	url = https://github.com/vim-scripts/vim-lastplace.githttps://github.com/vim-scripts/vim-lastplace.git
+	url = https://github.com/vim-scripts/vim-lastplace.git
 [submodule "plugged/vim-misc"]
 	path = plugged/vim-misc
-	url = https://github.com/xolox/vim-misc.githttps://github.com/xolox/vim-misc.git
+	url = https://github.com/xolox/vim-misc.git
 [submodule "plugged/vim-plug"]
 	path = plugged/vim-plug
-	url = https://github.com/junegunn/vim-plug.githttps://github.com/junegunn/vim-plug.git
+	url = https://github.com/junegunn/vim-plug.git
 [submodule "plugged/vim-superman"]
 	path = plugged/vim-superman
-	url = https://github.com/jez/vim-superman.githttps://github.com/jez/vim-superman.git
+	url = https://github.com/jez/vim-superman.git
 [submodule "plugged/vim-unimpaired"]
 	path = plugged/vim-unimpaired
-	url = https://github.com/tpope/vim-unimpaired.githttps://github.com/tpope/vim-unimpaired.git
+	url = https://github.com/tpope/vim-unimpaired.git
 [submodule "plugged/xmledit"]
 	path = plugged/xmledit
-	url = https://github.com/vim-scripts/xmledit.githttps://github.com/vim-scripts/xmledit.git
+	url = https://github.com/vim-scripts/xmledit.git
+[submodule "plugged/auto-pairs"]
+	path = plugged/auto-pairs
+	url = https://github.com/jiangmiao/auto-pairs.git
+[submodule "plugged/matchit"]
+	path = plugged/matchit
+	url = https://github.com/tmhedberg/matchit.git
+[submodule "plugged/nerdcommenter"]
+	path = plugged/nerdcommenter
+	url = https://github.com/preservim/nerdcommenter.git
+[submodule "plugged/tabular"]
+	path = plugged/tabular
+	url = https://github.com/godlygeek/tabular.git
+[submodule "plugged/vim-highlightedyank"]
+	path = plugged/vim-highlightedyank
+	url = https://github.com/machakann/vim-highlightedyank.git
