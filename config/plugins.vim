@@ -262,9 +262,6 @@ nnoremap <C-m> :Omelette<CR>
 
 inoremap <C-p> <C-o>:Files<CR>
 inoremap <C-g> <C-o>:GFiles<CR>
-inoremap <C-h> <C-o>:History<CR>
-inoremap <C-u> <C-o>:Rg<CR>
-inoremap <C-m> <C-o>:Omelette<CR>
 let g:fzf_buffers_jump = 1
 
 " AsyncRun
