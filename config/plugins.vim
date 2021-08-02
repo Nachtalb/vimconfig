@@ -30,6 +30,7 @@ Plug 'tmhedberg/matchit'
 Plug 'preservim/nerdcommenter'
 Plug 'jiangmiao/auto-pairs'
 Plug 'vim-scripts/indentpython.vim'
+Plug 'liuchengxu/eleline.vim'
 
 " ==== LASTPLACE ====
 " Intelligently reopen files
@@ -47,26 +48,47 @@ let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
 
 "==== COC ====
-"
-"COC PLUGINS
-"
-" CocInstall coc-json coc-python coc-cmake coc-css coc-cssmodules
-" coc-git coc-html coc-highlight coc-markdownlint coc-sh coc-sql coc-svg
-" coc-translator coc-xml coc-yaml
-"
+
 " coc-highlight:
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
+let g:coc_global_extensions = [
+    \'coc-browser',
+    \'coc-cmake',
+    \'coc-css',
+    \'coc-cssmodules',
+    \'coc-eslint',
+    \'coc-git',
+    \'coc-html',
+    \'coc-json',
+    \'coc-markdownlint',
+    \'coc-pyright',
+    \'coc-sh',
+    \'coc-svg',
+    \'coc-translator',
+    \'coc-tsserver',
+    \'coc-xml',
+    \'coc-yaml',
+    \'coc-yank'
+\]
+
+" \'coc-spell-checker',
+" coc-yank
+nnoremap <silent> <space>y :<C-u>CocList -A --normal yank<cr>
+
+inoremap <nowait><expr> <C-l> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+inoremap <nowait><expr> <C-h> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+
 " coc-git
 " navigate chunks of current buffer
-nmap [g <Plug>(coc-git-prevchunk)
-nmap ]g <Plug>(coc-git-nextchunk)
+nnoremap <silent><nowait>[g <Plug>(coc-git-prevchunk)
+nnoremap <silent><nowait>]g <Plug>(coc-git-nextchunk)
 " show chunk diff at current position
 nmap gs <Plug>(coc-git-chunkinfo)
 nmap go :CocCommand git.browserOpen<cr>
-
 nmap <Leader>gp :CocCommand git.push<cr>
 nmap <Leader>gu :CocCommand git.chunkUndo<cr>
+
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
@@ -81,6 +103,7 @@ function! s:check_back_space() abort
 endfunction
 
 inoremap <silent><expr> <c-space> coc#refresh()
+inoremap <silent><expr> <c-@> coc#refresh()
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
@@ -97,7 +120,7 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <silent> <C-D> :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -127,6 +150,7 @@ augroup end
 
 " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
 xmap <leader>a  <Plug>(coc-codeaction-selected)
+vmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>a  <Plug>(coc-codeaction-selected)
 
 " Remap for do codeAction of current line
@@ -183,15 +207,15 @@ if executable('ag')
     " Use ag over grep
     set grepprg=ag\ --nogroup\ --nocolor\ -U\ --follow
 
-    let g:ackprg='ag --silent --vimgrep --smart-case -U --follow --ignore-dir subinstallations --ignore-dir testreports --ignore SOURCES.txt --ignore-dir var --ignore-dir .idea --ignore-dir var --ignore-dir log --ignore-dir src --ignore-dir node_modules --ignore-dir parts/solr-download --ignore-dir parts/solr-instance --ignore "*.min.js" --ignore "*compiled.js" --ignore "*.map"'
+    let g:ackprg='ag --silent --vimgrep --smart-case -U --follow --ignore-dir testreports --ignore SOURCES.txt --ignore-dir var --ignore-dir .idea --ignore-dir var --ignore-dir log --ignore-dir node_modules --ignore-dir parts/solr-download --ignore-dir parts/solr-instance --ignore "*.min.js" --ignore "*compiled.js" --ignore "*.map"'
     if isdirectory('parts/omelette/')
         let plone_dir = trim(system('ls -1 -f | grep egg-info | cut -d. -f1'))
         let plone_dir = trim(system("dirname $(ls -1 -f | grep egg-info | sed 's/\\./\\//g')"))
-        let g:ackprg=g:ackprg . ' --ignore-dir parts/omelette/' . plone_dir
+        let g:ackprg=g:ackprg . ' --ignore-dir src --ignore-dir parts/omelette/' . plone_dir
     endif
 
-    nnoremap <Leader>a :Ack! '<C-r><C-w>'
-    nnoremap <Leader>A :Ack! --ignore-dir tests '<C-r><C-w>'
+    nnoremap <Leader>aa :Ack! '<C-r><C-w>'
+    nnoremap <Leader>AA :Ack! --ignore-dir tests '<C-r><C-w>'
 endif
 
 " ==== NERDTree ==== "
@@ -255,13 +279,10 @@ command! -bang -nargs=* Rg
   \   fzf#vim#with_preview(), <bang>0)
 
 nnoremap <C-p> :Files<CR>
-nnoremap <C-g> :GFiles<CR>
-nnoremap <C-h> :History<CR>
-nnoremap <C-u> :Rg<CR>
-nnoremap <C-m> :Omelette<CR>
+nnoremap <C-h> :GFiles<CR>
 
 inoremap <C-p> <C-o>:Files<CR>
-inoremap <C-g> <C-o>:GFiles<CR>
+inoremap <C-h> <C-o>:GFiles<CR>
 let g:fzf_buffers_jump = 1
 
 " AsyncRun

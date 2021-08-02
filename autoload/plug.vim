@@ -1,1 +1,1 @@
-/Users/bernd/.vim/plugged/vim-plug/plug.vim
+/home/bernd/.vim/plugged/vim-plug/plug.vim

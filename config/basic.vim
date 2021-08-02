@@ -63,7 +63,7 @@ set nofoldenable                    " Disable code folding
 
 set nowrap                          " Do not wrap lines
 
-set spell                           " Enable spellcheck
+set nospell                           " Enable spellcheck
 set spelllang=en                    " Set spellcheck language to english
 
 
@@ -75,7 +75,7 @@ function! GitBranch()
 endfunction
 
 set laststatus=2
-set statusline^=%{get(g:,'coc_git_status','')}%{get(b:,'coc_git_status','')}%{get(b:,'coc_git_blame','')}=%=%{coc#status()}%{get(b:,'coc_current_function','')}\ %l:%c
+" set statusline^=%{get(g:,'coc_git_status','')}%{get(b:,'coc_git_status','')}%{get(b:,'coc_git_blame','')}=%=%{coc#status()}%{get(b:,'coc_current_function','')}\ %l:%c
 " set statusline=%{GitBranch()}\ %f%m%r%<\ %{&fileencoding?&fileencoding:&encoding}\ [%{&ff}]\ %y\ %=%{coc#status()}%{get(b:,'coc_current_function','')}\ %l/%L:%v
 
 set cmdheight=2
@@ -151,10 +151,6 @@ map <leader>l :call ToggleStatusline()<cr>
 
 " Remap VIM 0 to first non-blank character
 map 0 ^
-
-" Write buffer if updated on CTRL-s
-inoremap <C-s> <C-o>:w<CR>
-noremap <C-s> :w<CR>
 
 " Use CTRL-j and CTRL-k to move lines up and down
 nnoremap <C-j> :m .+1<CR>==
