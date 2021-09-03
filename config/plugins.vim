@@ -99,8 +99,6 @@ nnoremap <silent><nowait>]g <Plug>(coc-git-nextchunk)
 " show chunk diff at current position
 nmap gs <Plug>(coc-git-chunkinfo)
 nmap go :CocCommand git.browserOpen<cr>
-nmap <Leader>gp :Git push<cr>
-nmap <Leader>gs :Git<cr>
 nmap <Leader>gu :CocCommand git.chunkUndo<cr>
 
 " Use tab for trigger completion with characters ahead and navigate.
@@ -253,9 +251,10 @@ let NERDTreeMinimalUI = 1
 let NERDTreeAutoDeleteBuffer = 1
 
 " ==== Fugitive ====
-nnoremap <Leader>gs :Gstatus<cr>
+nnoremap <Leader>gs :Git<cr>
 " nnoremap <Leader>go :Git open<cr><cr>
 nnoremap <Leader>gpl :Git pull -r<cr>
+nnoremap <Leader>gp :Git push<cr>
 nnoremap <Leader>gpf :Gpush -f
 " nnoremap <Leader>gpp :Gpush
 nnoremap <Leader>gd :Gdiff<cr>
