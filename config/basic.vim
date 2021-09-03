@@ -41,7 +41,10 @@ set mouse=                          " Disable mouse
 set incsearch                       " Higlight search results while typing
 set hlsearch                        " Higlight all search results of previous search
 set ignorecase                      " Ignore case while searching
-set smartcase                       " Override ignorecase if uppercase chars are typped
+set smartcase                       " Override ignorecase if uppercase chars are typpedd
+
+set splitbelow                      " Open new vim windows below instead of above
+set splitright                      " Open new vim windows on the right instead of left
 
 " Turn of search higlights of previous search
 nnoremap <leader><space> :nohlsearch<CR>
@@ -137,6 +140,10 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Editing mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+nnoremap <leader>q :bp \| sp \| bn \| bd<CR>
+
+
 fun! ToggleStatusline()
     if &laststatus == 2
         set laststatus=0
@@ -168,11 +175,13 @@ noremap <leader>S :%s/\<<C-r><C-w>\>//g<Left><Left>
 " Prepare for to search for word under cursor
 noremap <leader>s /<C-r><C-w><CR>
 
-" Alt-Left / Alt-Right
+" Alt-Left / Alt-Right OR CTRL-Left / CTRL-Right
 inoremap <ESC>[1;5C <C-o>w
 inoremap <ESC>[1;5D <C-o>b
 nnoremap <ESC>[1;5C w
 nnoremap <ESC>[1;5D b
+cnoremap <ESC>[1;5C <C-Right>
+cnoremap <ESC>[1;5D <C-Left>
 
 " Duplicate lines
 vnoremap <C-d> y`>p
@@ -215,9 +224,9 @@ endtry
 " => Command mode related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Bash like keys for the command line
-cnoremap <C-A>        <Home>
-cnoremap <C-E>        <End>
-cnoremap <C-K>        <C-U>
+cnoremap <C-a>        <Home>
+cnoremap <C-e>        <End>
+cnoremap <C-k>        <C-U>
 
-cnoremap <C-P> <Up>
-cnoremap <C-N> <Down>
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>

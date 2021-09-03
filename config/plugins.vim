@@ -21,7 +21,8 @@ Plug 'dag/vim-fish'
 Plug 'vim-scripts/vim-lastplace'
 Plug 'vim-scripts/xmledit'
 Plug 'flazz/vim-colorschemes'
-Plug 'xolox/vim-misc' | Plug 'xolox/vim-colorscheme-switcher'
+Plug 'xolox/vim-misc'
+" Plug 'xolox/vim-colorscheme-switcher'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jez/vim-superman'
 Plug 'godlygeek/tabular'
@@ -31,6 +32,18 @@ Plug 'preservim/nerdcommenter'
 Plug 'jiangmiao/auto-pairs'
 Plug 'vim-scripts/indentpython.vim'
 Plug 'liuchengxu/eleline.vim'
+Plug 'majutsushi/tagbar'
+Plug 'soramugi/auto-ctags.vim'
+Plug 'easymotion/vim-easymotion'
+Plug 'mg979/vim-visual-multi'
+" Plug 'nathanaelkane/vim-indent-guides'
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase'  }
+
+
+" ==== TagbarToggle ====
+nmap <F7> :TagbarJumpPrev<CR>
+nmap <F8> :TagbarToggle<CR>
+nmap <F9> :TagbarJumpNext<CR>
 
 " ==== LASTPLACE ====
 " Intelligently reopen files
@@ -86,7 +99,8 @@ nnoremap <silent><nowait>]g <Plug>(coc-git-nextchunk)
 " show chunk diff at current position
 nmap gs <Plug>(coc-git-chunkinfo)
 nmap go :CocCommand git.browserOpen<cr>
-nmap <Leader>gp :CocCommand git.push<cr>
+nmap <Leader>gp :Git push<cr>
+nmap <Leader>gs :Git<cr>
 nmap <Leader>gu :CocCommand git.chunkUndo<cr>
 
 " Use tab for trigger completion with characters ahead and navigate.
