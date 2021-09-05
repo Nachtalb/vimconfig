@@ -8,9 +8,27 @@
 [submodule "plugged/coc.nvim"]
 	path = plugged/coc.nvim
 	url = https://github.com/neoclide/coc.nvim.git
+[submodule "plugged/auto-ctags.vim"]
+	path = plugged/auto-ctags.vim
+	url = https://github.com/soramugi/auto-ctags.vim.git
+[submodule "plugged/eleline.vim"]
+	path = plugged/eleline.vim
+	url = https://github.com/liuchengxu/eleline.vim.git
+[submodule "plugged/tagbar"]
+	path = plugged/tagbar
+	url = https://github.com/majutsushi/tagbar.git
 [submodule "plugged/emmet-vim"]
 	path = plugged/emmet-vim
 	url = https://github.com/mattn/emmet-vim.git
+[submodule "plugged/vim-easymotion"]
+	path = plugged/vim-easymotion
+	url = https://github.com/easymotion/vim-easymotion.git
+[submodule "plugged/vim-hexokinase"]
+	path = plugged/vim-hexokinase
+	url = https://github.com/rrethy/vim-hexokinase.git
+[submodule "plugged/vim-visual-multi"]
+	path = plugged/vim-visual-multi
+	url = https://github.com/mg979/vim-visual-multi.git
 [submodule "plugged/fzf"]
 	path = plugged/fzf
 	url = https://github.com/junegunn/fzf.git
@@ -83,3 +101,6 @@
 [submodule "plugged/vim-highlightedyank"]
 	path = plugged/vim-highlightedyank
 	url = https://github.com/machakann/vim-highlightedyank.git
+[submodule "plugged/auto-ctags.vim"]
+	path = plugged/auto-ctags.vim
+	url = https://github.com/soramugi/auto-ctags.vim.git
