@@ -28,6 +28,8 @@ set viminfo+=n.viminfo              " Save viminfo dir specific
 
 set hidden
 
+set exrc                            " Enable project specific .vimrc settings
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
@@ -230,3 +232,8 @@ cnoremap <C-k>        <C-U>
 
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
+
+execute "set <M-a>=\ea"
+execute "set <M-x>=\ex"
+nnoremap <M-a> <C-a>
+nnoremap <M-x> <C-x>

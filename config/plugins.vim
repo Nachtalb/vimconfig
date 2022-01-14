@@ -12,7 +12,6 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ap/vim-buftabline'
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-unimpaired'
-Plug 'junegunn/fzf', { 'do': './install --all' } | Plug 'junegunn/fzf.vim'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'jez/vim-superman'
 Plug 'sjl/gundo.vim'
@@ -38,6 +37,9 @@ Plug 'easymotion/vim-easymotion'
 Plug 'mg979/vim-visual-multi'
 " Plug 'nathanaelkane/vim-indent-guides'
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase'  }
+Plug 'kien/ctrlp.vim'
+Plug 'elixir-editors/vim-elixir'
+Plug 'tpope/vim-obsession'
 
 
 " ==== TagbarToggle ====
@@ -82,7 +84,8 @@ let g:coc_global_extensions = [
     \'coc-tsserver',
     \'coc-xml',
     \'coc-yaml',
-    \'coc-yank'
+    \'coc-yank',
+    \'coc-clangd'
 \]
 
 " \'coc-spell-checker',
@@ -133,6 +136,7 @@ nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window
 nnoremap <silent> <C-D> :call <SID>show_documentation()<CR>
+inoremap <silent> <C-D> :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -219,7 +223,7 @@ if executable('ag')
     " Use ag over grep
     set grepprg=ag\ --nogroup\ --nocolor\ -U\ --follow
 
-    let g:ackprg='ag --silent --vimgrep --smart-case -U --follow --ignore-dir testreports --ignore SOURCES.txt --ignore-dir var --ignore-dir .idea --ignore-dir var --ignore-dir log --ignore-dir node_modules --ignore-dir parts/solr-download --ignore-dir parts/solr-instance --ignore "*.min.js" --ignore "*compiled.js" --ignore "*.map"'
+    let g:ackprg='ag --silent --vimgrep --smart-case -U --follow --ignore-dir public --ignore-dir testreports --ignore SOURCES.txt --ignore-dir var --ignore-dir .idea --ignore-dir var --ignore-dir log --ignore-dir node_modules --ignore-dir parts/solr-download --ignore-dir parts/solr-instance --ignore "*.min.js" --ignore "*compiled.js" --ignore "*.map"'
     if isdirectory('parts/omelette/')
         let plone_dir = trim(system('ls -1 -f | grep egg-info | cut -d. -f1'))
         let plone_dir = trim(system("dirname $(ls -1 -f | grep egg-info | sed 's/\\./\\//g')"))
@@ -255,7 +259,7 @@ nnoremap <Leader>gs :Git<cr>
 " nnoremap <Leader>go :Git open<cr><cr>
 nnoremap <Leader>gpl :Git pull -r<cr>
 nnoremap <Leader>gp :Git push<cr>
-nnoremap <Leader>gpf :Gpush -f
+nnoremap <Leader>gpf :Git push -f
 " nnoremap <Leader>gpp :Gpush
 nnoremap <Leader>gd :Gdiff<cr>
 nnoremap <Leader>gcc :Gcommit<cr>
@@ -274,46 +278,13 @@ nnoremap <Leader>gl1 :!GIT_PAGER=less git log --graph --abbrev-commit --decorate
 
 " ==== buf tabline ====
 set hidden
-nnoremap <Tab> :bnext<CR>
-nnoremap <S-Tab> :bprev<CR>
-noremap <C-q> :bdelete<CR>
+nnoremap <Tab> :bn<CR>
+nnoremap <S-Tab> :bp<CR>
+noremap <C-q> :bd<CR>
 
-" ==== FZF ====
-" Use CTRL-P to launch FZF
-
-command! -bang Omelette call fzf#vim#files('parts/omelette', fzf#vim#with_preview(), <bang>0)
-
-" To use with big projects
-" It has an initial wait because it starts the command with "sh -c" but after
-" that ripgrep is much faster at gathering files
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --no-ignore --files -L', 1,
-  \   fzf#vim#with_preview(), <bang>0)
-
-nnoremap <C-p> :Files<CR>
-nnoremap <C-h> :GFiles<CR>
-
-inoremap <C-p> <C-o>:Files<CR>
-inoremap <C-h> <C-o>:GFiles<CR>
-let g:fzf_buffers_jump = 1
-
-" AsyncRun
+" ==== AsyncRun ====
 let g:asyncrun_open = 20    " Auto open quickfix window with the given size
-
 nnoremap <Leader>ar :AsyncRun! -raw=1
-nnoremap <Leader>ta :AsyncRun -raw=1 bin/test
-nnoremap <Leader>tt :AsyncRun -raw=1 bin/test -t <cword><CR>
-nnoremap <Leader>apbo :AsyncRun -raw=1 bin/buildout<CR>
-nnoremap <Leader>apbi :AsyncRun -raw=1 bin/buildout install instance<CR>
-nnoremap <Leader>apbt :AsyncRun -raw=1 bin/buildout install test<CR>
-nnoremap <Leader>aib :AsyncRun -raw=1 bin/i18n-build<CR>
-nnoremap <Leader>afg :AsyncRun -raw=1 bin/instance fg<CR>
-
-" Add some of the shortcuts above as normal commands when pdb is exptected
-nnoremap <Leader>cte :!bin/test
-nnoremap <Leader>ctt :!bin/test -t <cword><CR>
-nnoremap <Leader>caf :!bin/instance fg<CR>
 
 " ==== End Plugin Section ====
 " This is required for Vim-Plug to work
