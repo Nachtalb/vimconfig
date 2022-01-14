@@ -104,3 +104,12 @@
 [submodule "plugged/auto-ctags.vim"]
 	path = plugged/auto-ctags.vim
 	url = https://github.com/soramugi/auto-ctags.vim.git
+[submodule "plugged/ctrlp.vim"]
+	path = plugged/ctrlp.vim
+	url = https://github.com/kien/ctrlp.vim.git
+[submodule "plugged/vim-elixir"]
+	path = plugged/vim-elixir
+	url = https://github.com/elixir-editors/vim-elixir.git
+[submodule "plugged/vim-obsession"]
+	path = plugged/vim-obsession
+	url = https://github.com/tpope/vim-obsession.git
