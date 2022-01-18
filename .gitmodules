@@ -113,3 +113,9 @@
 [submodule "plugged/vim-obsession"]
 	path = plugged/vim-obsession
 	url = https://github.com/tpope/vim-obsession.git
+[submodule "plugged/semshi"]
+	path = plugged/semshi
+	url = https://github.com/numirias/semshi.git
+[submodule "plugged/unicode.vim"]
+	path = plugged/unicode.vim
+	url = https://github.com/chrisbra/unicode.vim.git

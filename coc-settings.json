@@ -1,9 +1,13 @@
 {
+    "coc.preferences.formatOnType": true,
+    "coc.preferences.formatOnSaveFiletypes": ["python"],
+    "coc.preferences.willSaveHandlerTimeout": 2000,
     "python.linting.flake8Enabled": true,
-    "python.linting.flake8Path": "~/.config/omf/bin/flake8",
-    "python.linting.flake8Args": ["--max-line-length=120"],
-    "python.formatting.provider": "yapf",
-    "python.formatting.yapfPath": "~/.config/omf/bin/yapf",
+    "python.linting.flake8Path": "~/.pyenv/versions/nvim/bin/flake8",
+    "python.formatting.provider": "black",
+    "python.formatting.blackPath": "~/.pyenv/versions/nvim/bin/black",
+    "python.formatting.autopep8Path": "~/.pyenv/versions/nvim/bin/autopep8",
+    "python.formatting.yapfPath": "~/.pyenv/versions/nvim/bin/yapf",
     "python.formatting.yapfArgs": ["--style={ column_limit: 120 }"],
     "python.analysis.extraPaths": [
         "./parts/omelette"

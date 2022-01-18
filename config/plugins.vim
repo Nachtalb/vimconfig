@@ -40,7 +40,11 @@ Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase'  }
 Plug 'kien/ctrlp.vim'
 Plug 'elixir-editors/vim-elixir'
 Plug 'tpope/vim-obsession'
+Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
+Plug 'chrisbra/unicode.vim'
 
+
+nmap ga <Plug>(UnicodeGA)
 
 " ==== TagbarToggle ====
 nmap <F7> :TagbarJumpPrev<CR>
@@ -185,13 +189,23 @@ nmap <silent> <TAB> <Plug>(coc-range-select)
 xmap <silent> <TAB> <Plug>(coc-range-select)
 
 " Use `:Format` to format current buffer
-command! -nargs=0 Format :call CocAction('format')
+function! Format()
+    call CocAction('format')
+    if (&ft=='python')
+        call CocAction('runCommand', 'editor.action.organizeImport')
+    endif
+endfunction
+
+command! -nargs=0 Format call Format()
+nnoremap <leader>f :Format<cr>
 
 " Use `:Fold` to fold current buffer
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 " use `:OR` for organize import of current buffer
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+nnoremap <leader>or :OR<cr>
+autocmd BufWritePre *.py :silent call CocAction('runCommand', 'editor.action.organizeImport')
 
 " Using CocList
 " Show all diagnostics

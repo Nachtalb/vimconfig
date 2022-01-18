@@ -31,6 +31,11 @@ set hidden
 set exrc                            " Enable project specific .vimrc settings
 
 
+" Correct neovim python interpreter
+
+let g:python3_host_prog="~/.pyenv/versions/nvim/bin/python"
+let g:python_host_prog="~/.pyenv/versions/nvim2/bin/python"
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -233,7 +238,7 @@ cnoremap <C-k>        <C-U>
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 
-execute "set <M-a>=\ea"
-execute "set <M-x>=\ex"
+" execute "set <M-a>=\ea"
+" execute "set <M-x>=\ex"
 nnoremap <M-a> <C-a>
 nnoremap <M-x> <C-x>
