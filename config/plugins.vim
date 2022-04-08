@@ -3,7 +3,7 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " ==== Install Plugins ====
-Plug 'junegunn/vim-plug'
+" Plug 'junegunn/vim-plug'
 
 Plug 'scrooloose/nerdtree'
 Plug 'mileszs/ack.vim'
@@ -89,7 +89,8 @@ let g:coc_global_extensions = [
     \'coc-xml',
     \'coc-yaml',
     \'coc-yank',
-    \'coc-clangd'
+    \'coc-clangd',
+    \'coc-markdown-preview-enhanced'
 \]
 
 " \'coc-spell-checker',
