@@ -3,11 +3,11 @@
     "coc.preferences.formatOnSaveFiletypes": ["python"],
     "coc.preferences.willSaveHandlerTimeout": 2000,
     "python.linting.flake8Enabled": true,
-    "python.linting.flake8Path": "~/.pyenv/versions/nvim/bin/flake8",
+    "python.linting.flake8Path": "/home/seed/.pyenv/versions/nvim/bin/flake8",
     "python.formatting.provider": "black",
-    "python.formatting.blackPath": "~/.pyenv/versions/nvim/bin/black",
-    "python.formatting.autopep8Path": "~/.pyenv/versions/nvim/bin/autopep8",
-    "python.formatting.yapfPath": "~/.pyenv/versions/nvim/bin/yapf",
+    "python.formatting.blackPath": "/home/seed/.pyenv/versions/nvim/bin/black",
+    "python.formatting.autopep8Path": "/home/seed/.pyenv/versions/nvim/bin/autopep8",
+    "python.formatting.yapfPath": "/home/seed/.pyenv/versions/nvim/bin/yapf",
     "python.formatting.yapfArgs": ["--style={ column_limit: 120 }"],
     "python.analysis.extraPaths": [
         "./parts/omelette"
@@ -30,5 +30,33 @@
     "files.associations": {
         "*.zcml": "xml"
     },
+    "cSpell.ignorePaths": [
+        "**/package-lock.json",
+        "**/node_modules/**",
+        "**/vscode-extension/**",
+        "**/.git/objects/**",
+        ".vscode",
+        "coc-settings.json"
+    ],
+    "cSpell.ignoreRegExpList": [
+        "^(\" )?Plug '.*'",
+        "from [\\w\\.]+ import [\\w]+",
+        "import [\\w\\.]+( as \\w)?"
+    ],
+    "cSpell.userWords": [
+      "Cybercrime",
+      "Deserialization",
+      "Nachtalb",
+      "Pixiv",
+      "TQDM",
+      "asyncio",
+      "bruteforce",
+      "keylogger",
+      "opencv",
+      "ugoira",
+      "usecase",
+      "verca",
+      "webp"
+    ],
     "files.maxMemoryForLargeFilesMB": 12288
 }

@@ -7,7 +7,7 @@ set termguicolors
 
 " Set default syntax for various file types
 colorscheme badwolf
-hi Normal guibg=black
+" hi Normal guibg=black
 
 " function! SetCursor(type)
 "     let settings="'/mnt/c/Users/nicko/AppData/Local/Packages/Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe/LocalState/settings.json'"

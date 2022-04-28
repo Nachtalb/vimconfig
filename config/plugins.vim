@@ -42,7 +42,26 @@ Plug 'elixir-editors/vim-elixir'
 Plug 'tpope/vim-obsession'
 Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
 Plug 'chrisbra/unicode.vim'
+Plug 'isundil/vim-irssi-syntax'
+Plug 'mbbill/undotree'
+Plug 'yuttie/comfortable-motion.vim'
+Plug 'junegunn/goyo.vim'
+Plug 'mhinz/vim-startify'
+Plug 'moll/vim-bbye'
 
+
+" === Motion Scroll ===
+let g:comfortable_motion_no_default_key_mappings = 1
+
+nnoremap <silent> <C-d> :call comfortable_motion#flick(200)<CR>
+nnoremap <silent> <C-u> :call comfortable_motion#flick(-200)<CR>
+let g:comfortable_motion_air_drag = 4
+
+" nnoremap <silent> <C-f> :call comfortable_motion#flick(200)<CR>
+" nnoremap <silent> <C-b> :call comfortable_motion#flick(-200)<CR>
+
+" === Undo Tree ===
+nnoremap <F5> :UndotreeToggle<CR>
 
 nmap ga <Plug>(UnicodeGA)
 
@@ -90,7 +109,9 @@ let g:coc_global_extensions = [
     \'coc-yaml',
     \'coc-yank',
     \'coc-clangd',
-    \'coc-markdown-preview-enhanced'
+    \'coc-markdown-preview-enhanced',
+    \'coc-vimlsp',
+    \'coc-graphql'
 \]
 
 " \'coc-spell-checker',
@@ -140,8 +161,8 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window
-nnoremap <silent> <C-D> :call <SID>show_documentation()<CR>
-inoremap <silent> <C-D> :call <SID>show_documentation()<CR>
+nnoremap <silent> <C-l> :call <SID>show_documentation()<CR>
+inoremap <silent> <C-l> :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -295,7 +316,8 @@ nnoremap <Leader>gl1 :!GIT_PAGER=less git log --graph --abbrev-commit --decorate
 set hidden
 nnoremap <Tab> :bn<CR>
 nnoremap <S-Tab> :bp<CR>
-noremap <C-q> :bd<CR>
+noremap <C-q> :bdelete<CR>
+noremap <Leader>q :Bdelete<CR>
 
 " ==== AsyncRun ====
 let g:asyncrun_open = 20    " Auto open quickfix window with the given size

@@ -25,7 +25,7 @@ au FileType python iab ipdb __import__('ipdb').set_trace()
 " => Misc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-autocmd FileType html,xml,javascript,css,scss,sass,less,scss.css,yaml,yml,rst,md,sshconfig setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType rst,md,html,xml,javascript,css,scss,sass,less,scss.css,yaml,yml,rst,md,sshconfig setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType html,xml,javascript,css,scss,sass,less,scss.css,yaml,yml setlocal iskeyword+=-
 
 autocmd BufNewFile,BufRead *.pt,*.zcml setlocal iskeyword+=- shiftwidth=2 tabstop=2 softtabstop=2
