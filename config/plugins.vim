@@ -46,7 +46,7 @@ Plug 'isundil/vim-irssi-syntax'
 Plug 'mbbill/undotree'
 Plug 'yuttie/comfortable-motion.vim'
 Plug 'junegunn/goyo.vim'
-Plug 'mhinz/vim-startify'
+" Plug 'mhinz/vim-startify'
 Plug 'moll/vim-bbye'
 
 
