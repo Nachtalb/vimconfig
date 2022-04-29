@@ -111,7 +111,8 @@ let g:coc_global_extensions = [
     \'coc-clangd',
     \'coc-markdown-preview-enhanced',
     \'coc-vimlsp',
-    \'coc-graphql'
+    \'coc-graphql',
+    \'coc-elixir'
 \]
 
 " \'coc-spell-checker',

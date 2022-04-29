@@ -3,7 +3,7 @@
     "coc.preferences.formatOnSaveFiletypes": ["python"],
     "coc.preferences.willSaveHandlerTimeout": 2000,
     "python.linting.flake8Enabled": true,
-    "python.linting.flake8Path": "/home/seed/.pyenv/versions/nvim/bin/flake8",
+    "python.linting.flake8Path": "~/.pyenv/versions/nvim/bin/flake8",
     "python.formatting.provider": "black",
     "python.formatting.blackPath": "/home/seed/.pyenv/versions/nvim/bin/black",
     "python.formatting.autopep8Path": "/home/seed/.pyenv/versions/nvim/bin/autopep8",
@@ -58,5 +58,6 @@
       "verca",
       "webp"
     ],
-    "files.maxMemoryForLargeFilesMB": 12288
+    "files.maxMemoryForLargeFilesMB": 12288,
+    "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/13.0.0/clangd_13.0.0/bin/clangd"
 }
