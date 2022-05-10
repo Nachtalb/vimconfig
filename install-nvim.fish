@@ -1,17 +1,19 @@
 #!/usr/bin/fish
+mkdir ~/.vim -p
 cd ~/.vim
-sudo add-apt-repository ppa:neovim-ppa/unstable -y
-sudo apt-get update
-sudo apt install neovim -y
-pyenv virtualenv (pyenv versions --skip-aliases --bare | rg '^3[0-9.]+$' | sort -Vr | head -n 1) nvim
-pyenv activate nvim
+if command -q pacman
+  sudo pacman -Sy neovim nodejs yarn --noconfirm
+else
+  curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+  sudo apt-get install -y nodejs neovim
+end
+python3 -m venv venv
+source venv/bin/activate.fish
 pip install -U pip setuptools pynvim black autopep8 flake8 yapf pylint
-pyenv local nvim
+
 mkdir -p ~/.config/nvim/
 ln -sf ~/.vim/init.vim ~/.config/nvim/init.vim
 ln -sf ~/.vim/coc-settings.json ~/.config/nvim/coc-settings.json
 ln -sf ~/.vim/black.toml ~/.config/black
-ln -s ~/.vim/flake8 ~/.flake8
-cd
-rm -rf ~/.vim_runtime/*
-rg --files --no-ignore --hidden | rg '\.viminfo' | xargs rm
+ln -sf ~/.vim/flake8 ~/.flake8
+ln -sf ~/.vim/.vimrc ~/.vimrc

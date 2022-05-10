@@ -3,11 +3,11 @@
     "coc.preferences.formatOnSaveFiletypes": ["python"],
     "coc.preferences.willSaveHandlerTimeout": 2000,
     "python.linting.flake8Enabled": true,
-    "python.linting.flake8Path": "~/.pyenv/versions/nvim/bin/flake8",
+    "python.linting.flake8Path": "~/.vimrc/venv/bin/flake8",
     "python.formatting.provider": "black",
-    "python.formatting.blackPath": "/home/seed/.pyenv/versions/nvim/bin/black",
-    "python.formatting.autopep8Path": "/home/seed/.pyenv/versions/nvim/bin/autopep8",
-    "python.formatting.yapfPath": "/home/seed/.pyenv/versions/nvim/bin/yapf",
+    "python.formatting.blackPath": "~/.vimrc/venv/bin/black",
+    "python.formatting.autopep8Path": "~/.vimrc/venv/bin/autopep8",
+    "python.formatting.yapfPath": "~/.vimrc/venv/bin/yapf",
     "python.formatting.yapfArgs": ["--style={ column_limit: 120 }"],
     "python.analysis.extraPaths": [
         "./parts/omelette"

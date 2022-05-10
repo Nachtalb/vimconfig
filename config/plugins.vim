@@ -36,7 +36,6 @@ Plug 'soramugi/auto-ctags.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'mg979/vim-visual-multi'
 " Plug 'nathanaelkane/vim-indent-guides'
-Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase'  }
 Plug 'kien/ctrlp.vim'
 Plug 'elixir-editors/vim-elixir'
 Plug 'tpope/vim-obsession'
@@ -103,16 +102,13 @@ let g:coc_global_extensions = [
     \'coc-pyright',
     \'coc-sh',
     \'coc-svg',
-    \'coc-translator',
     \'coc-tsserver',
     \'coc-xml',
     \'coc-yaml',
     \'coc-yank',
     \'coc-clangd',
-    \'coc-markdown-preview-enhanced',
     \'coc-vimlsp',
-    \'coc-graphql',
-    \'coc-elixir'
+    \'coc-graphql'
 \]
 
 " \'coc-spell-checker',
