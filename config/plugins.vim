@@ -106,8 +106,7 @@ let g:coc_global_extensions = [
     \'coc-yaml',
     \'coc-yank',
     \'coc-clangd',
-    \'coc-vimlsp',
-    \'coc-graphql'
+    \'coc-vimlsp'
 \]
 
 " \'coc-spell-checker',
