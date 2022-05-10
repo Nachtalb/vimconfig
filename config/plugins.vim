@@ -93,7 +93,6 @@ let g:coc_global_extensions = [
     \'coc-browser',
     \'coc-cmake',
     \'coc-css',
-    \'coc-cssmodules',
     \'coc-eslint',
     \'coc-git',
     \'coc-html',
