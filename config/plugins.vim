@@ -103,7 +103,8 @@ let g:coc_global_extensions = [
     \'coc-xml',
     \'coc-yaml',
     \'coc-yank',
-    \'coc-vimlsp'
+    \'coc-vimlsp',
+    \'@yaegassy/coc-phpstan'
 \]
 
 " \'coc-spell-checker',
