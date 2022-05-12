@@ -91,7 +91,6 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 
 let g:coc_global_extensions = [
     \'coc-browser',
-    \'coc-cmake',
     \'coc-css',
     \'coc-eslint',
     \'coc-git',
@@ -100,12 +99,10 @@ let g:coc_global_extensions = [
     \'coc-markdownlint',
     \'coc-pyright',
     \'coc-sh',
-    \'coc-svg',
     \'coc-tsserver',
     \'coc-xml',
     \'coc-yaml',
     \'coc-yank',
-    \'coc-clangd',
     \'coc-vimlsp'
 \]
 
