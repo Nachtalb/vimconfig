@@ -11,7 +11,7 @@ mkdir -p ~/.config/nvim/
 ln -sf ~/.vim/init.vim ~/.config/nvim/init.vim
 ln -sf ~/.vim/coc-settings.json ~/.config/nvim/coc-settings.json
 ln -sf ~/.vim/black.toml ~/.config/black
-ln -s ~/.vim/flake8 ~/.flake8
+ln -sf ~/.vim/flake8 ~/.flake8
 cd
 rm -rf ~/.vim_runtime/*
 rg --files --no-ignore --hidden | rg '\.viminfo' | xargs rm
