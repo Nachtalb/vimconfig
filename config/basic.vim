@@ -43,7 +43,8 @@ let g:python_host_prog="~/.pyenv/versions/nvim2/bin/python"
 set lazyredraw                      " Improve vim's drawing mechanism
 
 set number                          " Add line numbers
-set mouse=                          " Disable mouse
+set mouse=a
+
 
 set incsearch                       " Higlight search results while typing
 set hlsearch                        " Higlight all search results of previous search
@@ -213,6 +214,19 @@ set pastetoggle=<F2>
 " Copy path to clipboard
 nnoremap cp :let @* = expand('%')<CR>
 nnoremap cpp :let @* = expand('%:p')<CR>
+
+" Yank on CTRL-C
+vnoremap <C-C> y
+
+" === WSL yank support ===
+let s:clip = '/mnt/c/Windows/System32/clip.exe'  " change this path according to your mount point
+if executable(s:clip)
+    augroup WSLYank
+        autocmd!
+        lua require('notify')('yanker init')
+        autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
+    augroup END
+endif
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
