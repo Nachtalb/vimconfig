@@ -17,11 +17,8 @@ Plug 'jez/vim-superman'
 Plug 'sjl/gundo.vim'
 Plug 'vim-scripts/indentpython.vim'
 Plug 'dag/vim-fish'
-Plug 'vim-scripts/vim-lastplace'
 Plug 'vim-scripts/xmledit'
-Plug 'flazz/vim-colorschemes'
 Plug 'xolox/vim-misc'
-" Plug 'xolox/vim-colorscheme-switcher'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jez/vim-superman'
 Plug 'godlygeek/tabular'
@@ -30,7 +27,9 @@ Plug 'tmhedberg/matchit'
 Plug 'preservim/nerdcommenter'
 Plug 'jiangmiao/auto-pairs'
 Plug 'vim-scripts/indentpython.vim'
-Plug 'liuchengxu/eleline.vim'
+" Plug 'liuchengxu/eleline.vim'
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
 Plug 'majutsushi/tagbar'
 Plug 'soramugi/auto-ctags.vim'
 Plug 'easymotion/vim-easymotion'
@@ -48,7 +47,16 @@ Plug 'yuttie/comfortable-motion.vim'
 Plug 'junegunn/goyo.vim'
 " Plug 'mhinz/vim-startify'
 Plug 'moll/vim-bbye'
+Plug 'wuelnerdotexe/vim-enfocado'
+Plug 'rcarriga/nvim-notify'
 
+" === Enfocado ===
+let g:enfocado_plugins = [
+  \ 'coc',
+  \ 'nerdtree',
+  \ 'notify',
+  \ 'plug',
+\ ]
 
 " === Motion Scroll ===
 let g:comfortable_motion_no_default_key_mappings = 1
@@ -329,3 +337,13 @@ nnoremap <Leader>ar :AsyncRun! -raw=1
 " call vundle#end()
 call plug#end()
 filetype plugin indent on
+
+lua << END
+require('lualine').setup { options = { theme = 'enfocado' } }
+
+vim.notify = require("notify")
+vim.notify.setup({
+    background_colour = "#000000",
+    stages = "slide",
+})
+END
