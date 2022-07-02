@@ -223,7 +223,6 @@ let s:clip = '/mnt/c/Windows/System32/clip.exe'  " change this path according to
 if executable(s:clip)
     augroup WSLYank
         autocmd!
-        lua require('notify')('yanker init')
         autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
     augroup END
 endif

@@ -3,7 +3,6 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " === Install Plugins ===
-" Plug 'junegunn/vim-plug'
 
 Plug 'scrooloose/nerdtree'
 Plug 'mileszs/ack.vim'
@@ -27,14 +26,12 @@ Plug 'tmhedberg/matchit'
 Plug 'preservim/nerdcommenter'
 Plug 'jiangmiao/auto-pairs'
 Plug 'vim-scripts/indentpython.vim'
-" Plug 'liuchengxu/eleline.vim'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'majutsushi/tagbar'
 Plug 'soramugi/auto-ctags.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'mg979/vim-visual-multi'
-" Plug 'nathanaelkane/vim-indent-guides'
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase'  }
 Plug 'elixir-editors/vim-elixir'
 Plug 'tpope/vim-obsession'
@@ -42,7 +39,6 @@ Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
 Plug 'chrisbra/unicode.vim'
 Plug 'isundil/vim-irssi-syntax'
 Plug 'mbbill/undotree'
-Plug 'yuttie/comfortable-motion.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'moll/vim-bbye'
 Plug 'wuelnerdotexe/vim-enfocado'
