@@ -36,7 +36,6 @@ Plug 'easymotion/vim-easymotion'
 Plug 'mg979/vim-visual-multi'
 " Plug 'nathanaelkane/vim-indent-guides'
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase'  }
-Plug 'kien/ctrlp.vim'
 Plug 'elixir-editors/vim-elixir'
 Plug 'tpope/vim-obsession'
 Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
@@ -45,11 +44,13 @@ Plug 'isundil/vim-irssi-syntax'
 Plug 'mbbill/undotree'
 Plug 'yuttie/comfortable-motion.vim'
 Plug 'junegunn/goyo.vim'
-" Plug 'mhinz/vim-startify'
 Plug 'moll/vim-bbye'
 Plug 'wuelnerdotexe/vim-enfocado'
 Plug 'rcarriga/nvim-notify'
 Plug 'folke/which-key.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'dstein64/nvim-scrollview'
 
 " === Enfocado ===
 let g:enfocado_plugins = [
@@ -57,18 +58,17 @@ let g:enfocado_plugins = [
   \ 'nerdtree',
   \ 'notify',
   \ 'plug',
+  \ 'telescope',
   \ 'which-key',
+  \ 'scrollview',
 \ ]
 
-" === Motion Scroll ===
-let g:comfortable_motion_no_default_key_mappings = 1
+" === Telescope ===
 
-nnoremap <silent> <C-d> :call comfortable_motion#flick(200)<CR>
-nnoremap <silent> <C-u> :call comfortable_motion#flick(-200)<CR>
-let g:comfortable_motion_air_drag = 4
-
-" nnoremap <silent> <C-f> :call comfortable_motion#flick(200)<CR>
-" nnoremap <silent> <C-b> :call comfortable_motion#flick(-200)<CR>
+nnoremap ff <cmd>Telescope find_files<cr>
+nnoremap fg <cmd>Telescope live_grep<cr>
+nnoremap fb <cmd>Telescope buffers<cr>
+nnoremap fh <cmd>Telescope help_tags<cr>
 
 " === Undo Tree ===
 nnoremap <F5> :UndotreeToggle<CR>
@@ -121,7 +121,6 @@ let g:coc_global_extensions = [
     \'coc-clangd',
     \'coc-markdown-preview-enhanced',
     \'coc-vimlsp',
-    \'coc-graphql',
     \'coc-elixir'
 \]
 
@@ -251,6 +250,8 @@ nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
 nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
 " Search workspace symbols
 nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+
+
 " Do default action for next item.
 nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
@@ -303,11 +304,9 @@ let NERDTreeAutoDeleteBuffer = 1
 
 " === Fugitive ===
 nnoremap <Leader>gs :Git<cr>
-" nnoremap <Leader>go :Git open<cr><cr>
 nnoremap <Leader>gpl :Git pull -r<cr>
 nnoremap <Leader>gp :Git push<cr>
 nnoremap <Leader>gpf :Git push -f
-" nnoremap <Leader>gpp :Gpush
 nnoremap <Leader>gd :Gdiff<cr>
 nnoremap <Leader>gcc :Gcommit<cr>
 nnoremap <Leader>gca :Git commit --amend --no-edit
@@ -316,14 +315,7 @@ nnoremap <Leader>gcb :Git checkout -b ne/
 nnoremap <Leader>gl1 :!GIT_PAGER=less git log --graph --abbrev-commit --decorate --format='\%C(bold blue)\%h\%C(reset) - \%C(bold green)(\%ai)\%C(reset) \%C(white)\%s\%C(reset) \%C(dim white)- \%an\%C(reset)\%C(bold yellow)\%d\%C(reset)' --color=always --all<CR>
 nnoremap <Leader>gl1 :!GIT_PAGER=less git log --graph --abbrev-commit --decorate --format='\%C(bold blue)\%h\%C(reset) - \%C(bold green)(\%ai)\%C(reset) \%C(white)\%s\%C(reset) \%C(dim white)- \%an\%C(reset)\%C(bold yellow)\%d\%C(reset)' --color=always<CR>
 
-"
-" === GitGutter ===
-" nnoremap <F3> :GitGutterPrevHunk<CR>
-" inoremap <F3> <C-o>:GitGutterPrevHunk<CR>
-" nnoremap <F4> :GitGutterNextHunk<CR>
-" inoremap <F4> <C-o>:GitGutterNextHunk<CR>
-
-" === buf tabline ===
+" === Buffer Tabline ===
 set hidden
 nnoremap <Tab> :bn<CR>
 nnoremap <S-Tab> :bp<CR>
@@ -335,8 +327,6 @@ let g:asyncrun_open = 20    " Auto open quickfix window with the given size
 nnoremap <Leader>ar :AsyncRun! -raw=1
 
 " === End Plugin Section ===
-" This is required for Vim-Plug to work
-" call vundle#end()
 call plug#end()
 filetype plugin indent on
 
@@ -349,5 +339,5 @@ vim.notify.setup({
     stages = "slide",
 })
 
-  require("which-key").setup()
+require("which-key").setup()
 END
