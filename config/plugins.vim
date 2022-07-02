@@ -2,7 +2,7 @@
 " => Plugin related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" ==== Install Plugins ====
+" === Install Plugins ===
 " Plug 'junegunn/vim-plug'
 
 Plug 'scrooloose/nerdtree'
@@ -73,17 +73,17 @@ nnoremap <F5> :UndotreeToggle<CR>
 
 nmap ga <Plug>(UnicodeGA)
 
-" ==== TagbarToggle ====
+" === TagbarToggle ===
 nmap <F7> :TagbarJumpPrev<CR>
 nmap <F8> :TagbarToggle<CR>
 nmap <F9> :TagbarJumpNext<CR>
 
-" ==== LASTPLACE ====
+" === LASTPLACE ===
 " Intelligently reopen files
 let g:lastplace_ignore = "gitcommit,gitrebase,svn,hgcommit"
 let g:lastplace_ignore_buftype = "quickfix,nofile,help"
 
-" ==== Commenter =====
+" === Commenter ====
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
 "
@@ -93,7 +93,7 @@ let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
 
-"==== COC ====
+"=== COC ===
 
 " coc-highlight:
 autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -256,10 +256,10 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
-" ==== Emmet ====
+" === Emmet ===
 let g:user_emmet_leader_key=','
 
-" ==== Ack / Ag ====
+" === Ack / Ag ===
 " Other settings
 " let g:ackpreview = 1
 
@@ -279,7 +279,7 @@ if executable('ag')
     nnoremap <Leader>AA :Ack! --ignore-dir tests '<C-r><C-w>'
 endif
 
-" ==== NERDTree ==== "
+" === NERDTree === "
 " Open close with CTRL-E
 inoremap <C-e> <ESC>:NERDTreeToggle<CR>
 nnoremap <C-e> :NERDTreeToggle<CR>
@@ -299,7 +299,7 @@ let NERDTreeShowHidden = 1
 let NERDTreeMinimalUI = 1
 let NERDTreeAutoDeleteBuffer = 1
 
-" ==== Fugitive ====
+" === Fugitive ===
 nnoremap <Leader>gs :Git<cr>
 " nnoremap <Leader>go :Git open<cr><cr>
 nnoremap <Leader>gpl :Git pull -r<cr>
@@ -315,24 +315,24 @@ nnoremap <Leader>gl1 :!GIT_PAGER=less git log --graph --abbrev-commit --decorate
 nnoremap <Leader>gl1 :!GIT_PAGER=less git log --graph --abbrev-commit --decorate --format='\%C(bold blue)\%h\%C(reset) - \%C(bold green)(\%ai)\%C(reset) \%C(white)\%s\%C(reset) \%C(dim white)- \%an\%C(reset)\%C(bold yellow)\%d\%C(reset)' --color=always<CR>
 
 "
-" ==== GitGutter ====
+" === GitGutter ===
 " nnoremap <F3> :GitGutterPrevHunk<CR>
 " inoremap <F3> <C-o>:GitGutterPrevHunk<CR>
 " nnoremap <F4> :GitGutterNextHunk<CR>
 " inoremap <F4> <C-o>:GitGutterNextHunk<CR>
 
-" ==== buf tabline ====
+" === buf tabline ===
 set hidden
 nnoremap <Tab> :bn<CR>
 nnoremap <S-Tab> :bp<CR>
 noremap <C-q> :bdelete<CR>
 noremap <Leader>q :Bdelete<CR>
 
-" ==== AsyncRun ====
+" === AsyncRun ===
 let g:asyncrun_open = 20    " Auto open quickfix window with the given size
 nnoremap <Leader>ar :AsyncRun! -raw=1
 
-" ==== End Plugin Section ====
+" === End Plugin Section ===
 " This is required for Vim-Plug to work
 " call vundle#end()
 call plug#end()
