@@ -49,6 +49,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'moll/vim-bbye'
 Plug 'wuelnerdotexe/vim-enfocado'
 Plug 'rcarriga/nvim-notify'
+Plug 'folke/which-key.nvim'
 
 " === Enfocado ===
 let g:enfocado_plugins = [
@@ -56,6 +57,7 @@ let g:enfocado_plugins = [
   \ 'nerdtree',
   \ 'notify',
   \ 'plug',
+  \ 'which-key',
 \ ]
 
 " === Motion Scroll ===
@@ -346,4 +348,6 @@ vim.notify.setup({
     background_colour = "#000000",
     stages = "slide",
 })
+
+  require("which-key").setup()
 END
