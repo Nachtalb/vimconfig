@@ -4,10 +4,8 @@
 
 " === Install Plugins ===
 
-Plug 'scrooloose/nerdtree'
 Plug 'mileszs/ack.vim'
 Plug 'tpope/vim-fugitive'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ap/vim-buftabline'
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-unimpaired'
@@ -47,16 +45,25 @@ Plug 'folke/which-key.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'dstein64/nvim-scrollview'
+Plug 'ryanoasis/vim-devicons'
+Plug 'dstein64/vim-startuptime'
+Plug 'kyazdani42/nvim-tree.lua'
 
 " === Enfocado ===
 let g:enfocado_plugins = [
   \ 'coc',
-  \ 'nerdtree',
   \ 'notify',
   \ 'plug',
   \ 'telescope',
   \ 'which-key',
 \ ]
+
+" Transparent background
+augroup enfocado_customization
+  autocmd!
+    autocmd ColorScheme enfocado highlight Normal ctermbg=NONE guibg=NONE
+    autocmd ColorScheme enfocado highlight NormalNC ctermbg=NONE guibg=NONE
+augroup END
 
 " === Telescope ===
 
@@ -277,25 +284,13 @@ if executable('ag')
     nnoremap <Leader>AA :Ack! --ignore-dir tests '<C-r><C-w>'
 endif
 
-" === NERDTree === "
+" === Nvim-Tree === "
 " Open close with CTRL-E
-inoremap <C-e> <ESC>:NERDTreeToggle<CR>
-nnoremap <C-e> :NERDTreeToggle<CR>
-" Find file in NERDTree with CTRL-F
-inoremap <C-f> <ESC>:NERDTreeFind<CR>
-nnoremap <C-f> :NERDTreeFind<CR>
-
-" Various settins
-let NERDTreeWinSize=35
-let NERDTreeWinPos = "left"
-let NERDTreeRespectWildIgnore = 0
-let NERDTreeIgnore = ['\.pyc', '\.pyo', '__pycache__', '\.idea', '\.git', '\.so', '\.swp', 'tmp', '\.DS_Store']
-let NERDTreeAutoCenter = 1
-let NERDTreeSortHiddenFirst = 1
-let NERDTreeQuitOnOpen = 1
-let NERDTreeShowHidden = 1
-let NERDTreeMinimalUI = 1
-let NERDTreeAutoDeleteBuffer = 1
+inoremap <C-e> <ESC>:NvimTreeToggle<CR>
+nnoremap <C-e> :NvimTreeToggle<CR>
+" Find file in NvimTree with CTRL-F
+inoremap <C-f> <ESC>:NvimTreeFindFileToggle<CR>
+nnoremap <C-f> :NvimTreeFindFileToggle<CR>
 
 " === Fugitive ===
 nnoremap <Leader>gs :Git<cr>
@@ -328,11 +323,33 @@ filetype plugin indent on
 lua << END
 require('lualine').setup { options = { theme = 'enfocado' } }
 
-vim.notify = require("notify")
-vim.notify.setup({
+require("notify").setup({
     background_colour = "#000000",
     stages = "slide",
 })
+vim.notify = require("notify")
 
 require("which-key").setup()
+
+require("nvim-tree").setup({
+    sort_by = "case_sensitive",
+    respect_buf_cwd = true,
+    view = {
+        adaptive_size = true,
+        mappings = {
+            list = {
+                { key = "u", action = "dir_up" },
+                { key = "<C-e>", action = "" },
+            },
+        },
+    },
+    renderer = {
+        group_empty = true,
+    },
+    actions = {
+        open_file = {
+            quit_on_open = true,
+        }
+    },
+})
 END
