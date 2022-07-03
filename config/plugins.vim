@@ -323,6 +323,21 @@ filetype plugin indent on
 lua << END
 require('lualine').setup { options = { theme = 'enfocado' } }
 
+require('telescope').setup {
+    defaults = {
+        mappings = {
+            i = {
+                ['<C-j>'] = "preview_scrolling_down",
+                ['<C-k>'] = "preview_scrolling_up",
+            },
+            n = {
+                ['<C-j>'] = "preview_scrolling_down",
+                ['<C-k>'] = "preview_scrolling_up",
+            }
+        }
+    }
+}
+
 require("notify").setup({
     background_colour = "#000000",
     stages = "slide",
