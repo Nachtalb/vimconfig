@@ -21,7 +21,7 @@ if &shell =~# 'fish$'
     :set shell=bash
 endif
 
-set clipboard=unnamed               " Use system clipboard
+set clipboard=unnamedplus           " Use system clipboard
 
 set viminfo^=%                      " Remember open buffers
 set viminfo+=n.viminfo              " Save viminfo dir specific
@@ -217,16 +217,6 @@ nnoremap cpp :let @* = expand('%:p')<CR>
 
 " Yank on CTRL-C
 vnoremap <C-C> y
-
-" === WSL yank support ===
-let s:clip = '/mnt/c/Windows/System32/clip.exe'  " change this path according to your mount point
-if executable(s:clip)
-    augroup WSLYank
-        autocmd!
-        autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
-    augroup END
-endif
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Turn persistent undo on
