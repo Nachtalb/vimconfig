@@ -56,7 +56,6 @@ let g:enfocado_plugins = [
   \ 'plug',
   \ 'telescope',
   \ 'which-key',
-  \ 'scrollview',
 \ ]
 
 " === Telescope ===
