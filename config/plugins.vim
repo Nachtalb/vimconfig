@@ -123,7 +123,8 @@ let g:coc_global_extensions = [
     \'coc-clangd',
     \'coc-markdown-preview-enhanced',
     \'coc-vimlsp',
-    \'coc-elixir'
+    \'coc-elixir',
+    \'coc-rust-analyzer',
 \]
 
 " \'coc-spell-checker',
