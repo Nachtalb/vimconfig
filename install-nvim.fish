@@ -1,25 +1,28 @@
 #!/usr/bin/fish
 
-if not command -q pyenv
-   echo "PYENV IS NOT INSTALLED!!" 
-   exit 1
+if begin; not command -q pyenv; or not command -q make; or not command -q go; or not command -q lua; end;
+    if grep -q 'arch' < /etc/os-release
+        sudo pacman -Sy --needed pyenv base-devel go lua
+    else
+        sudo apt install pyenv build-essentials golang lua
+    end
 end
 
-if command -q nvim
-    echo "NEOVIM ALREADY INSTALLED!!"
-else
-    echo "INSTALLING NEOVIM"
-    if grep -q 'arch' < /etc/os-release
-        set -l script $HOME/bin/update-neovim-nightly.sh
-        mkdir (dirname $script)
-        wget "https://gist.githubusercontent.com/ecosse3/ab58a8577d8c69dccdf03304b720e1c8/raw/fc6e03df4c4abd26b0c060c4ea9d7b899ef53087/update-neovim-nightly.sh" -O $script
-        chmod +x $script
-        yes | $script
-    else if grep -q 'debian' < /etc/os-release
-        sudo add-apt-repository ppa:neovim-ppa/unstable -y
-        sudo apt-get update
-        sudo apt install neovim -y
+echo "INSTALLING NEOVIM"
+if grep -q 'arch' < /etc/os-release
+    if begin; not command -q wget; or not command -q datediff; or not command -q xmllint; or not command -q curl; end;
+        sudo pacman -Sy --needed wget curl dateutils xmllint
     end
+
+    set -l script $HOME/bin/update-neovim-nightly.sh
+    mkdir (dirname $script)
+    wget "https://gist.githubusercontent.com/ecosse3/ab58a8577d8c69dccdf03304b720e1c8/raw/fc6e03df4c4abd26b0c060c4ea9d7b899ef53087/update-neovim-nightly.sh" -O $script
+    chmod +x $script
+    yes | $script
+else if grep -q 'debian' < /etc/os-release
+    sudo add-apt-repository ppa:neovim-ppa/unstable -y
+    sudo apt-get update
+    sudo apt install neovim -y
 end
 
 if not pyenv versions | grep -q nvim
@@ -44,6 +47,6 @@ cd
 echo "Clean previouse vim environment? " | read answer
 if test $answer = "yes" || test $answer = "y" || test -z $answer
     echo "CLEAN VIM ENVIRONMENT"
-    rm -rf ~/.vim_runtime/* 
+    rm -rf ~/.vim_runtime/*
     rg --files --no-ignore --hidden | rg '\.viminfo' | xargs rm
 end
