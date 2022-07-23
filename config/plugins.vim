@@ -356,6 +356,12 @@ require("which-key").setup()
 require("nvim-tree").setup({
     sort_by = "case_sensitive",
     respect_buf_cwd = true,
+    update_cwd = true,
+    update_focused_file = {
+        enable = true,
+        update_cwd = true,
+        ignore_list = {}
+    },
     view = {
         adaptive_size = true,
         mappings = {
