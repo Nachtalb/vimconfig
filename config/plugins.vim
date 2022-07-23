@@ -48,6 +48,10 @@ Plug 'dstein64/nvim-scrollview'
 Plug 'ryanoasis/vim-devicons'
 Plug 'dstein64/vim-startuptime'
 Plug 'kyazdani42/nvim-tree.lua'
+Plug 'previm/previm'
+
+" === Previm ===
+let g:previm_open_cmd = "xdg-open"
 
 " === Enfocado ===
 let g:enfocado_plugins = [
@@ -68,6 +72,7 @@ augroup END
 " === Telescope ===
 
 nnoremap ff <cmd>Telescope find_files<cr>
+nnoremap fa <cmd>Telescope find_files no_ignore=true<cr>
 nnoremap fg <cmd>Telescope live_grep<cr>
 nnoremap fb <cmd>Telescope buffers<cr>
 nnoremap fh <cmd>Telescope help_tags<cr>
@@ -125,6 +130,7 @@ let g:coc_global_extensions = [
     \'coc-vimlsp',
     \'coc-elixir',
     \'coc-rust-analyzer',
+    \'coc-marketplace',
 \]
 
 " \'coc-spell-checker',

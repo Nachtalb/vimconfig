@@ -30,7 +30,7 @@ if not pyenv versions | grep -q nvim
     cd ~/.vim
     pyenv virtualenv (pyenv versions --skip-aliases --bare | rg '^3[0-9.]+$' | sort -Vr | head -n 1) nvim
     pyenv activate nvim
-    pip install -U pip setuptools pynvim black autopep8 flake8 yapf pylint
+    pip install -U pip setuptools pynvim black autopep8 flake8 yapf pylint docutils
     pyenv local nvim
 end
 
