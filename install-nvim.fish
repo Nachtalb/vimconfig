@@ -4,7 +4,7 @@ if begin; not command -q pyenv; or not command -q make; or not command -q go; or
     if grep -q 'arch' < /etc/os-release
         sudo pacman -Sy --needed pyenv base-devel go lua
     else
-        sudo apt install pyenv build-essentials golang lua
+        sudo apt install pyenv build-essentials golang lua dateutils
     end
 end
 
