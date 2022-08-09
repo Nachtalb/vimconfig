@@ -49,6 +49,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'dstein64/vim-startuptime'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'previm/previm'
+Plug 'hashivim/vim-terraform'
 
 " === Previm ===
 let g:previm_open_cmd = "xdg-open"

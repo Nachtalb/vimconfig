@@ -15,3 +15,4 @@ set colorcolumn=72,80,90,120        " Add vertical guidelines
 
 set listchars=tab:‣-,trail:·,extends:»,precedes:«
 
+set pumblend=15
