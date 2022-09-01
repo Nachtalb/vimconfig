@@ -31,8 +31,9 @@ autocmd FileType html,xml,javascript,css,scss,sass,less,scss.css,yaml,yml setloc
 autocmd BufNewFile,BufRead *.pt,*.zcml setlocal iskeyword+=- shiftwidth=2 tabstop=2 softtabstop=2
 autocmd BufNewFile,BufRead *.fish set syntax=sh
 autocmd BufNewFile,BufRead *.zcml set syntax=xml
-autocmd BufNewFile,BufRead *.jinja set syntax=htmljinja
+autocmd BufNewFile,BufRead *.jinja,*.j2 set syntax=htmljinja
 autocmd BufNewFile,BufRead *.mako set filetype=mako
+autocmd BufNewFile,BufRead *.miv1 set filetype=json
 
 autocmd FileType json syntax match Comment +\/\/.\+$+
 

@@ -50,9 +50,14 @@ Plug 'dstein64/vim-startuptime'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'previm/previm'
 Plug 'hashivim/vim-terraform'
+Plug 'mitsuhiko/vim-jinja'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 
 " === Previm ===
 let g:previm_open_cmd = "xdg-open"
+
+" === Markdown Preview ===
+let g:mkdp_auto_close = 0
 
 " === Enfocado ===
 let g:enfocado_plugins = [
@@ -87,6 +92,7 @@ nmap ga <Plug>(UnicodeGA)
 nmap <F7> :TagbarJumpPrev<CR>
 nmap <F8> :TagbarToggle<CR>
 nmap <F9> :TagbarJumpNext<CR>
+
 
 " === LASTPLACE ===
 " Intelligently reopen files
@@ -133,6 +139,9 @@ let g:coc_global_extensions = [
     \'coc-rust-analyzer',
     \'coc-marketplace',
     \'coc-snippets',
+    \'coc-spell-checker',
+    \'coc-emoji',
+    \'coc-webview',
 \]
 
 " \'coc-spell-checker',
