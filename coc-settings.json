@@ -134,5 +134,15 @@
         "typeParameter": "\uf278",
         "default": "\uf29c"
     },
-    "markdown-preview-enhanced.previewTheme": "github-dark.css"
+    "markdown-preview-enhanced.previewTheme": "github-dark.css",
+    "diagnostic-languageserver.mergeConfig": true,
+    "diagnostic-languageserver.filetypes": {
+      "vim": "vint",
+      "sh": "shellcheck",
+      "yaml": "yamllint"
+    },
+    "diagnostic-languageserver.formatFiletypes": {
+      "lua": "lua-format",
+      "sh": "shfmt"
+    }
 }

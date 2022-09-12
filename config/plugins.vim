@@ -52,6 +52,7 @@ Plug 'previm/previm'
 Plug 'hashivim/vim-terraform'
 Plug 'mitsuhiko/vim-jinja'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
+Plug 'sheerun/vim-polyglot'
 
 " === Previm ===
 let g:previm_open_cmd = "xdg-open"
@@ -142,9 +143,18 @@ let g:coc_global_extensions = [
     \'coc-spell-checker',
     \'coc-emoji',
     \'coc-webview',
+    \'@yaegassy/coc-ansible',
+    \'coc-diagnostic',
 \]
-
 " \'coc-spell-checker',
+
+" Quickly view a list of all coc.nvim commands
+nnoremap <silent> <C-p> :<C-u>CocCommand<CR>
+
+let g:coc_filetype_map = {
+    \'yaml.ansible': 'ansible',
+\}
+
 " coc-yank
 nnoremap <silent> <space>y :<C-u>CocList -A --normal yank<cr>
 
