@@ -145,6 +145,9 @@ let g:coc_global_extensions = [
     \'coc-webview',
     \'@yaegassy/coc-ansible',
     \'coc-diagnostic',
+    \'coc-markdownlint',
+    \'coc-prettier',
+    \'coc-lua',
 \]
 " \'coc-spell-checker',
 
@@ -375,8 +378,8 @@ nnoremap <Leader>gl1 :!GIT_PAGER=less git log --graph --abbrev-commit --decorate
 set hidden
 nnoremap <Tab> :bn<CR>
 nnoremap <S-Tab> :bp<CR>
-noremap <C-q> :bdelete<CR>
-noremap <Leader>q :Bdelete<CR>
+noremap <Leader>q :bdelete<CR>
+noremap <C-q> :Bdelete<CR>
 
 " === AsyncRun ===
 let g:asyncrun_open = 20    " Auto open quickfix window with the given size

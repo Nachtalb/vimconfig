@@ -1,11 +1,9 @@
 #!/usr/bin/fish
 
-if begin; not command -q pyenv; or not command -q make; or not command -q go; or not command -q lua; end;
-    if grep -q 'arch' < /etc/os-release
-        sudo pacman -Sy --needed pyenv base-devel go lua
-    else
-        sudo apt install pyenv build-essentials golang lua dateutils
-    end
+if grep -q 'arch' < /etc/os-release
+    sudo pacman -Sy --needed pyenv base-devel go lua nodejs yarn npm dateutils
+else
+    sudo apt install pyenv build-essentials golang lua yarn npm nodejs
 end
 
 echo "INSTALLING NEOVIM"
@@ -28,7 +26,7 @@ end
 if not pyenv versions | grep -q nvim
     echo "SETTING UP PYTHON VENV"
     cd ~/.vim
-    pyenv virtualenv (pyenv versions --skip-aliases --bare | rg '^3[0-9.]+$' | sort -Vr | head -n 1) nvim
+    pyenv virtualenv (pyenv versions --skip-aliases --bare | rg '^3[0-9.ab]+(-dev)?$' | sort -Vr | head -n 1) nvim
     pyenv activate nvim
     pip install -U pip setuptools pynvim black autopep8 flake8 yapf pylint docutils
     pyenv local nvim
