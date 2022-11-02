@@ -34,6 +34,7 @@ autocmd BufNewFile,BufRead *.zcml set syntax=xml
 autocmd BufNewFile,BufRead *.jinja,*.j2 set syntax=htmljinja
 autocmd BufNewFile,BufRead *.mako set filetype=mako
 autocmd BufNewFile,BufRead *.miv1 set filetype=json
+autocmd BufNewFile,BufRead *.spec set filetype=python
 
 autocmd BufNewFile,BufRead emperor.yml set filetype=yaml.ansible
 

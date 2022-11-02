@@ -194,8 +194,10 @@ inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 inoremap <silent><expr> <c-space> coc#refresh()
 
 " Use `[d` and `]d` to navigate diagnostics
-nmap <silent> [d <Plug>(coc-diagnostic-prev)
-nmap <silent> ]d <Plug>(coc-diagnostic-next)
+nmap <silent> [d <Plug>(coc-diagnostic-prev-error)
+nmap <silent> ]d <Plug>(coc-diagnostic-next-error)
+nmap <silent> [s <Plug>(coc-diagnostic-prev)
+nmap <silent> ]s <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
@@ -305,11 +307,6 @@ if executable('ag')
     set grepprg=ag\ --nogroup\ --nocolor\ -U\ --follow
 
     let g:ackprg='ag --silent --vimgrep --smart-case -U --follow --ignore-dir public --ignore-dir testreports --ignore SOURCES.txt --ignore-dir var --ignore-dir .idea --ignore-dir var --ignore-dir log --ignore-dir node_modules --ignore-dir parts/solr-download --ignore-dir parts/solr-instance --ignore "*.min.js" --ignore "*compiled.js" --ignore "*.map"'
-    if isdirectory('parts/omelette/')
-        let plone_dir = trim(system('ls -1 -f | grep egg-info | cut -d. -f1'))
-        let plone_dir = trim(system("dirname $(ls -1 -f | grep egg-info | sed 's/\\./\\//g')"))
-        let g:ackprg=g:ackprg . ' --ignore-dir src --ignore-dir parts/omelette/' . plone_dir
-    endif
 
     nnoremap <Leader>aa :Ack! '<C-r><C-w>'
     nnoremap <Leader>AA :Ack! --ignore-dir tests '<C-r><C-w>'
@@ -326,9 +323,9 @@ nnoremap <C-f> :NvimTreeFindFileToggle<CR>
 " === Fugitive ===
 nnoremap <Leader>gs :Git<cr>
 nnoremap <Leader>gpl :Git pull -r<cr>
-nnoremap <Leader>gp :Git push<cr>
+nnoremap <Leader>gpu :Git push<cr>
 nnoremap <Leader>gpf :Git push -f
-nnoremap <Leader>gd :Gdiff<cr>
+nnoremap <Leader>gd  :Gdiff<cr>
 nnoremap <Leader>gcc :Gcommit<cr>
 nnoremap <Leader>gca :Git commit --amend --no-edit
 nnoremap <Leader>gco :Git checkout
