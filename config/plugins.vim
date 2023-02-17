@@ -54,6 +54,15 @@ Plug 'mitsuhiko/vim-jinja'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 Plug 'sheerun/vim-polyglot'
 Plug 'nikvdp/neomux'
+Plug 'mfussenegger/nvim-dap'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'mfussenegger/nvim-dap-python'
+Plug 'theHamsta/nvim-dap-virtual-text'
+Plug 'nvim-telescope/telescope-dap.nvim'
+Plug 'jbyuki/one-small-step-for-vimkind'
+Plug 'rcarriga/nvim-dap-ui'
+Plug 'Pocco81/DAPInstall.nvim'
+Plug 'williamboman/mason.nvim'
 
 " === Previm ===
 let g:previm_open_cmd = "xdg-open"
@@ -349,6 +358,9 @@ call plug#end()
 filetype plugin indent on
 
 lua << END
+require('mason').setup()
+require('config.dap').setup()
+
 require('lualine').setup { options = { theme = 'enfocado' } }
 
 require('telescope').setup {
