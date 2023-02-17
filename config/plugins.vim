@@ -3,8 +3,8 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " === Install Plugins ===
-
-Plug 'mileszs/ack.vim'
+Plug 'dstein64/vim-startuptime'
+" Plug 'mileszs/ack.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'ap/vim-buftabline'
 Plug 'mattn/emmet-vim'
@@ -46,7 +46,6 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'dstein64/nvim-scrollview'
 Plug 'ryanoasis/vim-devicons'
-Plug 'dstein64/vim-startuptime'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'previm/previm'
 Plug 'hashivim/vim-terraform'
@@ -311,15 +310,15 @@ let g:user_emmet_leader_key=','
 " let g:ackpreview = 1
 
 " Use silver searcher (ag) if available (much faster than Ack)
-if executable('ag')
-    " Use ag over grep
-    set grepprg=ag\ --nogroup\ --nocolor\ -U\ --follow
-
-    let g:ackprg='ag --silent --vimgrep --smart-case -U --follow --ignore-dir public --ignore-dir testreports --ignore SOURCES.txt --ignore-dir var --ignore-dir .idea --ignore-dir var --ignore-dir log --ignore-dir node_modules --ignore-dir parts/solr-download --ignore-dir parts/solr-instance --ignore "*.min.js" --ignore "*compiled.js" --ignore "*.map"'
-
-    nnoremap <Leader>aa :Ack! '<C-r><C-w>'
-    nnoremap <Leader>AA :Ack! --ignore-dir tests '<C-r><C-w>'
-endif
+" if executable('ag')
+"     " Use ag over grep
+"     set grepprg=ag\ --nogroup\ --nocolor\ -U\ --follow
+"
+"     let g:ackprg='ag --silent --vimgrep --smart-case -U --follow --ignore-dir public --ignore-dir testreports --ignore SOURCES.txt --ignore-dir var --ignore-dir .idea --ignore-dir var --ignore-dir log --ignore-dir node_modules --ignore-dir parts/solr-download --ignore-dir parts/solr-instance --ignore "*.min.js" --ignore "*compiled.js" --ignore "*.map"'
+"
+"     nnoremap <Leader>aa :Ack! '<C-r><C-w>'
+"     nnoremap <Leader>AA :Ack! --ignore-dir tests '<C-r><C-w>'
+" endif
 
 " === Nvim-Tree === "
 " Open close with CTRL-E
@@ -352,6 +351,19 @@ noremap <C-q> :Bdelete<CR>
 " === AsyncRun ===
 let g:asyncrun_open = 20    " Auto open quickfix window with the given size
 nnoremap <Leader>ar :AsyncRun! -raw=1
+
+let g:clipboard = {
+      \    'name': 'ccopy',
+      \    'copy': {
+      \       '+': 'ccopy',
+      \       '*': 'ccopy',
+      \     },
+      \    'paste': {
+      \       '+': 'cpaste',
+      \       '*': 'cpaste',
+      \    },
+      \    'cache_enabled': 0,
+      \ }
 
 " === End Plugin Section ===
 call plug#end()
