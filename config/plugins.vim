@@ -352,18 +352,20 @@ noremap <C-q> :Bdelete<CR>
 let g:asyncrun_open = 20    " Auto open quickfix window with the given size
 nnoremap <Leader>ar :AsyncRun! -raw=1
 
-let g:clipboard = {
-      \    'name': 'ccopy',
-      \    'copy': {
-      \       '+': 'ccopy',
-      \       '*': 'ccopy',
-      \     },
-      \    'paste': {
-      \       '+': 'cpaste',
-      \       '*': 'cpaste',
-      \    },
-      \    'cache_enabled': 0,
-      \ }
+if $SomeVar != ""
+  let g:clipboard = {
+        \    'name': 'ccopy',
+        \    'copy': {
+        \       '+': 'ccopy',
+        \       '*': 'ccopy',
+        \     },
+        \    'paste': {
+        \       '+': 'cpaste',
+        \       '*': 'cpaste',
+        \    },
+        \    'cache_enabled': 0,
+        \ }
+endif
 
 " === End Plugin Section ===
 call plug#end()
