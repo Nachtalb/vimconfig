@@ -38,9 +38,7 @@
     "python.formatting.autopep8Path": "~/.pyenv/versions/nvim/bin/autopep8",
     "python.formatting.yapfPath": "~/.pyenv/versions/nvim/bin/yapf",
     "python.formatting.yapfArgs": ["--style={ column_limit: 120 }"],
-    "python.analysis.extraPaths": [
-        "./parts/omelette"
-    ],
+    "python.linting.mypyPath": "~/.pyenv/versions/nvim/bin/mypy",
     "python.linting.ignorePatterns": [
         ".vscode/*.py",
         "**/site-packages/**/*.py",
