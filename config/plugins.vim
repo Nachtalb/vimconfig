@@ -352,7 +352,7 @@ noremap <C-q> :Bdelete<CR>
 let g:asyncrun_open = 20    " Auto open quickfix window with the given size
 nnoremap <Leader>ar :AsyncRun! -raw=1
 
-if $SomeVar != ""
+if $NACHTALB_DOTFILES != ""
   let g:clipboard = {
         \    'name': 'ccopy',
         \    'copy': {
