@@ -64,6 +64,7 @@ Plug 'jbyuki/one-small-step-for-vimkind'
 Plug 'rcarriga/nvim-dap-ui'
 Plug 'Pocco81/DAPInstall.nvim'
 Plug 'williamboman/mason.nvim'
+Plug 'nvim-telescope/telescope-ui-select.nvim'
 
 " === Previm ===
 let g:previm_open_cmd = "xdg-open"
@@ -405,6 +406,8 @@ require('telescope').setup {
         }
     }
 }
+
+require("telescope").load_extension("ui-select")
 
 require("notify").setup({
     background_colour = "#000000",
