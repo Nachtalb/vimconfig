@@ -267,6 +267,8 @@ xmap <silent> <TAB> <Plug>(coc-range-select)
 function! Format()
     call CocAction('format')
     if (&ft=='python')
+        call CocAction('runCommand', 'python.sortImports')
+    else
         call CocAction('runCommand', 'editor.action.organizeImport')
     endif
 endfunction
@@ -278,9 +280,9 @@ nnoremap <leader>f :Format<cr>
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 " use `:OR` for organize import of current buffer
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-nnoremap <leader>or :OR<cr>
-autocmd BufWritePre *.py :silent call CocAction('runCommand', 'editor.action.organizeImport')
+" command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+" nnoremap <leader>or :OR<cr>
+" autocmd BufWritePre *.py :silent call CocAction('runCommand', 'editor.action.organizeImport')
 
 " Using CocList
 " Show all diagnostics
