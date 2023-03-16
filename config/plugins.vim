@@ -450,7 +450,7 @@ require("nvim-tree").setup({
         group_empty = true,
         highlight_git = true,
         highlight_opened_files = "all",
-        highlight_modified = true,
+        highlight_modified = "all",
     },
     actions = {
         open_file = {
