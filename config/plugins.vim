@@ -1,11 +1,13 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" cSpell: disable
 
 " === Install Plugins ===
 Plug 'dstein64/vim-startuptime'
 " Plug 'mileszs/ack.vim'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
 Plug 'ap/vim-buftabline'
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-unimpaired'
@@ -235,6 +237,26 @@ nmap <leader>rn <Plug>(coc-rename)
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
+" Run the Code Lens action on the current line
+nnoremap <leader>cl  <Plug>(coc-codelens-action)
+
+" Use CTRL-S for selections ranges
+" Requires 'textDocument/selectionRange' support of language server
+nnoremap <silent> <C-s> <Plug>(coc-range-select)
+xnoremap <silent> <C-s> <Plug>(coc-range-select)
+
+" Map function and class text objects
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server
+" Eg. V (select mdoe) then af to select the whole function under the cursor
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
+
 augroup mygroup
   autocmd!
   " Setup formatexpr specified filetype(s).
@@ -252,16 +274,6 @@ nmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>ac  <Plug>(coc-codeaction)
 " Fix autofix problem of current line
 nmap <leader>qf  <Plug>(coc-fix-current)
-
-" Create mappings for function text object, requires document symbols feature of languageserver.
-xmap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap if <Plug>(coc-funcobj-i)
-omap af <Plug>(coc-funcobj-a)
-
-" Use <TAB> for select selections ranges, needs server support, like: coc-tsserver, coc-python
-nmap <silent> <TAB> <Plug>(coc-range-select)
-xmap <silent> <TAB> <Plug>(coc-range-select)
 
 " Use `:Format` to format current buffer
 function! Format()
