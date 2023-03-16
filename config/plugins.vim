@@ -416,15 +416,26 @@ require("which-key").setup()
 
 require("nvim-tree").setup({
     sort_by = "case_sensitive",
-    respect_buf_cwd = true,
-    update_cwd = true,
+    -- START exapnd to file in tree
+    prefer_startup_root = true,
     update_focused_file = {
         enable = true,
-        update_cwd = true,
-        ignore_list = {}
+        ignore_list = {},
+        update_root = true,
     },
+    -- END
+    auto_reload_on_write = true,
+    hijack_unnamed_buffer_when_opening = true,
+    modified = {
+        enable = true,
+    },
+    select_prompts = true,
     view = {
         adaptive_size = true,
+        centralize_selection = true,
+        width = {
+            min = 40,
+        },
         mappings = {
             list = {
                 { key = "u", action = "dir_up" },
@@ -434,11 +445,20 @@ require("nvim-tree").setup({
     },
     renderer = {
         group_empty = true,
+        highlight_git = true,
+        highlight_opened_files = "all",
+        highlight_modified = true,
     },
     actions = {
         open_file = {
             quit_on_open = true,
-        }
+        },
     },
+    live_filter = {
+        always_show_folders = false,
+    },
+    notify = {
+        threshold = vim.log.levels.WARNING
+    }
 })
 END
