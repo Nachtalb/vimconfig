@@ -168,6 +168,7 @@ let g:coc_global_extensions = [
     \'coc-markdownlint',
     \'coc-prettier',
     \'coc-lua',
+    \'coc-prettier',
 \]
 " \'coc-spell-checker',
 
@@ -176,6 +177,8 @@ nnoremap <silent> <C-p> :<C-u>CocCommand<CR>
 
 let g:coc_filetype_map = {
     \'yaml.ansible': 'ansible',
+    \'jinja2': 'htmldjango',
+    \'j2': 'htmldjango',
 \}
 
 " coc-yank
