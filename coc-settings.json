@@ -28,8 +28,18 @@
         "default": "\uf29c"
     },
     "coc.preferences.formatOnType": true,
-    "coc.preferences.formatOnSaveFiletypes": ["python"],
+    "coc.preferences.formatOnSaveFiletypes": ["python", "javascript", "html", "css", "markdown"],
     "coc.preferences.willSaveHandlerTimeout": 2000,
+    "prettier.resolveGlobalModules": true,
+    "prettier.enable": true,
+    "prettier.proseWrap": "always",
+    "prettier.prettierPath": "/usr/lib/node_modules/prettier",
+    "markdownlint.config": {
+      "MD013": {
+        "code_blocks": false,
+        "tables": false,
+      }
+    },
     "python.sortImports.args": ["--profile", "black", "--line-length", "120"],
     "python.linting.flake8Enabled": true,
     "python.linting.flake8Path": "~/.pyenv/versions/nvim/bin/flake8",
@@ -229,7 +239,7 @@
       "wlan"
     ],
     "files.maxMemoryForLargeFilesMB": 12288,
-    "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/13.0.0/clangd_13.0.0/bin/clangd",
+    "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/15.0.6/clangd_15.0.6/bin/clangd",
     "languageserver": {
         "terraform": {
             "command": "terraform-ls",

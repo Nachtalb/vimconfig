@@ -345,8 +345,8 @@ let g:user_emmet_leader_key=','
 inoremap <C-e> <ESC>:NvimTreeToggle<CR>
 nnoremap <C-e> :NvimTreeToggle<CR>
 " Find file in NvimTree with CTRL-F
-inoremap <C-f> <ESC>:NvimTreeFindFileToggle<CR>
-nnoremap <C-f> :NvimTreeFindFileToggle<CR>
+inoremap <C-f> <ESC>:NvimTreeFindFileToggle!<CR>
+nnoremap <C-f> :NvimTreeFindFileToggle!<CR>
 
 " === Fugitive ===
 nnoremap <Leader>gs :Git<cr>
