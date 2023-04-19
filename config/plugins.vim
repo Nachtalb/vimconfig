@@ -35,7 +35,7 @@ Plug 'mg979/vim-visual-multi'
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase'  }
 Plug 'elixir-editors/vim-elixir'
 Plug 'tpope/vim-obsession'
-Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
+Plug 'wookayin/semshi', { 'do': ':UpdateRemotePlugins' }
 Plug 'chrisbra/unicode.vim'
 Plug 'isundil/vim-irssi-syntax'
 Plug 'mbbill/undotree'
