@@ -375,20 +375,18 @@ noremap <C-q> :Bdelete<CR>
 let g:asyncrun_open = 20    " Auto open quickfix window with the given size
 nnoremap <Leader>ar :AsyncRun! -raw=1
 
-if $NACHTALB_DOTFILES != ""
-  let g:clipboard = {
-        \    'name': 'ccopy',
-        \    'copy': {
-        \       '+': 'ccopy',
-        \       '*': 'ccopy',
-        \     },
-        \    'paste': {
-        \       '+': 'cpaste',
-        \       '*': 'cpaste',
-        \    },
-        \    'cache_enabled': 0,
-        \ }
-endif
+let g:clipboard = {
+      \    'name': 'ccopy',
+      \    'copy': {
+      \       '+': 'ccopy',
+      \       '*': 'ccopy',
+      \     },
+      \    'paste': {
+      \       '+': 'cpaste',
+      \       '*': 'cpaste',
+      \    },
+      \    'cache_enabled': 0,
+      \ }
 
 " === End Plugin Section ===
 call plug#end()
@@ -425,6 +423,28 @@ vim.notify = require("notify")
 
 require("which-key").setup()
 
+
+local function on_attach(bufnr)
+  local api = require('nvim-tree.api')
+
+  local function opts(desc)
+    return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+  end
+
+
+  -- Default mappings
+  api.config.mappings.default_on_attach(bufnr)
+
+  -- Mappings removed
+  vim.keymap.set('n', '<C-e>', '', { buffer = bufnr })
+  vim.keymap.del('n', '<C-e>', { buffer = bufnr })
+
+
+  -- New Mappings
+  vim.keymap.set('n', 'u', api.tree.change_root_to_parent, opts('Up'))
+end
+
+
 require("nvim-tree").setup({
     sort_by = "case_sensitive",
     -- START exapnd to file in tree
@@ -447,12 +467,6 @@ require("nvim-tree").setup({
         width = {
             min = 40,
         },
-        mappings = {
-            list = {
-                { key = "u", action = "dir_up" },
-                { key = "<C-e>", action = "" },
-            },
-        },
     },
     renderer = {
         group_empty = true,
@@ -470,7 +484,8 @@ require("nvim-tree").setup({
     },
     notify = {
         threshold = vim.log.levels.WARNING
-    }
+    },
+    on_attach = on_attach
 })
 
   -- Set up nvim-cmp.

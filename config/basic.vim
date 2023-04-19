@@ -76,6 +76,7 @@ set nowrap                          " Do not wrap lines
 
 set nospell                           " Enable spellcheck
 set spelllang=en                    " Set spellcheck language to english
+lang en_US.UTF-8
 
 
 function! GitBranch()
