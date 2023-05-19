@@ -169,6 +169,7 @@ let g:coc_global_extensions = [
     \'coc-prettier',
     \'coc-lua',
     \'coc-prettier',
+    \'coc-toml',
 \]
 " \'coc-spell-checker',
 
