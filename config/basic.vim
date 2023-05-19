@@ -30,12 +30,6 @@ set hidden
 
 set exrc                            " Enable project specific .vimrc settings
 
-
-" Correct neovim python interpreter
-
-let g:python3_host_prog="~/.pyenv/versions/nvim/bin/python"
-let g:python_host_prog="~/.pyenv/versions/nvim2/bin/python"
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -76,7 +70,7 @@ set nowrap                          " Do not wrap lines
 
 set nospell                           " Enable spellcheck
 set spelllang=en                    " Set spellcheck language to english
-lang en_US.UTF-8
+" lang en_US.UTF-8
 
 
 function! GitBranch()
