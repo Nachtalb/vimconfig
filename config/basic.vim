@@ -30,6 +30,9 @@ set hidden
 
 set exrc                            " Enable project specific .vimrc settings
 
+let g:python3_host_prog = '/usr/sbin/python'
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

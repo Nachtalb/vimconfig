@@ -2,7 +2,6 @@
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " === PLUGIN STYLES ===
-let g:enfocado_style = 'neon'
-colorscheme enfocado
+colorscheme hardhacker
 
 let g:Hexokinase_highlighters = ['backgroundfull']

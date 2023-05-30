@@ -41,7 +41,6 @@ Plug 'isundil/vim-irssi-syntax'
 Plug 'mbbill/undotree'
 Plug 'junegunn/goyo.vim'
 Plug 'moll/vim-bbye'
-Plug 'wuelnerdotexe/vim-enfocado'
 Plug 'rcarriga/nvim-notify'
 Plug 'folke/which-key.nvim'
 Plug 'nvim-lua/plenary.nvim'
@@ -70,28 +69,41 @@ Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'onsails/lspkind.nvim'
+Plug 'antoinemadec/FixCursorHold.nvim'
+Plug 'nvim-neotest/neotest'
+Plug 'nvim-neotest/neotest-python'
+Plug 'nvim-neotest/neotest-plenary'
+Plug 'nvim-neotest/neotest-vim-test'
+Plug 'andymass/vim-matchup'
+Plug 'nvim-treesitter/nvim-treesitter-context'
+Plug 'hardhackerlabs/theme-vim', { 'as': 'hardhacker' }
+
+" === TS Context ===
+command! TSContextJump lua require("treesitter-context").go_to_context()
+nnoremap [c :TSContextJump<CR>
+hi TreesitterContextBottom gui=underline guisp=Grey
+
+" === Neotest ===
+command! NeotestSummary lua require("neotest").summary.toggle()
+command! NeotestFile lua require("neotest").run.run(vim.fn.expand("%"))
+command! Neotest lua require("neotest").run.run(vim.fn.getcwd())
+command! NeotestNearest lua require("neotest").run.run()
+command! NeotestDebug lua require("neotest").run.run({ strategy = "dap" })
+command! NeotestAttach lua require("neotest").run.attach()
+
+nnoremap <leader>tt :NeotestNearest<CR>
+nnoremap <leader>tf :NeotestFile<CR>
+nnoremap <leader>ta :Neotest<CR>
+nnoremap <leader>ts :NeotestSummary<cr>
+
+nnoremap <silent>[n <cmd>lua require("neotest").jump.prev({ status = "failed" })<CR>
+nnoremap <silent>]n <cmd>lua require("neotest").jump.next({ status = "failed" })<CR>
 
 " === Previm ===
 let g:previm_open_cmd = "xdg-open"
 
 " === Markdown Preview ===
 let g:mkdp_auto_close = 0
-
-" === Enfocado ===
-let g:enfocado_plugins = [
-  \ 'coc',
-  \ 'notify',
-  \ 'plug',
-  \ 'telescope',
-  \ 'which-key',
-\ ]
-
-" Transparent background
-augroup enfocado_customization
-  autocmd!
-    autocmd ColorScheme enfocado highlight Normal ctermbg=NONE guibg=NONE
-    autocmd ColorScheme enfocado highlight NormalNC ctermbg=NONE guibg=NONE
-augroup END
 
 " === Telescope ===
 
@@ -203,14 +215,28 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
 
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-inoremap <silent><expr> <C-x><C-z> coc#pum#visible() ? coc#pum#stop() : "\<C-x>\<C-z>"
-" remap for complete to use tab and <cr>
+
+" Use tab for trigger completion with characters ahead and navigate
+" NOTE: There's always complete item selected by default, you may want to enable
+" no select by `"suggest.noselect": true` in your configuration file
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config
 inoremap <silent><expr> <TAB>
-    \ coc#pum#visible() ? coc#pum#next(1):
-    \ <SID>check_back_space() ? "\<Tab>" :
-    \ coc#refresh()
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
 inoremap <silent><expr> <c-space> coc#refresh()
 
 " Use `[d` and `]d` to navigate diagnostics
@@ -287,7 +313,13 @@ nmap <leader>qf  <Plug>(coc-fix-current)
 
 " Use `:Format` to format current buffer
 function! Format()
-    call CocAction('format')
+    try
+      call CocAction('format')
+    catch
+      echohl Error
+      echo '"' . expand('%') . '" could not be formatted'
+      echohl None
+    endtry
     if (&ft=='python')
         call CocAction('runCommand', 'python.sortImports')
     else
@@ -297,6 +329,7 @@ endfunction
 
 command! -nargs=0 Format call Format()
 nnoremap <leader>f :Format<cr>
+autocmd BufWritePre * :Format
 
 " Use `:Fold` to fold current buffer
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
@@ -397,7 +430,7 @@ lua << END
 require('mason').setup()
 require('config.dap').setup()
 
-require('lualine').setup { options = { theme = 'enfocado' } }
+require('lualine').setup()
 
 require('telescope').setup {
     defaults = {
@@ -528,4 +561,22 @@ require("nvim-tree").setup({
       { name = 'cmdline' }
     })
   })
+
+  require("neotest").setup({
+    adapters = {
+      require("neotest-python")({
+        dap = { justMyCode = false },
+      }),
+      require("neotest-plenary"),
+      require("neotest-vim-test")({
+        ignore_file_types = { "python", "vim", "lua" },
+      }),
+    },
+  })
+
+  require'nvim-treesitter.configs'.setup {
+    matchup = {
+      enable = true,
+    },
+  }
 END
