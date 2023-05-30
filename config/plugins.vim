@@ -5,10 +5,8 @@
 
 " === Install Plugins ===
 Plug 'dstein64/vim-startuptime'
-" Plug 'mileszs/ack.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'ap/vim-buftabline'
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-unimpaired'
 Plug 'skywind3000/asyncrun.vim'
@@ -47,11 +45,8 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'dstein64/nvim-scrollview'
 Plug 'ryanoasis/vim-devicons'
-Plug 'kyazdani42/nvim-tree.lua'
-Plug 'previm/previm'
 Plug 'hashivim/vim-terraform'
 Plug 'mitsuhiko/vim-jinja'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 Plug 'sheerun/vim-polyglot'
 Plug 'nikvdp/neomux'
 Plug 'mfussenegger/nvim-dap'
@@ -77,11 +72,17 @@ Plug 'nvim-neotest/neotest-vim-test'
 Plug 'andymass/vim-matchup'
 Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'hardhackerlabs/theme-vim', { 'as': 'hardhacker' }
+Plug 'MunifTanjim/nui.nvim'
+Plug 'nvim-neo-tree/neo-tree.nvim'
+Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
+Plug 'echasnovski/mini.indentscope'
+Plug 'folke/noice.nvim'
+Plug 'toppair/peek.nvim', { 'do': 'deno task --quiet build:fast' }
+Plug 's1n7ax/nvim-window-picker'
 
 " === TS Context ===
 command! TSContextJump lua require("treesitter-context").go_to_context()
 nnoremap [c :TSContextJump<CR>
-hi TreesitterContextBottom gui=underline guisp=Grey
 
 " === Neotest ===
 command! NeotestSummary lua require("neotest").summary.toggle()
@@ -101,9 +102,6 @@ nnoremap <silent>]n <cmd>lua require("neotest").jump.next({ status = "failed" })
 
 " === Previm ===
 let g:previm_open_cmd = "xdg-open"
-
-" === Markdown Preview ===
-let g:mkdp_auto_close = 0
 
 " === Telescope ===
 
@@ -166,7 +164,6 @@ let g:coc_global_extensions = [
     \'coc-yaml',
     \'coc-yank',
     \'coc-clangd',
-    \'coc-markdown-preview-enhanced',
     \'coc-vimlsp',
     \'coc-elixir',
     \'coc-rust-analyzer',
@@ -177,8 +174,6 @@ let g:coc_global_extensions = [
     \'coc-webview',
     \'@yaegassy/coc-ansible',
     \'coc-diagnostic',
-    \'coc-markdownlint',
-    \'coc-prettier',
     \'coc-lua',
     \'coc-prettier',
     \'coc-toml',
@@ -200,16 +195,7 @@ nnoremap <silent> <space>y :<C-u>CocList -A --normal yank<cr>
 inoremap <nowait><expr> <C-l> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
 inoremap <nowait><expr> <C-h> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
 
-" coc-git
-" navigate chunks of current buffer
-nnoremap <silent><nowait>[g <Plug>(coc-git-prevchunk)
-nnoremap <silent><nowait>]g <Plug>(coc-git-nextchunk)
-" show chunk diff at current position
-nmap gs <Plug>(coc-git-chunkinfo)
-nmap go :CocCommand git.browserOpen<cr>
-nmap <Leader>gu :CocCommand git.chunkUndo<cr>
-
-"" COC Complation
+" COC Complation
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~ '\s'
@@ -362,30 +348,23 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 " === Emmet ===
 let g:user_emmet_leader_key=','
 
-" === Ack / Ag ===
-" Other settings
-" let g:ackpreview = 1
-
-" Use silver searcher (ag) if available (much faster than Ack)
-" if executable('ag')
-"     " Use ag over grep
-"     set grepprg=ag\ --nogroup\ --nocolor\ -U\ --follow
-"
-"     let g:ackprg='ag --silent --vimgrep --smart-case -U --follow --ignore-dir public --ignore-dir testreports --ignore SOURCES.txt --ignore-dir var --ignore-dir .idea --ignore-dir var --ignore-dir log --ignore-dir node_modules --ignore-dir parts/solr-download --ignore-dir parts/solr-instance --ignore "*.min.js" --ignore "*compiled.js" --ignore "*.map"'
-"
-"     nnoremap <Leader>aa :Ack! '<C-r><C-w>'
-"     nnoremap <Leader>AA :Ack! --ignore-dir tests '<C-r><C-w>'
-" endif
-
-" === Nvim-Tree === "
+" === NoeTree === "
 " Open close with CTRL-E
-inoremap <C-e> <ESC>:NvimTreeToggle<CR>
-nnoremap <C-e> :NvimTreeToggle<CR>
+inoremap <C-e> <ESC>:Neotree focus<CR>
+nnoremap <C-e> :Neotree focus<CR>
 " Find file in NvimTree with CTRL-F
-inoremap <C-f> <ESC>:NvimTreeFindFileToggle!<CR>
-nnoremap <C-f> :NvimTreeFindFileToggle!<CR>
+inoremap <C-f> <ESC>:Neotree focus reveal_force_cwd<CR>
+nnoremap <C-f> :Neotree focus reveal_force_cwd<CR>
 
-" === Fugitive ===
+" === GIT ===
+" navigate chunks of current buffer
+nnoremap <silent><nowait>[g <Plug>(coc-git-prevchunk)
+nnoremap <silent><nowait>]g <Plug>(coc-git-nextchunk)
+" show chunk diff at current position
+nmap gs <Plug>(coc-git-chunkinfo)
+nmap go :CocCommand git.browserOpen<cr>
+nmap <Leader>gu :CocCommand git.chunkUndo<cr>
+
 nnoremap <Leader>gs :Git<cr>
 nnoremap <Leader>gpl :Git pull -r<cr>
 nnoremap <Leader>gpu :Git push<cr>
@@ -395,8 +374,12 @@ nnoremap <Leader>gcc :Gcommit<cr>
 nnoremap <Leader>gca :Git commit --amend --no-edit
 nnoremap <Leader>gco :Git checkout
 nnoremap <Leader>gcb :Git checkout -b ne/
-nnoremap <Leader>gl1 :!GIT_PAGER=less git log --graph --abbrev-commit --decorate --format='\%C(bold blue)\%h\%C(reset) - \%C(bold green)(\%ai)\%C(reset) \%C(white)\%s\%C(reset) \%C(dim white)- \%an\%C(reset)\%C(bold yellow)\%d\%C(reset)' --color=always --all<CR>
-nnoremap <Leader>gl1 :!GIT_PAGER=less git log --graph --abbrev-commit --decorate --format='\%C(bold blue)\%h\%C(reset) - \%C(bold green)(\%ai)\%C(reset) \%C(white)\%s\%C(reset) \%C(dim white)- \%an\%C(reset)\%C(bold yellow)\%d\%C(reset)' --color=always<CR>
+nnoremap <Leader>gl :Telescope git_commits<CR>
+nnoremap <Leader>gb :Telescope git_branches<CR>
+
+" === Telescope ===
+nnoremap <Leader>? :Telescope keymaps<CR>
+nnoremap <Leader>p :Telescope registers<CR>
 
 " === Buffer Tabline ===
 set hidden
@@ -427,100 +410,111 @@ call plug#end()
 filetype plugin indent on
 
 lua << END
-require('mason').setup()
-require('config.dap').setup()
+  require('mason').setup()
+  require('config.dap').setup()
 
-require('lualine').setup()
+  -- HardHacker theme colors
+  local colors = {
+    blue   = '#b1baf4',
+    cyan   = '#b3f4f3',
+    black  = '#1c1924', -- 30% darker than HardHacker "Background"
+    white  = '#eee9fc',
+    red    = '#e965a5',
+    violet = '#e192ef',
+    comment   = '#3f3951',
+  }
 
-require('telescope').setup {
-    defaults = {
-        mappings = {
-            i = {
-                ['<C-j>'] = "preview_scrolling_down",
-                ['<C-k>'] = "preview_scrolling_up",
-            },
-            n = {
-                ['<C-j>'] = "preview_scrolling_down",
-                ['<C-k>'] = "preview_scrolling_up",
-            }
-        }
+  local hardhacker_theme = {
+    normal = {
+      a = { fg = colors.black, bg = colors.violet },
+      b = { fg = colors.white, bg = colors.comment },
+      c = { fg = colors.white, bg = colors.black },
+    },
+
+    insert = { a = { fg = colors.black, bg = colors.blue } },
+    visual = { a = { fg = colors.black, bg = colors.cyan } },
+    replace = { a = { fg = colors.black, bg = colors.red } },
+
+    inactive = {
+      a = { fg = colors.white, bg = colors.black },
+      b = { fg = colors.white, bg = colors.black },
+      c = { fg = colors.black, bg = colors.black },
+    },
+  }
+
+  require('mini.indentscope').setup {
+    draw = {
+      delay = 0,
+      animation = require('mini.indentscope').gen_animation.none()
+    },
+    symbol = "▏",
+    options = { try_as_border = false },
+  }
+
+  require('lualine').setup {
+    options = {
+      theme = hardhacker_theme,
+      component_separators = '|',
+      section_separators = { left = '', right = '' },
+      icons_enabled = true,
+    },
+  }
+
+  require("bufferline").setup {
+    options = {
+      separator_style = "slant", -- | "thick" | "thin" | { 'any', 'any' },
+      indicator = {
+        -- icon = " ",
+        -- style = 'icon',
+        style = "icon",
+      },
+      close_command = "Bdelete! %d", -- can be a string | function, see "Mouse actions"
+      diagnostics_indicator = function(count, _, _, _)
+        if count > 9 then
+          return "9+"
+        end
+        return tostring(count)
+      end,
+      offsets = {
+        {
+          filetype = "neo-tree",
+          text = "EXPLORER",
+          text_align = "center",
+          -- separator = true,
+        },
+      },
+      hover = {
+        enabled = true,
+        delay = 0,
+        reveal = { "close" },
+      },
     }
-}
+  }
 
-require("telescope").load_extension("ui-select")
+  require('telescope').setup {
+      defaults = {
+          mappings = {
+              i = {
+                  ['<C-j>'] = "preview_scrolling_down",
+                  ['<C-k>'] = "preview_scrolling_up",
+              },
+              n = {
+                  ['<C-j>'] = "preview_scrolling_down",
+                  ['<C-k>'] = "preview_scrolling_up",
+              }
+          }
+      }
+  }
 
-require("notify").setup({
-    background_colour = "#000000",
-    stages = "slide",
-})
-vim.notify = require("notify")
+  require("telescope").load_extension("ui-select")
 
-require("which-key").setup()
+  require("notify").setup({
+      background_colour = "#000000",
+      stages = "slide",
+  })
+  vim.notify = require("notify")
 
-
-local function on_attach(bufnr)
-  local api = require('nvim-tree.api')
-
-  local function opts(desc)
-    return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
-  end
-
-
-  -- Default mappings
-  api.config.mappings.default_on_attach(bufnr)
-
-  -- Mappings removed
-  vim.keymap.set('n', '<C-e>', '', { buffer = bufnr })
-  vim.keymap.del('n', '<C-e>', { buffer = bufnr })
-
-
-  -- New Mappings
-  vim.keymap.set('n', 'u', api.tree.change_root_to_parent, opts('Up'))
-end
-
-
-require("nvim-tree").setup({
-    sort_by = "case_sensitive",
-    -- START exapnd to file in tree
-    prefer_startup_root = true,
-    update_focused_file = {
-        enable = true,
-        ignore_list = {},
-        update_root = true,
-    },
-    -- END
-    auto_reload_on_write = true,
-    hijack_unnamed_buffer_when_opening = true,
-    modified = {
-        enable = true,
-    },
-    select_prompts = true,
-    view = {
-        adaptive_size = true,
-        centralize_selection = true,
-        width = {
-            min = 40,
-        },
-    },
-    renderer = {
-        group_empty = true,
-        highlight_git = true,
-        highlight_opened_files = "all",
-        highlight_modified = "all",
-    },
-    actions = {
-        open_file = {
-            quit_on_open = true,
-        },
-    },
-    live_filter = {
-        always_show_folders = false,
-    },
-    notify = {
-        threshold = vim.log.levels.WARNING
-    },
-    on_attach = on_attach
-})
+  require("which-key").setup()
 
   -- Set up nvim-cmp.
   local cmp = require'cmp'
@@ -574,9 +568,138 @@ require("nvim-tree").setup({
     },
   })
 
+  require("neo-tree").setup {
+    close_if_last_window = true,
+    document_symbols = {
+      kinds = {
+        File = { icon = "󰈙", hl = "Tag" },
+        Namespace = { icon = "󰌗", hl = "Include" },
+        Package = { icon = "󰏖", hl = "Label" },
+        Class = { icon = "󰌗", hl = "Include" },
+        Property = { icon = "󰆧", hl = "@property" },
+        Enum = { icon = "󰒻", hl = "@number" },
+        Function = { icon = "󰊕", hl = "Function" },
+        String = { icon = "󰀬", hl = "String" },
+        Number = { icon = "󰎠", hl = "Number" },
+        Array = { icon = "󰅪", hl = "Type" },
+        Object = { icon = "󰅩", hl = "Type" },
+        Key = { icon = "󰌋", hl = "" },
+        Struct = { icon = "󰌗", hl = "Type" },
+        Operator = { icon = "󰆕", hl = "Operator" },
+        TypeParameter = { icon = "󰊄", hl = "Type" },
+        StaticMethod = { icon = '󰠄 ', hl = 'Function' },
+      }
+    },
+    window = {
+      mappings = {
+        ["<S-Tab>"] = "prev_source",
+        ["<Tab>"] = "next_source",
+        ["<C-f>"] = "close_window",
+        ["<C-e>"] = "close_window",
+      },
+    },
+    source_selector = {
+      winbar = true,
+      content_layout = "center",
+      tabs_layout = "equal",
+      show_separator_on_edge = true,
+      sources = {
+        { source = "filesystem", display_name = "󰉓 Files" },
+        { source = "buffers", display_name = "󰈙 Buffer" },
+        { source = "git_status", display_name = " Git" },
+        { source = "diagnostics", display_name = "󰒡 Diagnostics" },
+      }
+    },
+    default_component_configs = {
+      indent = {
+        indent_size = 2,
+        padding = 1, -- extra padding on left hand side
+        -- indent guides
+        with_markers = true,
+        indent_marker = "│",
+        last_indent_marker = "└",
+        -- expander config, needed for nesting files
+        with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
+        expander_collapsed = "",
+        expander_expanded = "",
+        expander_highlight = "NeoTreeExpander",
+      },
+      icon = {
+        folder_closed = "",
+        folder_open = "",
+        folder_empty = "",
+        folder_empty_open = "",
+        -- The next two settings are only a fallback, if you use nvim-web-devicons and configure default icons there
+        -- then these will never be used.
+        default = " ",
+      },
+      modified = { symbol = "[+]" },
+      git_status = {
+        symbols = {
+          added = "",
+          modified = "",
+          removed = "",
+          renamed = "➜",
+          untracked = "",
+          ignored = "",
+          unstaged = "U",
+          staged = "",
+          conflict = "",
+        },
+      },
+      diagnostics = {
+        symbols = {
+          error = "",
+          warn = "",
+          hint = "",
+          info = "",
+        },
+      },
+    },
+    filtered_items = {
+      hide_dotfiles = false,
+      hide_gitignored = false
+    },
+    filesystem = {
+      follow_current_file = true,
+      group_empty_dirs = true,
+    },
+    buffers = {
+      follow_current_file = true,
+      group_empty_dirs = true,
+    },
+  }
+
   require'nvim-treesitter.configs'.setup {
+    ensure_installed = {
+      "awk", "bash", "c", "comment", "cpp", "diff", "dockerfile", "fish",
+      "git_config", "git_rebase", "gitattributes", "gitcommit", "gitignore",
+      "go", "html", "htmldjango", "java", "javascript", "json", "json5",
+      "jsonc", "lua", "markdown", "markdown_inline", "python", "query",
+      "regex", "rust", "scss", "sql", "toml", "tsx", "typescript", "vim", "vue",
+      "yaml", "zig",
+    },
     matchup = {
       enable = true,
     },
   }
+
+  require("noice").setup{
+    cmdline = {
+      view = "cmdline",
+      format = {
+        cmdline = { icon = "  " },
+      },
+    }
+  }
+
+  require('peek').setup {
+    auto_load = true,
+    app = "browser",
+  }
+
+  vim.api.nvim_create_user_command('PeekOpen', require('peek').open, {})
+  vim.api.nvim_create_user_command('PeekClose', require('peek').close, {})
+
+  require('window-picker').setup()
 END

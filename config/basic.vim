@@ -37,7 +37,7 @@ let g:python3_host_prog = '/usr/sbin/python'
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-set lazyredraw                      " Improve vim's drawing mechanism
+" set lazyredraw                      " Improve vim's drawing mechanism
 
 set number                          " Add line numbers
 set mouse=a
