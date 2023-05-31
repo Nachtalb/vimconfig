@@ -1,4 +1,6 @@
 {
+  "coc.preferences.extensionUpdateCheck": "daily",
+  "coc.preferences.silentAutoupdate": true,
   "pyright.completion.importSupport": true,
   "coc.preferences.formatOnType": true,
   "coc.preferences.formatOnSave": true,
@@ -32,6 +34,7 @@
   "cSpell.userWords": [
     "ASGI",
     "Anilist",
+    "Autoupdate",
     "Booru",
     "CLIARGS",
     "CTRCTL",
@@ -180,6 +183,7 @@
     "onlyoffice",
     "openai",
     "opencv",
+    "organizeimports",
     "overseerr",
     "pacman",
     "passthrough",
