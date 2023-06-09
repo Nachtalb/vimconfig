@@ -77,8 +77,8 @@ Plug 'nvim-neo-tree/neo-tree.nvim'
 Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 Plug 'echasnovski/mini.indentscope'
 Plug 'folke/noice.nvim'
-Plug 'toppair/peek.nvim', { 'do': 'deno task --quiet build:fast' }
 Plug 's1n7ax/nvim-window-picker'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 
 " === TS Context ===
 command! TSContextJump lua require("treesitter-context").go_to_context()
@@ -692,14 +692,6 @@ lua << END
       },
     }
   }
-
-  require('peek').setup {
-    auto_load = true,
-    app = "browser",
-  }
-
-  vim.api.nvim_create_user_command('PeekOpen', require('peek').open, {})
-  vim.api.nvim_create_user_command('PeekClose', require('peek').close, {})
 
   require('window-picker').setup()
 END
