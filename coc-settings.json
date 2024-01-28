@@ -257,7 +257,8 @@
     "yandere",
     "yarl"
   ],
-  "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/15.0.6/clangd_15.0.6/bin/clangd",
+  "clangd.path": "/usr/bin/clangd",
+  "clangd.arguments": ["--clang-tidy"],
   "languageserver": {
     "terraform": {
       "command": "terraform-ls",
@@ -269,6 +270,19 @@
     "ruff-lsp": {
       "command": "ruff-lsp",
       "filetypes": ["python"]
+    },
+    "ccls": {
+      "command": "ccls",
+      "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
+      "rootPatterns": [".ccls-root", "build/compile_commands.json"],
+      "initializationOptions": {
+        "cache": {
+          "directory": ".ccls-cache"
+        },
+        "client": {
+          "snippetSupport": true
+        }
+      }
     }
   },
   "suggest.completionItemKindLabels": {
