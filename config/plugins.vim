@@ -38,7 +38,7 @@ Plug 'isundil/vim-irssi-syntax'
 Plug 'mbbill/undotree'
 Plug 'junegunn/goyo.vim'
 Plug 'moll/vim-bbye'
-Plug 'rcarriga/nvim-notify'
+" Plug 'rcarriga/nvim-notify'
 Plug 'folke/which-key.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
@@ -73,11 +73,14 @@ Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'hardhackerlabs/theme-vim', { 'as': 'hardhacker' }
 Plug 'MunifTanjim/nui.nvim'
 Plug 'nvim-neo-tree/neo-tree.nvim'
-Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
+Plug 'akinsho/bufferline.nvim'
 Plug 'echasnovski/mini.indentscope'
 Plug 'folke/noice.nvim'
 Plug 's1n7ax/nvim-window-picker'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
+Plug 'vimpostor/vim-tpipeline'
+Plug 'github/copilot.vim'
+Plug 'nvim-telescope/telescope-live-grep-args.nvim'
 
 " === TS Context ===
 command! TSContextJump lua require("treesitter-context").go_to_context()
@@ -109,6 +112,7 @@ nnoremap fa <cmd>Telescope find_files no_ignore=true<cr>
 nnoremap fg <cmd>Telescope live_grep<cr>
 nnoremap fb <cmd>Telescope buffers<cr>
 nnoremap fh <cmd>Telescope help_tags<cr>
+noremap <leader>s /<C-r><C-w><CR>
 
 " === Undo Tree ===
 nnoremap <F5> :UndotreeToggle<CR>
@@ -162,7 +166,6 @@ let g:coc_global_extensions = [
     \'coc-xml',
     \'coc-yaml',
     \'coc-yank',
-    \'coc-clangd',
     \'coc-vimlsp',
     \'coc-elixir',
     \'coc-rust-analyzer',
@@ -178,9 +181,17 @@ let g:coc_global_extensions = [
     \'coc-toml',
 \]
 " \'coc-spell-checker',
+" \'coc-clangd',
 
 " Quickly view a list of all coc.nvim commands
 nnoremap <silent> <C-p> :<C-u>CocCommand<CR>
+
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-n>'
+
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-p>'
+
 
 let g:coc_filetype_map = {
     \'yaml.ansible': 'ansible',
@@ -190,9 +201,6 @@ let g:coc_filetype_map = {
 
 " coc-yank
 nnoremap <silent> <space>y :<C-u>CocList -A --normal yank<cr>
-
-inoremap <nowait><expr> <C-l> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-inoremap <nowait><expr> <C-h> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
 
 " COC Complation
 function! s:check_back_space() abort
@@ -237,16 +245,26 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window
-nnoremap <silent> <C-l> :call <SID>show_documentation()<CR>
-inoremap <silent> <C-l> :call <SID>show_documentation()<CR>
+" Use K to show documentation in preview window.
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
   else
-    call CocAction('doHover')
+    execute '!' . &keywordprg . " " . expand('<cword>')
   endif
 endfunction
+
+nnoremap <silent> <C-l> :call <SID>show_documentation()<CR>
+inoremap <silent> <C-l> <ESC>:call <SID>show_documentation()<CR>
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+nnoremap <silent><nowait><expr> <C-j> coc#float#has_scroll() ? coc#float#scroll(1) : ":m .+1\<CR>"
+nnoremap <silent><nowait><expr> <C-k> coc#float#has_scroll() ? coc#float#scroll(0) : ":m .-2\<CR>"
+inoremap <silent><nowait><expr> <C-j> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<C-o>:m .+1\<CR>"
+inoremap <silent><nowait><expr> <C-k> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<C-o>:m .-2\<CR>"
 
 " Highlight symbol under cursor on CursorHold
 autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -314,7 +332,7 @@ endfunction
 
 command! -nargs=0 Format call Format()
 nnoremap <leader>f :Format<cr>
-autocmd BufWritePre * :Format
+" autocmd BufWritePre *.py :Format
 
 " Use `:Fold` to fold current buffer
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
@@ -354,6 +372,9 @@ nnoremap <C-e> :Neotree focus<CR>
 " Find file in NvimTree with CTRL-F
 inoremap <C-f> <ESC>:Neotree focus reveal_force_cwd<CR>
 nnoremap <C-f> :Neotree focus reveal_force_cwd<CR>
+
+" Navigate to the git root of the current file
+:nmap <leader>gr :cd %:p:h <CR> \| :cd `git rev-parse --show-toplevel`<CR>
 
 " === GIT ===
 " navigate chunks of current buffer
@@ -506,12 +527,18 @@ lua << END
   }
 
   require("telescope").load_extension("ui-select")
+  require("telescope").load_extension("live_grep_args")
 
-  require("notify").setup({
-      background_colour = "#000000",
-      stages = "slide",
-  })
-  vim.notify = require("notify")
+  local live_grep_args_shortcuts = require("telescope-live-grep-args.shortcuts")
+  vim.keymap.set("n", "<leader>fs", live_grep_args_shortcuts.grep_word_under_cursor)
+
+  -- require("notify").setup({
+  --     background_colour = "#000000",
+  --     stages = "slide",
+  --     render = "wrapped-compact",
+  --     max_width = 50,
+  -- })
+  -- vim.notify = require("notify")
 
   require("which-key").setup()
 
@@ -525,7 +552,7 @@ lua << END
         maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
         ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
       })
-    }
+    },
   })
 
   -- Set configuration for specific filetype.
@@ -590,6 +617,7 @@ lua << END
       }
     },
     window = {
+      width = 30,
       mappings = {
         ["<S-Tab>"] = "prev_source",
         ["<Tab>"] = "next_source",
@@ -660,11 +688,15 @@ lua << END
       hide_gitignored = false
     },
     filesystem = {
-      follow_current_file = true,
+      follow_current_file = {
+        enabled = true
+      },
       group_empty_dirs = true,
     },
     buffers = {
-      follow_current_file = true,
+      follow_current_file = {
+        enabled = true
+      },
       group_empty_dirs = true,
     },
   }

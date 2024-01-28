@@ -4,15 +4,13 @@
 set nocompatible                    " be iMproved, required
 filetype off                        " required
 
-" set the runtime path to include Vundle and initialize
-" set rtp+=~/.vim/bundle/Vundle.vim
-" call vundle#begin()
 call plug#begin('~/.vim/plugged')
 
 let mapleader = ","                 " Set leader to ,
 
 " Write file as sudo with upper case w
-command W w !sudo tee % > /dev/null
+command S w !sudo tee % > /dev/null
+command W w
 
 set autoread                        " Auto read external changes
 
@@ -23,14 +21,17 @@ endif
 
 set clipboard=unnamedplus           " Use system clipboard
 
-set viminfo^=%                      " Remember open buffers
-set viminfo+=n.viminfo              " Save viminfo dir specific
+" set viminfo^=%                      " Remember open buffers
+" set viminfo+=n.viminfo              " Save viminfo dir specific
 
 set hidden
 
 set exrc                            " Enable project specific .vimrc settings
 
 let g:python3_host_prog = '/usr/sbin/python'
+
+" Auto load `.vimrc` in the current dir if dir is a git repo
+autocmd VimEnter * if filereadable('.vimrc') && isdirectory('.git') | source ./.vimrc | endif
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -43,15 +44,15 @@ set number                          " Add line numbers
 set mouse=a
 
 
-set incsearch                       " Higlight search results while typing
-set hlsearch                        " Higlight all search results of previous search
+set incsearch                       " Highlight search results while typing
+set hlsearch                        " Highlight all search results of previous search
 set ignorecase                      " Ignore case while searching
-set smartcase                       " Override ignorecase if uppercase chars are typpedd
+set smartcase                       " Override ignorecase if uppercase chars are typed
 
 set splitbelow                      " Open new vim windows below instead of above
 set splitright                      " Open new vim windows on the right instead of left
 
-" Turn of search higlights of previous search
+" Turn of search highlights of previous search
 nnoremap <leader><space> :nohlsearch<CR>
 
 set showcmd                         " Show current command being typed
@@ -65,7 +66,7 @@ set backspace=eol,start,indent      " Make backspace work as it should
 
 set encoding=utf-8                  " Set correct encoding
 
-set list                            " Show spcial characters like trailing whitespaces / tabs and eol
+set list                            " Show spacial characters like trailing whitespaces / tabs and eol
 
 set nofoldenable                    " Disable code folding
 
@@ -97,7 +98,7 @@ set signcolumn=yes
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-syntax on                           " Enable syntax higlighting
+syntax on                           " Enable syntax highlighting
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
@@ -166,20 +167,19 @@ map <leader>l :call ToggleStatusline()<cr>
 map 0 ^
 
 " Use CTRL-j and CTRL-k to move lines up and down
-nnoremap <C-j> :m .+1<CR>==
-nnoremap <C-k> :m .-2<CR>==
-inoremap <C-j> <Esc>:m .+1<CR>==gi
-inoremap <C-k> <Esc>:m .-2<CR>==gi
+" nnoremap <C-j> :m .+1<CR>==
+" nnoremap <C-k> :m .-2<CR>==
+" inoremap <C-j> <Esc>:m .+1<CR>==gi
+" inoremap <C-k> <Esc>:m .-2<CR>==gi
 vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
 
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
 
-" Prepaer for replace word under cursor
+" Prepare for replace word under cursor
 noremap <leader>S :%s/\<<C-r><C-w>\>//g<Left><Left>
 " Prepare for to search for word under cursor
-noremap <leader>s /<C-r><C-w><CR>
 
 " Alt-Left / Alt-Right OR CTRL-Left / CTRL-Right
 inoremap <ESC>[1;5C <C-o>w
