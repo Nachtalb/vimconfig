@@ -2,6 +2,7 @@
   "coc.preferences.extensionUpdateCheck": "daily",
   "coc.preferences.silentAutoupdate": true,
   "pyright.completion.importSupport": true,
+  "pyright.disableDiagnostics": true,
   "coc.preferences.formatOnType": true,
   "coc.preferences.formatOnSave": true,
   "coc.preferences.willSaveHandlerTimeout": 2000,
@@ -19,9 +20,11 @@
       "tables": false
     }
   },
+  "python.venvPath": "/home/archie/.cache/pypoetry/virtualenvs",
+  "python.analysis.diagnosticMode": "workspace",
   "python.linting.mypyEnabled": true,
   "python.formatting.provider": "black",
-  "pyright.organizeimports.provider": "ruff",
+  "pyright.organizeimports.provider": "isort",
   "python.linting.ignorePatterns": [".vscode/*.py", "**/site-packages/**/*.py", "bin/*", "var/**/*"],
   "cSpell.language": "en-GB",
   "cSpell.ignorePaths": [
@@ -303,5 +306,21 @@
     "lua": "lua-format",
     "sh": "shfmt"
   },
-  "snippets.ultisnips.pythonPrompt": false
+  "snippets.ultisnips.pythonPrompt": false,
+  "hover.floatConfig": {
+    "border": true,
+    "rounded": true,
+    "shadow": true
+  },
+  "suggest.floatConfig": {
+    "border": true,
+    "rounded": true,
+    "shadow": true
+  },
+  "diagnostic.floatConfig": {
+    "border": true,
+    "rounded": true,
+    "shadow": true,
+    "focusable": false
+  }
 }
