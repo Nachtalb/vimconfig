@@ -388,7 +388,7 @@ nmap <Leader>gu :CocCommand git.chunkUndo<cr>
 nnoremap <Leader>gs :Git<cr>
 nnoremap <Leader>gpl :Git pull -r<cr>
 nnoremap <Leader>gpu :Git push<cr>
-nnoremap <Leader>gpf :Git push -f
+nnoremap <Leader>gpf :Git push --force-with-lease<cr>
 nnoremap <Leader>gd  :Gdiff<cr>
 nnoremap <Leader>gcc :Gcommit<cr>
 nnoremap <Leader>gca :Git commit --amend --no-edit
