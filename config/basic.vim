@@ -34,6 +34,10 @@ let g:python3_host_prog = '/usr/sbin/python'
 autocmd VimEnter * if filereadable('.vimrc') && isdirectory('.git') | source ./.vimrc | endif
 
 
+if filereadable("./.vimrc")
+  source ./.vimrc
+endif
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -161,7 +165,7 @@ fun! ToggleStatusline()
     endif
 endfun
 
-map <leader>l :call ToggleStatusline()<cr>
+" map <leader>l :call ToggleStatusline()<cr>
 
 " Remap VIM 0 to first non-blank character
 map 0 ^

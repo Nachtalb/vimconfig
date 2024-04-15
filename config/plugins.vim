@@ -131,6 +131,7 @@ let g:previm_open_cmd = "xdg-open"
 nnoremap ff <cmd>Telescope find_files<cr>
 nnoremap fa <cmd>Telescope find_files no_ignore=true<cr>
 nnoremap fg <cmd>Telescope live_grep<cr>
+nnoremap fs <cmd>Telescope grep_string<cr>
 nnoremap fb <cmd>Telescope buffers<cr>
 nnoremap fh <cmd>Telescope help_tags<cr>
 noremap <leader>s /<C-r><C-w><CR>
@@ -188,7 +189,6 @@ let g:coc_global_extensions = [
     \'coc-yaml',
     \'coc-yank',
     \'coc-vimlsp',
-    \'coc-elixir',
     \'coc-rust-analyzer',
     \'coc-marketplace',
     \'coc-snippets',
@@ -356,6 +356,11 @@ endfunction
 command! -nargs=0 Format call Format()
 nnoremap <leader>f :Format<cr>
 " autocmd BufWritePre *.py :Format
+
+autocmd BufWritePre *.py :silent call CocAction('runCommand', 'python.sortImports')
+autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
+command! -nargs=0 OR   :silent call CocAction('runCommand', 'editor.action.organizeImport')
+
 
 " Use `:Fold` to fold current buffer
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
