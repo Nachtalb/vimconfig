@@ -78,7 +78,7 @@ Plug 'echasnovski/mini.indentscope'
 Plug 'folke/noice.nvim'
 Plug 's1n7ax/nvim-window-picker'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
-Plug 'vimpostor/vim-tpipeline'
+"Plug 'vimpostor/vim-tpipeline'
 Plug 'github/copilot.vim'
 Plug 'nvim-telescope/telescope-live-grep-args.nvim'
 
