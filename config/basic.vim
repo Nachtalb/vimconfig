@@ -182,12 +182,12 @@ noremap <leader>S :%s/\<<C-r><C-w>\>//g<Left><Left>
 " Prepare for to search for word under cursor
 
 " Alt-Left / Alt-Right OR CTRL-Left / CTRL-Right
-inoremap <ESC>[1;5C <C-o>w
-inoremap <ESC>[1;5D <C-o>b
-nnoremap <ESC>[1;5C w
-nnoremap <ESC>[1;5D b
-cnoremap <ESC>[1;5C <C-Right>
-cnoremap <ESC>[1;5D <C-Left>
+" inoremap <ESC>[1;5C <C-o>w
+" inoremap <ESC>[1;5D <C-o>b
+" nnoremap <ESC>[1;5C w
+" nnoremap <ESC>[1;5D b
+" cnoremap <ESC>[1;5C <C-Right>
+" cnoremap <ESC>[1;5D <C-Left>
 
 " Duplicate lines
 vnoremap <C-d> y`>p
