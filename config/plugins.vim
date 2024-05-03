@@ -81,6 +81,8 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 "Plug 'vimpostor/vim-tpipeline'
 Plug 'github/copilot.vim'
 Plug 'nvim-telescope/telescope-live-grep-args.nvim'
+Plug 'nvim-neotest/nvim-nio'
+Plug 'xiyaowong/transparent.nvim'
 
 " === TS Context ===
 command! TSContextJump lua require("treesitter-context").go_to_context()
@@ -429,6 +431,7 @@ let g:clipboard = {
 call plug#end()
 filetype plugin indent on
 
+
 lua << END
   require('mason').setup()
   require('config.dap').setup()
@@ -473,16 +476,21 @@ lua << END
 
   require('lualine').setup {
     options = {
-      theme = hardhacker_theme,
-      component_separators = '|',
+      -- theme = hardhacker_theme,
+      -- theme = "palenight",
+      theme = 'powerline',
+      component_separators = { left = '', right = '' },
       section_separators = { left = '', right = '' },
       icons_enabled = true,
+      globalstatus = false,
     },
   }
 
   require("bufferline").setup {
     options = {
-      separator_style = "slant", -- | "thick" | "thin" | { 'any', 'any' },
+      mode = "buffers",
+      -- separator_style = "slant", -- | "thick" | "thin" | { 'any', 'any' },
+      separator_style = "slant",
       indicator = {
         -- icon = " ",
         -- style = 'icon',
@@ -725,4 +733,19 @@ lua << END
   }
 
   require('window-picker').setup()
+
+  require('transparent').setup({
+    groups = {
+    'Normal', 'NormalNC', 'Comment', 'Constant', 'Special', 'Identifier',
+    'Statement', 'PreProc', 'Type', 'Underlined', 'Todo', 'String', 'Function',
+    'Conditional', 'Repeat', 'Operator', 'Structure', 'NonText',
+    'SignColumn', 'StatusLine', 'StatusLineNC',
+    'EndOfBuffer',
+    -- 'CursorLine', 'CursorLineNr', 'LineNr',
+    }
+  })
+
+  require('transparent').clear_prefix('BufferLine')
+  require('transparent').clear_prefix('NeoTree')
+  -- require('transparent').clear_prefix('lualine')
 END
