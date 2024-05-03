@@ -73,7 +73,7 @@ Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'hardhackerlabs/theme-vim', { 'as': 'hardhacker' }
 Plug 'MunifTanjim/nui.nvim'
 Plug 'nvim-neo-tree/neo-tree.nvim'
-Plug 'akinsho/bufferline.nvim'
+Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 Plug 'echasnovski/mini.indentscope'
 Plug 'folke/noice.nvim'
 Plug 's1n7ax/nvim-window-picker'
