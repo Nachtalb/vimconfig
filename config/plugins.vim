@@ -71,12 +71,11 @@ Plug 'nvim-neotest/neotest-vim-test'
 Plug 'andymass/vim-matchup'
 Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'hardhackerlabs/theme-vim', { 'as': 'hardhacker' }
-Plug 'MunifTanjim/nui.nvim'
 Plug 'nvim-neo-tree/neo-tree.nvim'
 Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 Plug 'echasnovski/mini.indentscope'
 Plug 'folke/noice.nvim'
-Plug 's1n7ax/nvim-window-picker'
+Plug 'MunifTanjim/nui.nvim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 "Plug 'vimpostor/vim-tpipeline'
 Plug 'github/copilot.vim'
@@ -436,35 +435,6 @@ lua << END
   require('mason').setup()
   require('config.dap').setup()
 
-  -- HardHacker theme colors
-  local colors = {
-    blue   = '#b1baf4',
-    cyan   = '#b3f4f3',
-    black  = '#1c1924', -- 30% darker than HardHacker "Background"
-    white  = '#eee9fc',
-    red    = '#e965a5',
-    violet = '#e192ef',
-    comment   = '#3f3951',
-  }
-
-  local hardhacker_theme = {
-    normal = {
-      a = { fg = colors.black, bg = colors.violet },
-      b = { fg = colors.white, bg = colors.comment },
-      c = { fg = colors.white, bg = colors.black },
-    },
-
-    insert = { a = { fg = colors.black, bg = colors.blue } },
-    visual = { a = { fg = colors.black, bg = colors.cyan } },
-    replace = { a = { fg = colors.black, bg = colors.red } },
-
-    inactive = {
-      a = { fg = colors.white, bg = colors.black },
-      b = { fg = colors.white, bg = colors.black },
-      c = { fg = colors.black, bg = colors.black },
-    },
-  }
-
   require('mini.indentscope').setup {
     draw = {
       delay = 0,
@@ -472,18 +442,6 @@ lua << END
     },
     symbol = "▏",
     options = { try_as_border = false },
-  }
-
-  require('lualine').setup {
-    options = {
-      -- theme = hardhacker_theme,
-      -- theme = "palenight",
-      theme = 'powerline',
-      component_separators = { left = '', right = '' },
-      section_separators = { left = '', right = '' },
-      icons_enabled = true,
-      globalstatus = false,
-    },
   }
 
   require("bufferline").setup {
@@ -729,21 +687,23 @@ lua << END
       format = {
         cmdline = { icon = "  " },
       },
+    },
+    messages = {
+      view = "notify",
+      view_search = "mini",
     }
   }
-
-  require('window-picker').setup()
 
   require('transparent').setup({
     groups = {
     'Normal', 'NormalNC', 'Comment', 'Constant', 'Special', 'Identifier',
     'Statement', 'PreProc', 'Type', 'Underlined', 'Todo', 'String', 'Function',
     'Conditional', 'Repeat', 'Operator', 'Structure', 'NonText',
-    'SignColumn', 'StatusLine', 'StatusLineNC',
-    'EndOfBuffer',
-    -- 'CursorLine', 'CursorLineNr', 'LineNr',
+    'SignColumn', 'EndOfBuffer',
+    -- 'CursorLine', 'CursorLineNr', 'LineNr', 'StatusLine', 'StatusLineNC',
     }
   })
+
 
   require('transparent').clear_prefix('BufferLine')
   require('transparent').clear_prefix('NeoTree')
