@@ -83,6 +83,26 @@ Plug 'nvim-telescope/telescope-live-grep-args.nvim'
 Plug 'nvim-neotest/nvim-nio'
 Plug 'xiyaowong/transparent.nvim'
 
+" === Plugin Settings ===
+function! Update()
+  " Update plugins
+  PlugUpgrade
+  PlugInstall
+  PlugClean
+  PlugUpdate
+
+  " Update coc extensions
+  CocUpdate
+
+  " Update treesitter
+  TSUpdate
+
+  " Semshi update
+  UpdateRemotePlugins
+endfunction
+
+command! -nargs=0 Update call Update()
+
 " === TS Context ===
 command! TSContextJump lua require("treesitter-context").go_to_context()
 nnoremap [c :TSContextJump<CR>
@@ -225,6 +245,8 @@ function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
+autocmd FileType python let b:coc_disabled_sources = ['around', 'yank', 'file']
 
 " Make <CR> to accept selected completion item or notify coc.nvim to format
 " <C-g>u breaks current undo, please make your own choice
