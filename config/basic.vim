@@ -31,14 +31,15 @@ set exrc                            " Enable project specific .vimrc settings
 let g:python3_host_prog = '/usr/sbin/python'
 
 " Auto load `.vimrc` in the current dir if dir is a git repo
-let possible_vimrc = ['.vimrc', '.vim/.vimrc', '.vim/vimrc']
-
-for vimrc in possible_vimrc
-    if filereadable(expand(vimrc))
-        execute 'source ' . vimrc
-        break
-    endif
-endfor
+if getcwd() != $HOME
+    let possible_vimrc = ['.vimrc', '.vim/.vimrc', '.vim/vimrc']
+    for vimrc in possible_vimrc
+        if filereadable(expand(vimrc))
+            execute 'source ' . vimrc
+            break
+        endif
+    endfor
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
