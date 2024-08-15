@@ -72,7 +72,7 @@ Plug 'andymass/vim-matchup'
 Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'hardhackerlabs/theme-vim', { 'as': 'hardhacker' }
 Plug 'nvim-neo-tree/neo-tree.nvim'
-Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
+Plug 'akinsho/bufferline.nvim'
 Plug 'echasnovski/mini.indentscope'
 Plug 'folke/noice.nvim'
 Plug 'MunifTanjim/nui.nvim'
@@ -82,6 +82,7 @@ Plug 'github/copilot.vim'
 Plug 'nvim-telescope/telescope-live-grep-args.nvim'
 Plug 'nvim-neotest/nvim-nio'
 Plug 'xiyaowong/transparent.nvim'
+Plug 'barrett-ruth/live-server.nvim'
 
 " === Plugin Settings ===
 function! Update()
@@ -203,6 +204,9 @@ let g:coc_global_extensions = [
 \]
 " \'coc-spell-checker',
 " \'coc-clangd',
+
+" Setup Prettier command for formatting
+command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
 
 " Quickly view a list of all coc.nvim commands
 nnoremap <silent> <C-p> :<C-u>CocCommand<CR>
@@ -346,16 +350,18 @@ function! Format()
       echo '"' . expand('%') . '" could not be formatted'
       echohl None
     endtry
-    if (&ft=='python')
+    if (&ft == 'python' && executable('isort'))
+        echom 'Sorting imports with coc isort'
         call CocAction('runCommand', 'python.sortImports')
     else
+        echom 'Organizing imports with coc.nvim general'
         call CocAction('runCommand', 'editor.action.organizeImport')
     endif
 endfunction
 
 command! -nargs=0 Format call Format()
 nnoremap <leader>f :Format<cr>
-" autocmd BufWritePre *.py :Format
+autocmd BufWritePre *.py call Format()
 
 autocmd BufWritePre *.py :silent call CocAction('runCommand', 'python.sortImports')
 autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
@@ -735,4 +741,11 @@ lua << END
   require('transparent').clear_prefix('BufferLine')
   require('transparent').clear_prefix('NeoTree')
   -- require('transparent').clear_prefix('lualine')
+
+  require('live-server').setup({
+  args = {
+    '--port=5500',
+    '--browser=wsl-open',
+    }
+  })
 END

@@ -1,5 +1,10 @@
 {
+  "tsserver.enable": true,
+  "biome.enable": true,
+  "biome.trace.server": "messages",
   "suggest.defaultSortMethod": "none",
+  "typescript.suggest.autoImports": true,
+  "javascript.suggest.autoImports": true,
   "suggest.noselect": true,
   "coc.preferences.extensionUpdateCheck": "daily",
   "coc.preferences.silentAutoupdate": true,
@@ -17,7 +22,9 @@
   "prettier.prettierPath": "/usr/lib/node_modules/prettier",
   "prettier.tabWidth": 2,
   "python.linting.ruffPath": "ruff",
-  "python.linting.ruffArgs": ["--check"],
+  "python.linting.ruffArgs": [
+    "--check"
+  ],
   "python.linting.ruffEnabled": true,
   "markdownlint.config": {
     "MD013": {
@@ -30,7 +37,12 @@
   "python.linting.mypyEnabled": true,
   "python.formatting.provider": "black",
   "pyright.organizeimports.provider": "isort",
-  "python.linting.ignorePatterns": [".vscode/*.py", "**/site-packages/**/*.py", "bin/*", "var/**/*"],
+  "python.linting.ignorePatterns": [
+    ".vscode/*.py",
+    "**/site-packages/**/*.py",
+    "bin/*",
+    "var/**/*"
+  ],
   "cSpell.language": "en-GB",
   "cSpell.ignorePaths": [
     "**/package-lock.json",
@@ -40,8 +52,13 @@
     ".vscode",
     "coc-settings.json"
   ],
-  "cSpell.ignoreRegExpList": ["^(\" )?Plug '.*'", "from [\\w\\.]+ import [\\w]+", "import [\\w\\.]+( as \\w)?"],
+  "cSpell.ignoreRegExpList": [
+    "^(\" )?Plug '.*'",
+    "from [\\w\\.]+ import [\\w]+",
+    "import [\\w\\.]+( as \\w)?"
+  ],
   "cSpell.userWords": [
+    "ACNH",
     "ASGI",
     "Anilist",
     "Autoupdate",
@@ -53,6 +70,7 @@
     "CLIARGS",
     "CTRCTL",
     "Cloudflare's",
+    "Critterpedia",
     "Cybercrime",
     "Danbooru",
     "Datatype",
@@ -60,6 +78,7 @@
     "Dockernet",
     "EDFTY",
     "Elbonian",
+    "Flaticon",
     "Galööri",
     "Gelbooru",
     "Gorpj",
@@ -67,6 +86,7 @@
     "HTTPX",
     "Hashi",
     "Healthcheck",
+    "Hita",
     "Hololive",
     "Häberli",
     "IQDB",
@@ -76,11 +96,13 @@
     "Jenkinsfile",
     "Jirafeau",
     "KHTML",
+    "Kort",
     "Kubernetes",
     "LLMNR",
     "Leeplate",
     "Lexer",
     "Lumia",
+    "Lusitana",
     "MELANI",
     "Messervy",
     "Moloch",
@@ -110,6 +132,7 @@
     "Schweizerische",
     "Simens",
     "Skopeo",
+    "Smartline",
     "Styleguide",
     "TLDR",
     "TQDM",
@@ -120,9 +143,11 @@
     "Uncrustify",
     "VMIDs",
     "Varchar",
+    "Vercel",
     "WERGV",
     "Wlogins",
     "aarch",
+    "abbr",
     "actix",
     "adminer",
     "aiofiles",
@@ -135,29 +160,22 @@
     "anilist",
     "anymore",
     "apng",
+    "appsec",
+    "arange",
     "arkime",
+    "armor",
     "asarray",
     "asdict",
     "asession",
-    "asyncio",
-    "asyncpg",
-    "auditd",
-    "autostarted",
-    "backrefs",
-    "bertvv",
-    "bilibili",
-    "bingchat",
-    "boorus",
-    "appsec",
-    "arkime",
-    "armor",
-    "asdict",
-    "asession",
+    "astuple",
+    "astype",
     "asyncio",
     "asyncpg",
     "asynctest",
     "auditd",
     "autostarted",
+    "auxil",
+    "backrefs",
     "bertvv",
     "bilibili",
     "bingchat",
@@ -167,11 +185,13 @@
     "bootdisk",
     "brotli",
     "bruteforce",
+    "cataloging",
     "ccls",
     "centos",
     "cfuid",
     "chasseral",
     "chatgpt",
+    "chdir",
     "chgrp",
     "clangd",
     "cleanup",
@@ -189,6 +209,8 @@
     "dapi",
     "datetime",
     "dbport",
+    "dedupe",
+    "deduped",
     "delfino",
     "deobfuscating",
     "devel",
@@ -201,6 +223,7 @@
     "dotfiles",
     "dptree",
     "drawio",
+    "dtype",
     "edcsa",
     "elasticstack",
     "emojize",
@@ -224,21 +247,14 @@
     "handpicked",
     "healthchecks",
     "hedgedoc",
+    "heroicons",
+    "hitakorts",
     "hostpital",
     "hstack",
     "humanfriendly",
     "hund",
     "hvrd",
     "hydrodam",
-    "imageio",
-    "iothread",
-    "iothreads",
-    "ipdb",
-    "isort",
-    "jitsi",
-    "jsons",
-    "keras",
-    "keycloak",
     "igbo",
     "imageio",
     "imgur",
@@ -246,10 +262,12 @@
     "iothreads",
     "ipdb",
     "ipython",
+    "ismethod",
     "isort",
     "jinja",
     "jitsi",
     "jsons",
+    "keras",
     "keycloak",
     "keyid",
     "keylogger",
@@ -302,6 +320,7 @@
     "otaku",
     "overseerr",
     "pacman",
+    "paramref",
     "passthrough",
     "pbar",
     "pfsense",
@@ -316,6 +335,7 @@
     "privkey",
     "pvscsi",
     "pydantic",
+    "pynicotine",
     "pypi",
     "pyproject",
     "pyright",
@@ -335,6 +355,7 @@
     "ristorante",
     "rocketchat",
     "romaji",
+    "sabnzbd",
     "sadd",
     "scsihw",
     "selectattr",
@@ -345,6 +366,7 @@
     "stackoverflow",
     "strs",
     "struct",
+    "tablefmt",
     "tagified",
     "tagify",
     "tautulli",
@@ -355,6 +377,7 @@
     "tfstate",
     "threedbooru",
     "threema",
+    "thresholding",
     "timezone",
     "tinymce",
     "toggleable",
@@ -365,6 +388,7 @@
     "truetype",
     "ugoira",
     "unspecced",
+    "upscroll",
     "usecase",
     "userdb",
     "uvicorn",
@@ -391,36 +415,41 @@
     "yarl"
   ],
   "clangd.path": "/usr/bin/clangd",
-  "clangd.arguments": ["--clang-tidy"],
+  "clangd.arguments": [
+    "--clang-tidy"
+  ],
   "languageserver": {
     "terraform": {
       "command": "terraform-ls",
-      "args": ["serve"],
-      "filetypes": ["terraform", "tf"],
+      "args": [
+        "serve"
+      ],
+      "filetypes": [
+        "terraform",
+        "tf"
+      ],
       "initializationOptions": {},
       "settings": {}
     },
-    "ccls": {
-      "command": "ccls",
-      "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
-      "rootPatterns": [".ccls-root", "build/compile_commands.json"],
-      "initializationOptions": {
-        "cache": {
-          "directory": ".ccls-cache"
-        },
-        "client": {
-          "snippetSupport": true
-        }
-      }
-    },
     "ruff-lsp": {
       "command": "ruff-lsp",
-      "filetypes": ["python"]
+      "filetypes": [
+        "python"
+      ]
     },
     "ccls": {
       "command": "ccls",
-      "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
-      "rootPatterns": [".ccls-root", "build/compile_commands.json"],
+      "filetypes": [
+        "c",
+        "cpp",
+        "cuda",
+        "objc",
+        "objcpp"
+      ],
+      "rootPatterns": [
+        ".ccls-root",
+        "build/compile_commands.json"
+      ],
       "initializationOptions": {
         "cache": {
           "directory": ".ccls-cache"
