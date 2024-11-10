@@ -506,7 +506,7 @@ lua << END
         enabled = true,
         delay = 0,
         reveal = { "close" },
-      },
+      }
     }
   }
 

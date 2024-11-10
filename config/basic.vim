@@ -214,7 +214,7 @@ nnoremap <C-x> :Buffers<CR>
 inoremap <C-x> <C-o>:Buffers<CR>
 
 " Toggle Pastemode
-set pastetoggle=<F2>
+"set pastetoggle=<F2>
 
 " Copy path to clipboard
 nnoremap cp :let @* = expand('%')<CR>
