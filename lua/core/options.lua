@@ -127,3 +127,8 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     pattern = "*",
     command = "TrimWhiteSpace"
 })
+
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+    pattern = "*/ansible/*.yml",
+    command = "set filetype=yaml.ansible"
+})

@@ -23,47 +23,47 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 })
 
 -- Set file types for specific extensions
-vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-    group = augroup("special_filetypes"),
-    pattern = {
-        "*.fish",
-        "*.zcml",
-        "*.jinja",
-        "*.j2",
-        "*.mako",
-        "*.miv1",
-        "*.spec",
-        "emperor.yml",
-    },
-    callback = function(ev)
-        local extension_to_filetype = {
-            fish = "sh",
-            zcml = "xml",
-            ["jinja"] = "htmljinja",
-            ["j2"] = "htmljinja",
-            mako = "mako",
-            miv1 = "json",
-            spec = "python",
-            yml = function(filename)
-                if filename == "emperor.yml" then
-                    return "yaml.ansible"
-                end
-            end
-        }
-
-        local ext = vim.fn.fnamemodify(ev.match, ":e")
-        local filename = vim.fn.fnamemodify(ev.match, ":t")
-
-        local filetype = extension_to_filetype[ext]
-        if type(filetype) == "function" then
-            filetype = filetype(filename)
-        end
-
-        if filetype then
-            vim.bo[ev.buf].filetype = filetype
-        end
-    end,
-})
+-- vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+--     group = augroup("special_filetypes"),
+--     pattern = {
+--         "*.fish",
+--         "*.zcml",
+--         "*.jinja",
+--         "*.j2",
+--         "*.mako",
+--         "*.miv1",
+--         "*.spec",
+--         "emperor.yml",
+--     },
+--     callback = function(ev)
+--         local extension_to_filetype = {
+--             fish = "sh",
+--             zcml = "xml",
+--             ["jinja"] = "htmljinja",
+--             ["j2"] = "htmljinja",
+--             mako = "mako",
+--             miv1 = "json",
+--             spec = "python",
+--             yml = function(filename)
+--                 if filename == "emperor.yml" then
+--                     return "yaml.ansible"
+--                 end
+--             end
+--         }
+--
+--         local ext = vim.fn.fnamemodify(ev.match, ":e")
+--         local filename = vim.fn.fnamemodify(ev.match, ":t")
+--
+--         local filetype = extension_to_filetype[ext]
+--         if type(filetype) == "function" then
+--             filetype = filetype(filename)
+--         end
+--
+--         if filetype then
+--             vim.bo[ev.buf].filetype = filetype
+--         end
+--     end,
+-- })
 
 -- Set JSON comment highlighting
 vim.api.nvim_create_autocmd({ "FileType" }, {
@@ -136,7 +136,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     callback = function()
         vim.g.python_highlight_all = 1
         -- Disable specific COC sources for Python
-        vim.b.coc_disabled_sources = {'around', 'yank', 'file'}
+        vim.b.coc_disabled_sources = { 'around', 'yank', 'file' }
     end,
 })
 
@@ -165,7 +165,7 @@ vim.api.nvim_create_autocmd("CursorHold", {
 -- Setup formatexpr for specific filetypes
 vim.api.nvim_create_autocmd("FileType", {
     group = augroup("coc_format"),
-    pattern = {"typescript", "json"},
+    pattern = { "typescript", "json" },
     callback = function()
         vim.opt_local.formatexpr = "CocAction('formatSelected')"
     end,
@@ -185,7 +185,7 @@ vim.api.nvim_create_autocmd("User", {
 -------------------------------------------------------------------------------
 
 -- Dictionary loading
-vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
     group = augroup("load_dict"),
     pattern = "*",
     callback = function()

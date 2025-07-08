@@ -116,11 +116,28 @@ map('n', '<Leader>cl', '<Plug>(coc-codelens-action)', { silent = true })
 map('n', '<C-s>', '<Plug>(coc-range-select)', { silent = true })
 map('x', '<C-s>', '<Plug>(coc-range-select)', { silent = true })
 
+-- Applying code actions to the selected code block
+map('x', '<Leader>a', '<Plug>(coc-codeaction)', { silent = true })
+map('n', '<Leader>a', '<Plug>(coc-codeaction)', { silent = true })
+
+-- Remap keys for applying code actions at the cursor position
+map('n', '<Leader>ac', '<Plug>(coc-codeaction-cursor)', { silent = true })
+-- Remap keys for apply code actions affect whole buffer
+map('n', '<Leader>as', '<Plug>(coc-codeaction-source)', { silent = true })
+-- Apply the most preferred quickfix action to fix diagnostic on the current line
+map('n', '<Leader>qf', '<Plug>(coc-fix-current)', { silent = true })
+
+-- Remap keys for applying refactor code actions
+map('n', '<Leader>re', '<Plug>(coc-codeaction-refactor)', { silent = true })
+map('x', '<Leader>r', '<Plug>(coc-codeaction-refactor-selected)', { silent = true })
+map('n', '<Leader>r', '<Plug>(coc-codeaction-refactor-selected)', { silent = true })
+
 -- COC completion
 local coc_opts = { silent = true, noremap = true, expr = true, replace_keycodes = false }
 -- map('i', '<TAB>', 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', coc_opts)
 map('i', '<S-TAB>', [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], coc_opts)
 map('i', '<cr>', [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], coc_opts)
+map('i', '<C-a>', [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], coc_opts)
 map('i', '<C-space>', 'coc#refresh()', coc_opts)
 
 

@@ -12,6 +12,7 @@
   "pyright.disableDiagnostics": true,
   "coc.preferences.formatOnType": true,
   "coc.preferences.formatOnSave": true,
+  "prettier.disableLanguages": ["yaml", "yml", "yaml.ansible"],
   "coc.preferences.willSaveHandlerTimeout": 2000,
   "rust-analyzer.check.command": "clippy",
   "rust-analyzer.checkOnSave": true,
@@ -22,10 +23,9 @@
   "prettier.prettierPath": "/usr/lib/node_modules/prettier",
   "prettier.tabWidth": 2,
   "python.linting.ruffPath": "ruff",
-  "python.linting.ruffArgs": [
-    "--check"
-  ],
+  "python.linting.ruffArgs": ["--check"],
   "python.linting.ruffEnabled": true,
+  "ruff.enable": true,
   "markdownlint.config": {
     "MD013": {
       "code_blocks": false,
@@ -37,12 +37,7 @@
   "python.linting.mypyEnabled": true,
   "python.formatting.provider": "black",
   "pyright.organizeimports.provider": "isort",
-  "python.linting.ignorePatterns": [
-    ".vscode/*.py",
-    "**/site-packages/**/*.py",
-    "bin/*",
-    "var/**/*"
-  ],
+  "python.linting.ignorePatterns": [".vscode/*.py", "**/site-packages/**/*.py", "bin/*", "var/**/*"],
   "cSpell.language": "en-GB",
   "cSpell.ignorePaths": [
     "**/package-lock.json",
@@ -52,11 +47,7 @@
     ".vscode",
     "coc-settings.json"
   ],
-  "cSpell.ignoreRegExpList": [
-    "^(\" )?Plug '.*'",
-    "from [\\w\\.]+ import [\\w]+",
-    "import [\\w\\.]+( as \\w)?"
-  ],
+  "cSpell.ignoreRegExpList": ["^(\" )?Plug '.*'", "from [\\w\\.]+ import [\\w]+", "import [\\w\\.]+( as \\w)?"],
   "cSpell.userWords": [
     "ACNH",
     "ASGI",
@@ -64,6 +55,7 @@
     "Autoupdate",
     "Blackhole",
     "Blackholing",
+    "Boolish",
     "Booru",
     "Bundesbahnen",
     "CISA",
@@ -78,6 +70,8 @@
     "Dockernet",
     "EDFTY",
     "Elbonian",
+    "Elitebook",
+    "FVEK",
     "Flaticon",
     "Galööri",
     "Gelbooru",
@@ -89,8 +83,8 @@
     "Hita",
     "Hololive",
     "Häberli",
-    "IQDB",
     "INET",
+    "IQDB",
     "IUAM",
     "Intelli",
     "Iqdb",
@@ -136,9 +130,11 @@
     "Simens",
     "Skopeo",
     "Smartline",
+    "Sogou",
     "Styleguide",
     "TLDR",
     "TQDM",
+    "TUXEDO",
     "Tips'n'Tricks",
     "Toptal",
     "Toptal's",
@@ -162,10 +158,12 @@
     "amain",
     "amharic",
     "anilist",
+    "anstream",
     "anymore",
     "apng",
     "appsec",
     "arange",
+    "archlinux",
     "arkime",
     "armor",
     "asarray",
@@ -185,6 +183,7 @@
     "bilibili",
     "bingchat",
     "bitnami",
+    "bitpixie",
     "booru",
     "boorus",
     "bootdisk",
@@ -198,11 +197,14 @@
     "chatgpt",
     "chdir",
     "chgrp",
-    "clangd",
     "chibi",
+    "clangd",
     "cleanup",
     "cloudinit",
     "color",
+    "colorchoice",
+    "colored",
+    "colors",
     "confflightinframil",
     "conftest",
     "conn",
@@ -256,16 +258,17 @@
     "heatmaps",
     "hedgedoc",
     "heroicons",
-    "hitakorts",
     "hitakort",
+    "hitakorts",
     "hostpital",
     "hstack",
     "humanfriendly",
     "hund",
     "hvrd",
     "hydrodam",
-    "igbo",
     "ictx",
+    "iface",
+    "igbo",
     "imageio",
     "imgur",
     "iothread",
@@ -322,6 +325,7 @@
     "nsfw",
     "nvenc",
     "nvim",
+    "nvme",
     "objc",
     "objcpp",
     "onlyoffice",
@@ -371,6 +375,7 @@
     "sabnzbd",
     "sadd",
     "scsihw",
+    "secureboot",
     "selectattr",
     "shiz",
     "sklad",
@@ -430,41 +435,19 @@
     "yarl"
   ],
   "clangd.path": "/usr/bin/clangd",
-  "clangd.arguments": [
-    "--clang-tidy"
-  ],
+  "clangd.arguments": ["--clang-tidy"],
   "languageserver": {
     "terraform": {
       "command": "terraform-ls",
-      "args": [
-        "serve"
-      ],
-      "filetypes": [
-        "terraform",
-        "tf"
-      ],
+      "args": ["serve"],
+      "filetypes": ["terraform", "tf"],
       "initializationOptions": {},
       "settings": {}
     },
-    "ruff-lsp": {
-      "command": "ruff-lsp",
-      "filetypes": [
-        "python"
-      ]
-    },
     "ccls": {
       "command": "ccls",
-      "filetypes": [
-        "c",
-        "cpp",
-        "cuda",
-        "objc",
-        "objcpp"
-      ],
-      "rootPatterns": [
-        ".ccls-root",
-        "build/compile_commands.json"
-      ],
+      "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
+      "rootPatterns": [".ccls-root", "build/compile_commands.json"],
       "initializationOptions": {
         "cache": {
           "directory": ".ccls-cache"
@@ -504,11 +487,14 @@
   "diagnostic-languageserver.filetypes": {
     "vim": "vint",
     "sh": "shellcheck",
-    "yaml": "yamllint"
+    "yaml": "yamllint",
+    "yaml.ansible": "ansible-lint"
   },
   "diagnostic-languageserver.formatFiletypes": {
     "lua": "lua-format",
-    "sh": "shfmt"
+    "sh": "shfmt",
+    "yaml": "yamllint",
+    "yaml.ansible": "ansible-lint"
   },
   "snippets.ultisnips.pythonPrompt": false,
   "hover.floatConfig": {
