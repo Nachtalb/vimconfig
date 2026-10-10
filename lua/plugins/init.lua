@@ -34,10 +34,6 @@ return {
     -- { "numirias/semshi",               ft = "python" },
 
     -- AI assistance
-    {
-        'Exafunction/codeium.vim',
-        event = 'BufEnter',
-    },
     -- { "github/copilot.vim",            event = "VeryLazy" },
     -- {
     --     "zbirenbaum/copilot.lua",

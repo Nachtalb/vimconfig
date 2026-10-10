@@ -10,6 +10,7 @@
 local mason_servers = {
     "ansiblels",
     "bashls",
+    "copilot",
     "cssls",
     "eslint",
     "html",
@@ -72,6 +73,24 @@ return {
 
             vim.lsp.enable({ "ty", "ruff" })
 
+            -- GitHub Copilot ghost text through Neovim's builtin inline completion.
+            -- Sign in once with :LspCopilotSignIn
+            vim.lsp.config("copilot", {
+                settings = { telemetry = { telemetryLevel = "off" } },
+            })
+            vim.lsp.inline_completion.enable()
+            vim.keymap.set("i", "<Tab>", function()
+                if not vim.lsp.inline_completion.get() then
+                    return "<Tab>"
+                end
+            end, { expr = true, desc = "Accept Copilot suggestion" })
+            vim.keymap.set("i", "<M-]>", function()
+                vim.lsp.inline_completion.select({ count = 1 })
+            end, { desc = "Next Copilot suggestion" })
+            vim.keymap.set("i", "<M-[>", function()
+                vim.lsp.inline_completion.select({ count = -1 })
+            end, { desc = "Previous Copilot suggestion" })
+
             -- System-installed servers, enabled only when present
             for _, server in ipairs({ "clangd", "terraformls" }) do
                 local cmd = vim.lsp.config[server].cmd
@@ -115,7 +134,7 @@ return {
         opts = {
             keymap = {
                 preset = "enter",
-                -- <Tab> stays with Codeium
+                -- <Tab> accepts Copilot ghost text (see nvim-lspconfig config)
                 ["<Tab>"] = false,
                 ["<S-Tab>"] = { "select_prev", "fallback" },
                 ["<C-a>"] = { "accept", "fallback" },
