@@ -79,11 +79,11 @@ map('n', '<F8>', ':TagbarToggle<CR>')
 map('n', '<F9>', ':TagbarJumpNext<CR>')
 
 -- Git mappings
-map('n', '[g', '<Plug>(coc-git-prevchunk)', { silent = true })
-map('n', ']g', '<Plug>(coc-git-nextchunk)', { silent = true })
-map('n', 'gs', '<Plug>(coc-git-chunkinfo)', { silent = true })
-map('n', 'go', ':CocCommand git.browserOpen<CR>')
-map('n', '<Leader>gu', ':CocCommand git.chunkUndo<CR>')
+map('n', '[g', function() require('gitsigns').nav_hunk('prev') end)
+map('n', ']g', function() require('gitsigns').nav_hunk('next') end)
+map('n', 'gs', function() require('gitsigns').preview_hunk() end)
+map('n', 'go', ':GBrowse<CR>')
+map('n', '<Leader>gu', function() require('gitsigns').reset_hunk() end)
 
 map('n', '<Leader>gs', ':Git<CR>')
 map('n', '<Leader>gpl', ':Git pull -r<CR>')
@@ -100,66 +100,51 @@ map('n', '<Leader>gb', ':Telescope git_branches<CR>')
 -- Navigate to git root
 map('n', '<Leader>gr', ':cd %:p:h <CR> | :cd `git rev-parse --show-toplevel`<CR>')
 
--- COC mappings
-map('n', '[d', '<Plug>(coc-diagnostic-prev-error)', { silent = true })
-map('n', ']d', '<Plug>(coc-diagnostic-next-error)', { silent = true })
-map('n', '[s', '<Plug>(coc-diagnostic-prev)', { silent = true })
-map('n', ']s', '<Plug>(coc-diagnostic-next)', { silent = true })
-map('n', 'gd', '<Plug>(coc-definition)', { silent = true })
-map('n', 'gy', '<Plug>(coc-type-definition)', { silent = true })
-map('n', 'gi', '<Plug>(coc-implementation)', { silent = true })
-map('n', 'gr', '<Plug>(coc-references)', { silent = true })
-map('n', '<Leader>rn', '<Plug>(coc-rename)', { silent = true })
-map('x', '<Leader>f', '<Plug>(coc-format-selected)', { silent = true })
-map('n', '<Leader>f', '<Plug>(coc-format-selected)', { silent = true })
-map('n', '<Leader>cl', '<Plug>(coc-codelens-action)', { silent = true })
-map('n', '<C-s>', '<Plug>(coc-range-select)', { silent = true })
-map('x', '<C-s>', '<Plug>(coc-range-select)', { silent = true })
+-- LSP mappings
+-- Drop the builtin gr* defaults so `gr` (references) doesn't wait for more keys
+for _, lhs in ipairs({ 'gra', 'gri', 'grn', 'grr', 'grt', 'grx' }) do
+    pcall(vim.keymap.del, { 'n', 'x' }, lhs)
+end
 
--- Applying code actions to the selected code block
-map('x', '<Leader>a', '<Plug>(coc-codeaction)', { silent = true })
-map('n', '<Leader>a', '<Plug>(coc-codeaction)', { silent = true })
+local function jump_diagnostic(count, severity)
+    return function() vim.diagnostic.jump({ count = count, severity = severity, float = true }) end
+end
+map('n', '[d', jump_diagnostic(-1, vim.diagnostic.severity.ERROR))
+map('n', ']d', jump_diagnostic(1, vim.diagnostic.severity.ERROR))
+map('n', '[s', jump_diagnostic(-1))
+map('n', ']s', jump_diagnostic(1))
+map('n', 'gd', vim.lsp.buf.definition)
+map('n', 'gy', vim.lsp.buf.type_definition)
+map('n', 'gi', vim.lsp.buf.implementation)
+map('n', 'gr', vim.lsp.buf.references)
+map('n', '<Leader>rn', vim.lsp.buf.rename)
+map({ 'n', 'x' }, '<Leader>f', function() require('conform').format({ async = true }) end)
+map('n', '<Leader>cl', vim.lsp.codelens.run)
+map('n', '<C-s>', 'van', { remap = true })
+map('x', '<C-s>', 'an', { remap = true })
 
--- Remap keys for applying code actions at the cursor position
-map('n', '<Leader>ac', '<Plug>(coc-codeaction-cursor)', { silent = true })
--- Remap keys for apply code actions affect whole buffer
-map('n', '<Leader>as', '<Plug>(coc-codeaction-source)', { silent = true })
--- Apply the most preferred quickfix action to fix diagnostic on the current line
-map('n', '<Leader>qf', '<Plug>(coc-fix-current)', { silent = true })
+-- Code actions
+map({ 'n', 'x' }, '<Leader>a', vim.lsp.buf.code_action)
+map('n', '<Leader>ac', vim.lsp.buf.code_action)
+map('n', '<Leader>as', function()
+    vim.lsp.buf.code_action({ context = { only = { 'source' }, diagnostics = {} } })
+end)
+map('n', '<Leader>qf', function()
+    vim.lsp.buf.code_action({ context = { only = { 'quickfix' }, diagnostics = {} }, apply = true })
+end)
+map('n', '<Leader>re', function()
+    vim.lsp.buf.code_action({ context = { only = { 'refactor' }, diagnostics = {} } })
+end)
+map({ 'n', 'x' }, '<Leader>r', function()
+    vim.lsp.buf.code_action({ context = { only = { 'refactor' }, diagnostics = {} } })
+end)
 
--- Remap keys for applying refactor code actions
-map('n', '<Leader>re', '<Plug>(coc-codeaction-refactor)', { silent = true })
-map('x', '<Leader>r', '<Plug>(coc-codeaction-refactor-selected)', { silent = true })
-map('n', '<Leader>r', '<Plug>(coc-codeaction-refactor-selected)', { silent = true })
-
--- COC completion
-local coc_opts = { silent = true, noremap = true, expr = true, replace_keycodes = false }
--- map('i', '<TAB>', 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', coc_opts)
-map('i', '<S-TAB>', [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], coc_opts)
-map('i', '<cr>', [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], coc_opts)
-map('i', '<C-a>', [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], coc_opts)
-map('i', '<C-space>', 'coc#refresh()', coc_opts)
-
-
--- COC function and class text objects
-map('x', 'if', '<Plug>(coc-funcobj-i)', { silent = true })
-map('o', 'if', '<Plug>(coc-funcobj-i)', { silent = true })
-map('x', 'af', '<Plug>(coc-funcobj-a)', { silent = true })
-map('o', 'af', '<Plug>(coc-funcobj-a)', { silent = true })
-map('x', 'ic', '<Plug>(coc-classobj-i)', { silent = true })
-map('o', 'ic', '<Plug>(coc-classobj-i)', { silent = true })
-map('x', 'ac', '<Plug>(coc-classobj-a)', { silent = true })
-map('o', 'ac', '<Plug>(coc-classobj-a)', { silent = true })
-
--- COC lists
-map('n', '<space>a', ':<C-u>CocList diagnostics<cr>', { silent = true })
-map('n', '<space>e', ':<C-u>CocList extensions<cr>', { silent = true })
-map('n', '<space>c', ':<C-u>CocList commands<cr>', { silent = true })
-map('n', '<space>o', ':<C-u>CocList outline<cr>', { silent = true })
-map('n', '<space>s', ':<C-u>CocList -I symbols<cr>', { silent = true })
-map('n', '<space>j', ':<C-u>CocNext<CR>', { silent = true })
-map('n', '<space>k', ':<C-u>CocPrev<CR>', { silent = true })
-map('n', '<space>p', ':<C-u>CocListResume<CR>', { silent = true })
+-- LSP pickers (replaces CocList)
+map('n', '<space>a', ':Telescope diagnostics<CR>')
+map('n', '<space>c', ':Telescope commands<CR>')
+map('n', '<space>o', ':Telescope lsp_document_symbols<CR>')
+map('n', '<space>s', ':Telescope lsp_dynamic_workspace_symbols<CR>')
+map('n', '<space>p', ':Telescope resume<CR>')
 
 -- Neotest
 -- map('n', '<leader>tt', ':NeotestNearest<CR>')
@@ -189,8 +174,3 @@ vim.cmd([[
 map('n', 'cp', ":let @* = expand('%')<CR>")
 map('n', 'cpp', ":let @* = expand('%:p')<CR>")
 
--- Helper function for COC tab completion
-_G.check_back_space = function()
-    local col = vim.fn.col('.') - 1
-    return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s')
-end

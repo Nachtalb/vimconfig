@@ -79,26 +79,11 @@ return {
     },
     {
         "barrett-ruth/live-server.nvim",
-        build = "yarn global add live-server",
-        cmd = "LiveServer",
-        config = function()
-            require("live-server").setup({
-                args = {
-                    "--port=5500",
-                    "--browser=wsl-open",
-                }
-            })
+        cmd = { "LiveServerStart", "LiveServerStop", "LiveServerToggle" },
+        init = function()
+            -- v0.2+: pure Lua server, configured through a global
+            vim.g.live_server = { port = 5500 }
         end,
-    },
-
-    -- Mason (package manager)
-    {
-        "williamboman/mason.nvim",
-        cmd = "Mason",
-        opts = { ensure_installed = { "ansible-lint" } },
-        config = function()
-            require("mason").setup()
-        end
     },
 
     -- Mini plugins
