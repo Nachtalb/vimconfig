@@ -4,6 +4,7 @@
 " cSpell: disable
 
 " === Install Plugins ===
+Plug 'neovim/nvim-lspconfig'
 Plug 'dstein64/vim-startuptime'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
@@ -83,6 +84,7 @@ Plug 'nvim-telescope/telescope-live-grep-args.nvim'
 Plug 'nvim-neotest/nvim-nio'
 Plug 'xiyaowong/transparent.nvim'
 Plug 'barrett-ruth/live-server.nvim'
+Plug 'mubeentariq/tylsp.nvim'
 
 " === Plugin Settings ===
 function! Update()
@@ -465,6 +467,16 @@ filetype plugin indent on
 
 
 lua << END
+  vim.lsp.enable('ty')
+  -- require'lspconfig'.ty.setup{
+  --     on_attach = function(client, bufnr)
+  --         -- Key mappings for LSP functions
+  --         local opts = { noremap=true, silent=true }
+  --         vim.api.nvim_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  --         vim.api.nvim_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  --     end,
+  -- }
+
   require('mason').setup()
   require('config.dap').setup()
 
@@ -700,18 +712,15 @@ lua << END
     },
   }
 
-  require'nvim-treesitter.configs'.setup {
-    ensure_installed = {
-      "awk", "bash", "c", "comment", "cpp", "diff", "dockerfile", "fish",
-      "git_config", "git_rebase", "gitattributes", "gitcommit", "gitignore",
-      "go", "html", "htmldjango", "java", "javascript", "json", "json5",
-      "jsonc", "lua", "markdown", "markdown_inline", "python", "query",
-      "regex", "rust", "scss", "sql", "toml", "tsx", "typescript", "vim", "vue",
-      "yaml", "zig",
-    },
-    matchup = {
-      enable = true,
-    },
+  -- nvim-treesitter main branch: no more configs module; install parsers
+  -- directly (needs the tree-sitter CLI) and matchup uses builtin TS itself
+  require('nvim-treesitter').install {
+    "awk", "bash", "c", "comment", "cpp", "diff", "dockerfile", "fish",
+    "git_config", "git_rebase", "gitattributes", "gitcommit", "gitignore",
+    "go", "html", "htmldjango", "java", "javascript", "json", "json5",
+    "lua", "markdown", "markdown_inline", "python", "query",
+    "regex", "rust", "scss", "sql", "toml", "tsx", "typescript", "vim", "vue",
+    "yaml", "zig",
   }
 
   require("noice").setup{
@@ -742,10 +751,7 @@ lua << END
   require('transparent').clear_prefix('NeoTree')
   -- require('transparent').clear_prefix('lualine')
 
-  require('live-server').setup({
-  args = {
-    '--port=5500',
-    '--browser=wsl-open',
-    }
-  })
+  -- live-server v0.2+: config via global; port defaults to 5500, browser
+  -- opens through vim.ui.open
+  vim.g.live_server = { port = 5500 }
 END

@@ -7,55 +7,43 @@ local whichkey = require "which-key"
 -- end
 
 function M.setup()
-  local keymap = {
-    d = {
-      name = "Debug",
-      R = { "<cmd>lua require'dap'.run_to_cursor()<cr>", "Run to Cursor" },
-      E = { "<cmd>lua require'dapui'.eval(vim.fn.input '[Expression] > ')<cr>", "Evaluate Input" },
-      C = { "<cmd>lua require'dap'.set_breakpoint(vim.fn.input '[Condition] > ')<cr>", "Conditional Breakpoint" },
-      U = { "<cmd>lua require'dapui'.toggle()<cr>", "Toggle UI" },
-      b = { "<cmd>lua require'dap'.step_back()<cr>", "Step Back" },
-      c = { "<cmd>lua require'dap'.continue()<cr>", "Continue" },
-      d = { "<cmd>lua require'dap'.disconnect()<cr>", "Disconnect" },
-      e = { "<cmd>lua require'dapui'.eval()<cr>", "Evaluate" },
-      g = { "<cmd>lua require'dap'.session()<cr>", "Get Session" },
-      h = { "<cmd>lua require'dap.ui.widgets'.hover()<cr>", "Hover Variables" },
-      n = { "<cmd>lua require'dap-python'.debug_selection()<cr>", "Debug selection" },
-      m = { "<cmd>lua require'dap-python'.test_method()<cr>", "Test method" },
-      M = { "<cmd>lua require'dap-python'.test_class()<cr>", "Test class" },
-      S = { "<cmd>lua require'dap.ui.widgets'.scopes()<cr>", "Scopes" },
-      i = { "<cmd>lua require'dap'.step_into()<cr>", "Step Into" },
-      o = { "<cmd>lua require'dap'.step_over()<cr>", "Step Over" },
-      p = { "<cmd>lua require'dap'.pause.toggle()<cr>", "Pause" },
-      q = { "<cmd>lua require'dap'.close()<cr>", "Quit" },
-      r = { "<cmd>lua require'dap'.repl.toggle()<cr>", "Toggle Repl" },
-      s = { "<cmd>lua require'dap'.continue()<cr>", "Start" },
-      t = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Toggle Breakpoint" },
-      x = { "<cmd>lua require'dap'.terminate()<cr>", "Terminate" },
-      u = { "<cmd>lua require'dap'.step_out()<cr>", "Step Out" },
-    },
-  }
+  local function cmd(lhs, rhs, desc)
+    return { "<leader>d" .. lhs, "<cmd>lua " .. rhs .. "<cr>", desc = desc }
+  end
 
-  whichkey.register(keymap, {
+  whichkey.add({
     mode = "n",
-    prefix = "<leader>",
-    buffer = nil,
     silent = true,
-    noremap = true,
-    nowait = false,
+    { "<leader>d", group = "Debug" },
+    cmd("R", "require'dap'.run_to_cursor()", "Run to Cursor"),
+    cmd("E", "require'dapui'.eval(vim.fn.input '[Expression] > ')", "Evaluate Input"),
+    cmd("C", "require'dap'.set_breakpoint(vim.fn.input '[Condition] > ')", "Conditional Breakpoint"),
+    cmd("U", "require'dapui'.toggle()", "Toggle UI"),
+    cmd("b", "require'dap'.step_back()", "Step Back"),
+    cmd("c", "require'dap'.continue()", "Continue"),
+    cmd("d", "require'dap'.disconnect()", "Disconnect"),
+    cmd("e", "require'dapui'.eval()", "Evaluate"),
+    cmd("g", "require'dap'.session()", "Get Session"),
+    cmd("h", "require'dap.ui.widgets'.hover()", "Hover Variables"),
+    cmd("n", "require'dap-python'.debug_selection()", "Debug selection"),
+    cmd("m", "require'dap-python'.test_method()", "Test method"),
+    cmd("M", "require'dap-python'.test_class()", "Test class"),
+    cmd("S", "require'dap.ui.widgets'.scopes()", "Scopes"),
+    cmd("i", "require'dap'.step_into()", "Step Into"),
+    cmd("o", "require'dap'.step_over()", "Step Over"),
+    cmd("p", "require'dap'.pause.toggle()", "Pause"),
+    cmd("q", "require'dap'.close()", "Quit"),
+    cmd("r", "require'dap'.repl.toggle()", "Toggle Repl"),
+    cmd("s", "require'dap'.continue()", "Start"),
+    cmd("t", "require'dap'.toggle_breakpoint()", "Toggle Breakpoint"),
+    cmd("x", "require'dap'.terminate()", "Terminate"),
+    cmd("u", "require'dap'.step_out()", "Step Out"),
   })
 
-  local keymap_v = {
-    name = "Debug",
-    e = { "<cmd>lua require'dapui'.eval()<cr>", "Evaluate" },
-  }
-  whichkey.register(keymap_v, {
+  whichkey.add({
     mode = "v",
-    prefix = "<leader>",
-    buffer = nil,
     silent = true,
-    noremap = true,
-    nowait = false,
+    { "<leader>e", "<cmd>lua require'dapui'.eval()<cr>", desc = "Evaluate" },
   })
 end
 

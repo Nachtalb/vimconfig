@@ -34,8 +34,6 @@ local function configure()
 end
 
 local function configure_exts()
-  require('dap.ext.vscode').load_launchjs()
-
   require("nvim-dap-virtual-text").setup {
     commented = true,
   }

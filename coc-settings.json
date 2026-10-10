@@ -22,9 +22,7 @@
   "prettier.prettierPath": "/usr/lib/node_modules/prettier",
   "prettier.tabWidth": 2,
   "python.linting.ruffPath": "ruff",
-  "python.linting.ruffArgs": [
-    "--check"
-  ],
+  "python.linting.ruffArgs": ["--check"],
   "python.linting.ruffEnabled": true,
   "markdownlint.config": {
     "MD013": {
@@ -37,12 +35,7 @@
   "python.linting.mypyEnabled": true,
   "python.formatting.provider": "black",
   "pyright.organizeimports.provider": "isort",
-  "python.linting.ignorePatterns": [
-    ".vscode/*.py",
-    "**/site-packages/**/*.py",
-    "bin/*",
-    "var/**/*"
-  ],
+  "python.linting.ignorePatterns": [".vscode/*.py", "**/site-packages/**/*.py", "bin/*", "var/**/*"],
   "cSpell.language": "en-GB",
   "cSpell.ignorePaths": [
     "**/package-lock.json",
@@ -52,11 +45,7 @@
     ".vscode",
     "coc-settings.json"
   ],
-  "cSpell.ignoreRegExpList": [
-    "^(\" )?Plug '.*'",
-    "from [\\w\\.]+ import [\\w]+",
-    "import [\\w\\.]+( as \\w)?"
-  ],
+  "cSpell.ignoreRegExpList": ["^(\" )?Plug '.*'", "from [\\w\\.]+ import [\\w]+", "import [\\w\\.]+( as \\w)?"],
   "cSpell.userWords": [
     "ACNH",
     "ASGI",
@@ -214,6 +203,7 @@
     "delfino",
     "deobfuscating",
     "devel",
+    "dhash",
     "dikt",
     "disksize",
     "disktype",
@@ -266,6 +256,7 @@
     "isort",
     "jinja",
     "jitsi",
+    "jsonify",
     "jsons",
     "keras",
     "keycloak",
@@ -415,41 +406,19 @@
     "yarl"
   ],
   "clangd.path": "/usr/bin/clangd",
-  "clangd.arguments": [
-    "--clang-tidy"
-  ],
+  "clangd.arguments": ["--clang-tidy"],
   "languageserver": {
     "terraform": {
       "command": "terraform-ls",
-      "args": [
-        "serve"
-      ],
-      "filetypes": [
-        "terraform",
-        "tf"
-      ],
+      "args": ["serve"],
+      "filetypes": ["terraform", "tf"],
       "initializationOptions": {},
       "settings": {}
     },
-    "ruff-lsp": {
-      "command": "ruff-lsp",
-      "filetypes": [
-        "python"
-      ]
-    },
     "ccls": {
       "command": "ccls",
-      "filetypes": [
-        "c",
-        "cpp",
-        "cuda",
-        "objc",
-        "objcpp"
-      ],
-      "rootPatterns": [
-        ".ccls-root",
-        "build/compile_commands.json"
-      ],
+      "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
+      "rootPatterns": [".ccls-root", "build/compile_commands.json"],
       "initializationOptions": {
         "cache": {
           "directory": ".ccls-cache"
